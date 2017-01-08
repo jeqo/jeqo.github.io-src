@@ -1,0 +1,5 @@
+languageCode = "en-us"
+title = "@jeqo"
+baseurl = "http://jeqo.github.io/"
+
+theme = "jeqo-theme"
