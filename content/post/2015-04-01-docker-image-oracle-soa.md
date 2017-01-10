@@ -1,12 +1,12 @@
 ---
-Title: Docker image for Oracle SOA Suite 12c
+title: Docker image for Oracle SOA Suite 12c
 date: 2015-04-01
-Section: post
-Tags: 
+section: post
+tags:
 - oracle
 - soa
 - docker
-Categories: 
+categories: 
 - devops
 ---
 

@@ -1,12 +1,12 @@
 ---
-Title: Oracle Fusion Middleware Chef Cookbook - New Release!
+title: Oracle Fusion Middleware Chef Cookbook - New Release!
 date: 2015-07-21
-Section: post
-Tags: 
+section: post
+tags:
 - oracle
 - soa
 - chef
-Categories: 
+categories: 
 - devops
 ---
 

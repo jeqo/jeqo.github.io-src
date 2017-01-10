@@ -1,13 +1,13 @@
 ---
-Title: Chef Cookbook for Oracle Fusion Middleware 12c
+title: Chef Cookbook for Oracle Fusion Middleware 12c
 date: 2014-12-09
-Section: post
-Tags: 
+section: post
+tags:
 - oracle
 - fmw
 - bpm
 - chef
-Categories: 
+categories: 
 - devops
 ---
 

@@ -1,11 +1,11 @@
 ---
-Title: Vagrant and Chef Quickstart
+title: Vagrant and Chef Quickstart
 date: 2014-11-26
-Section: post
-Tags: 
+section: post
+tags:
 - vagrant
 - virtualbox
-Categories: 
+categories: 
 - Devops
 ---
 

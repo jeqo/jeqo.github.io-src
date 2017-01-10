@@ -1,12 +1,12 @@
 ---
-Title: Oracle SOA Suite 12c sobre Docker
+title: Oracle SOA Suite 12c sobre Docker
 date: 2015-04-01
-Section: post
-Tags: 
+section: post
+tags:
 - oracle
 - soa
 - docker
-Categories: 
+categories: 
 - devops
 ---
 

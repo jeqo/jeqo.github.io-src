@@ -1,13 +1,13 @@
 ---
-Title: Book Review: Applied SOA Patterns on the Oracle Platform
+title: Book Review - Applied SOA Patterns on the Oracle Platform
 date: 2014-11-28
-Section: post
-Tags: 
+section: post
+tags:
 - oracle
 - soa
 - book
 - review
-Categories: 
+categories: 
 - integration
 ---
 

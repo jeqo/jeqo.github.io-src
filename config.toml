@@ -8,11 +8,14 @@ contentdir = "content"
 layoutdir = "layouts"
 publishdir = "public"
 MetaDataFormat = "yaml"
+PygmentsStyle = "monokai"
 
 disqusShorname = "jeqo"
 
+[author]
+    name = "Jorge Quilcate Otoya"
+
 [params]
-    copyright = "&copy Copyright 2017. Jorge Quilcate."
     description = "back-end development, integration, devops, etc."
 
 [taxonomies]
@@ -20,21 +23,26 @@ disqusShorname = "jeqo"
     category = "categories"
 
 [[menu.main]]
-    name = "Twitter"
+    name = "GitHub"
     pre = ""
     weight = -100
-    url = "http://www.twitter.com/jeqo89"
+    url = "https://github.com/jeqo/"
+[[menu.main]]
+    name = "Twitter"
+    pre = ""
+    weight = -90
+    url = "https://twitter.com/jeqo89"
 [[menu.main]]
     name = "RSS"
     pre = ""
-    weight = -90
+    weight = -80
     url = "index.xml"
 
 [Languages]
-[Languages.en]
-    weight = 1
+    [Languages.en]
+        weight = 1
 
-[Languages.es]
-    baseurl = "https://jeqo.github.io/es"
-    weight = 2
-    description = "desarrollo de 'back-end', integración, 'devops', etc."
+    [Languages.es]
+        baseurl = "https://jeqo.github.io/es"
+        weight = 2
+        description = "desarrollo de 'back-end', integración, 'devops', etc."

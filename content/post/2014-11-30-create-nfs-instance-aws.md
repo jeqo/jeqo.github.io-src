@@ -1,13 +1,13 @@
 ---
-Title: Create a NFS instance on AWS using Vagrant and Chef
+title: Create a NFS instance on AWS using Vagrant and Chef
 date: 2014-11-30
-Section: post
-Tags: 
+section: post
+tags:
 - nfs
 - aws
 - vagrant
 - chef
-Categories: 
+categories: 
 - devops
 ---
 

@@ -1,13 +1,13 @@
 ---
-Title: Integrate Java EE 7 and Kafka using Avro and RxJava
+title: Integrate Java EE 7 and Kafka using Avro and RxJava
 date: 2015-07-31
-Section: post
-Tags: 
+section: post
+tags:
 - java ee
 - kafka
 - avro
 - rx
-Categories: 
+categories: 
 - development
 - integration
 - back-end

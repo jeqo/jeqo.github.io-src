@@ -1,11 +1,11 @@
 ---
-Title: Ansible - Provisionamiento sin agentes
+title: Ansible - Provisionamiento sin agentes
 date: 2016-03-30
-Section: post
-Tags: 
+section: post
+tags:
 - ansible
 - docker
-Categories: 
+categories: 
 - devops
 ---
 
