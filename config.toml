@@ -8,7 +8,7 @@ contentdir = "content"
 layoutdir = "layouts"
 publishdir = "public"
 MetaDataFormat = "yaml"
-PygmentsStyle = "monokai"
+PygmentsStyle = "autumn"
 
 disqusShorname = "jeqo"
 

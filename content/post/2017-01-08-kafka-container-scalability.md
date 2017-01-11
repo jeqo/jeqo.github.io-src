@@ -22,10 +22,6 @@ Repository: https://github.com/jeqo/post-kafka-containers-scaling
 
 # Single-Node Cluster
 
-***
-Directory: `single-node-kafka-cluster`
-***
-
 First of all, let's start with the most simple way to run Docker, that
 could be useful for some development scenarios: **Single-Node Cluster**
 
@@ -58,8 +54,6 @@ services:
       ZOOKEEPER_CONNECT: zookeeper:2181
     links:
       - zookeeper
-    ports:
-      - 19092:9092
   zookeeper:
     image: jeqo/apache-zookeeper:3.4.8
     volumes:
@@ -75,9 +69,9 @@ Docker Compose will create a `network` where these service can communicate.
 
 {{< highlight yaml >}}
 jeqo@jeqo-Oryx-Pro:.../single-node-kafka-cluster$ docker-compose up -d
-Creating network "singlenodekafkacluster_default" with the default driver
-Creating singlenodekafkacluster_zookeeper_1
-Creating singlenodekafkacluster_kafka_1
+Creating network "kafkacluster_default" with the default driver
+Creating kafkacluster_zookeeper_1
+Creating kafkacluster_kafka_1
 {{< /highlight >}}
 
 If you want to communicate with the cluster from your application's
@@ -91,9 +85,9 @@ services:
     command: sleep infinity
     networks:
       - default
-      - singlenodekafkacluster_default #(2)
+      - kafkacluster_default #(2)
 networks: #(1)
-  singlenodekafkacluster_default:
+  kafkacluster_default:
     external: true
 {{< /highlight >}}
 
@@ -114,4 +108,34 @@ topic1
 
 # Multi-Node Cluster
 
-//TODO  
+To scale a container using Docker Compose is as simple as using the `scale` command:
+
+{{< highlight bash >}}
+docker-compose scale kafka=3
+{{< /highlight >}}
+
+This will create 2 more containers:
+
+{{< highlight bash >}}
+$ docker-compose scale kafka=3
+Creating and starting kafkacluster_kafka_2 ... done
+Creating and starting kafkacluster_kafka_3 ... done
+{{< /highlight >}}
+
+You, as an application developer, only need to know one of the `broker` IPs, or use the service
+name to connect to the cluster. As the documentation specifies, the client (eg. producer or consumer)
+will use it only once to get the Kafka `broker` IPs from the same cluster. This means that 
+Kafka scaling will be transparent to your application.
+
+To validate that all brokers are part of the cluster let's use Zookeeper client to check. From
+client container:
+
+{{< highlight bash >}}
+$ docker-compose exec kafka bash
+# bin/zookeeper-shell.sh zookeeper:2181
+ls /brokers/ids
+[1003, 1002, 1001]
+{{< /highlight >}}
+
+# Considerations to scale Topics
+
