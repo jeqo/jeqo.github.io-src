@@ -1,6 +1,6 @@
 ---
 title: Scaling Kafka with Docker Containers
-date: 2017-01-10
+date: 2017-01-15
 section: post
 tags:
 - kafka
@@ -11,13 +11,14 @@ categories:
 draft: true
 ---
 
+//TODO check intro
 In this post I will try to show some of the considerations and challenges to
-deploy Kafka clusters with Docker Containers.
+deploy Kafka clusters with Docker Containers, from the `topic` point of view.
 
 <!--more-->
 
 ***
-Repository: https://github.com/jeqo/post-kafka-containers-scaling
+Repository: https://github.com/jeqo/post-scale-kafka-containers
 ***
 
 # Single-Node Cluster
@@ -41,8 +42,9 @@ Docker Compose services is a `docker-compose.yml` file:
 ***
 I will use a couple of images that I build. These are fairly simple
 and you can find their source code here:
-[Apache Kafka](https://github.com/jeqo/docker-image-apache-kafka)
- and [Apache Zookeeper](https://github.com/jeqo/docker-image-apache-zookeeper)
+[Apache Kafka](https://github.com/jeqo/docker-image-apache-kafka),
+[Apache Zookeeper](https://github.com/jeqo/docker-image-apache-zookeeper), and
+[Confluent Platform](https://github.com/jeqo/docker-image-confluent-platform)
 ***
 
 {{< highlight yaml >}}
@@ -50,14 +52,10 @@ version: "2.1"
 services:
   kafka:
     image: jeqo/apache-kafka:0.10.1.0-2.11
-    environment:
-      ZOOKEEPER_CONNECT: zookeeper:2181
     links:
       - zookeeper
   zookeeper:
     image: jeqo/apache-zookeeper:3.4.8
-    volumes:
-      - ./zoo.cfg:/opt/apache-zookeeper/conf/zoo.cfg
 {{< /highlight >}}
 
 This configuration defines 2 services: `kafka` and `zookeeper`. The `kafka`
@@ -124,7 +122,7 @@ Creating and starting kafkacluster_kafka_3 ... done
 
 You, as an application developer, only need to know one of the `broker` IPs, or use the service
 name to connect to the cluster. As the documentation specifies, the client (eg. producer or consumer)
-will use it only once to get the Kafka `broker` IPs from the same cluster. This means that 
+will use it only once to get the Kafka `broker` IPs from the same cluster. This means that
 Kafka scaling will be transparent to your application.
 
 To validate that all brokers are part of the cluster let's use Zookeeper client to check. From
@@ -137,5 +135,60 @@ ls /brokers/ids
 [1003, 1002, 1001]
 {{< /highlight >}}
 
-# Considerations to scale Topics
+# Scaling Topics
 
+In Kafka, `Topics` are distributed in `Partitions`. `Partitions` allows **scalability**, letting `Topics`
+fit in several nodes, and **parallelism**, allowing different instances from the same `Consumer Group` to
+consume messages in parallel.
+
+Apart from this, Kafka manage how this `Partitions` are replicated, to achieve high availability. In
+this case, if you have many `replicas` from one `partition`, one will be the `leader` and there will
+be zero o more `followers` spread on different nodes.
+
+How do we configure this using this simple container configuration? Let's evaluate some scenarios:
+
+## Adding new topics to the cluster
+
+Once you scale your cluster, Kafka won't use these new nodes unless new `topics` are created.
+
+Let's test it following these steps:
+
+1. Start a single node cluster
+
+<script type="text/javascript" src="https://asciinema.org/a/9xzqgicktaqhzp1fofjk9ejgm.js" id="asciicast-9xzqgicktaqhzp1fofjk9ejgm" async></script>
+
+2. Then start client, create a topic `topic1`, and describe the topic to check the broker
+
+<script type="text/javascript" src="https://asciinema.org/a/2schnuetb24mjx6txopew51hc.js" id="asciicast-2schnuetb24mjx6txopew51hc" async></script>
+
+3. Scale your cluster to 3 nodes
+
+<script type="text/javascript" src="https://asciinema.org/a/ahibdzz7xt67q53sc5ert6qdp.js" id="asciicast-ahibdzz7xt67q53sc5ert6qdp" async></script>
+
+4. Add topics to occupy other brokers
+
+Using multiple partitions:
+
+<script type="text/javascript" src="https://asciinema.org/a/enq2czkpgdf0tbf3u6fwir3ml.js" id="asciicast-enq2czkpgdf0tbf3u6fwir3ml" async></script>
+
+Or using a replication factor:
+
+<script type="text/javascript" src="https://asciinema.org/a/f0u67h5ufiz4zkup84a1t8t5g.js" id="asciicast-f0u67h5ufiz4zkup84a1t8t5g" async></script>
+
+To decide what `replication factor` or how many `partitions` to use, depends
+on your use case. This deserves its own blog post.
+
+//TODO check considerations
+
+# Confluent Platform images
+
+All these could be done in the same way with [Confluent Platform](https://www.confluent.io/).
+
+There is a couple of directories `confluent-cluster` and `confluent-client` to test this out:
+
+<script type="text/javascript" src="https://asciinema.org/a/a446bixdfn3l8xqoiolmsmlqg.js" id="asciicast-a446bixdfn3l8xqoiolmsmlqg" async></script>
+
+And, you know, put ...
+
+<blockquote class="twitter-tweet" data-lang="es"><p lang="en" dir="ltr">.<a href="https://twitter.com/apachekafka">@apachekafka</a> everywhere :) <a href="https://t.co/AcEmkRBCpv">pic.twitter.com/AcEmkRBCpv</a></p>&mdash; Gwen (Chen) Shapira (@gwenshap) <a href="https://twitter.com/gwenshap/status/777660752626851840">19 de septiembre de 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
