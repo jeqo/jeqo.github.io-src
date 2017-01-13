@@ -12,6 +12,7 @@ draft: true
 ---
 
 //TODO check intro
+
 In this post I will try to show some of the considerations and challenges to
 deploy Kafka clusters with Docker Containers, from the `topic` point of view.
 
