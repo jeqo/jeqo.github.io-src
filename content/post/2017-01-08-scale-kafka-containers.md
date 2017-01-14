@@ -11,10 +11,9 @@ categories:
 draft: true
 ---
 
-//TODO check intro
-
-In this post I will try to show some of the considerations and challenges to
-deploy Kafka clusters with Docker Containers, from the `topic` point of view.
+In this post I will show how to use Docker containers to create and scale
+a Kafka cluster, and also how to create, scale and move `topics` inside
+the cluster.
 
 <!--more-->
 
@@ -66,7 +65,7 @@ from `kafka` to `zookeeper` service.
 If we try to start these configuration with `docker-compose up -d`,
 Docker Compose will create a `network` where these service can communicate.
 
-{{< highlight yaml >}}
+{{< highlight bash >}}
 jeqo@jeqo-Oryx-Pro:.../single-node-kafka-cluster$ docker-compose up -d
 Creating network "kafkacluster_default" with the default driver
 Creating kafkacluster_zookeeper_1
@@ -80,7 +79,7 @@ docker-compose configuration, you can do it as follows:
 version: "2.1"
 services:
   kafka:
-    image: jeqo/apache-kafka:0.10.1.0-2.11
+    image: jeqo/apache-kafka-client:0.10.1.0-2.11
     command: sleep infinity
     networks:
       - default
@@ -179,7 +178,51 @@ Or using a replication factor:
 To decide what `replication factor` or how many `partitions` to use, depends
 on your use case. This deserves its own blog post.
 
-//TODO check considerations
+## Expanding topics in your cluster
+
+Expanding topics in your cluster means move `topics` and `partitions` once
+you have more `brokers` in your `cluster`, because, as show before,
+your new `brokers` won't store any data, once they are created, unless
+you create new `topics`.
+
+You can do this 3 steps:
+
+1. Identify which topics do you want to move.
+
+2. Generate a candidate reassignment. This could be done automatically, or
+you can decide how to redistribute your topics.
+
+3. Execute your reassignment plan.
+
+You can do this following the documentation here: http://kafka.apache.org/documentation/#basic_ops_cluster_expansion
+
+The steps described in the documentation are automated a bit with Ansible:
+
+Inside the `playbooks/prepare-reassignment.yml` file you have 2 variables:
+
+{{< highlight yaml >}}
+vars:
+  topics:
+    - topic1
+  broker_list: 1003
+{{< /highlight >}}
+
+This will prepare a recipe to move your topic `topic1` to `broker` with id `1003`.
+
+<script type="text/javascript" src="https://asciinema.org/a/c6332x8t7yumpj65ie4qudgem.js" id="asciicast-c6332x8t7yumpj65ie4qudgem" async></script>
+
+You can paste the JSON file generated into `playbooks/reassign-topic-plan.json`
+
+{{< highlight json >}}
+{
+  "version":1,
+  "partitions":[{"topic":"topic1","partition":0,"replicas":[1003]}]
+}
+{{< /highlight >}}
+
+And then run this plan with the another playbook: `playbooks/execute-reassignment.yml`
+
+<script type="text/javascript" src="https://asciinema.org/a/99308.js" id="asciicast-99308" async></script>
 
 # Confluent Platform images
 
@@ -189,7 +232,10 @@ There is a couple of directories `confluent-cluster` and `confluent-client` to t
 
 <script type="text/javascript" src="https://asciinema.org/a/a446bixdfn3l8xqoiolmsmlqg.js" id="asciicast-a446bixdfn3l8xqoiolmsmlqg" async></script>
 
-And, you know, put ...
+Hope this post help you to understand Kafka `topics` and how `containers` can
+help you to run clusters in seconds :)
+
+And, you know, run ...
 
 <blockquote class="twitter-tweet" data-lang="es"><p lang="en" dir="ltr">.<a href="https://twitter.com/apachekafka">@apachekafka</a> everywhere :) <a href="https://t.co/AcEmkRBCpv">pic.twitter.com/AcEmkRBCpv</a></p>&mdash; Gwen (Chen) Shapira (@gwenshap) <a href="https://twitter.com/gwenshap/status/777660752626851840">19 de septiembre de 2016</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
