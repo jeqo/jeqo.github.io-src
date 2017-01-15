@@ -8,7 +8,6 @@ tags:
 categories:
 - devops
 - integration
-draft: true
 ---
 
 In this post I will show how to use Docker containers to create and scale
@@ -37,10 +36,10 @@ If we talk in Container terms and practices, these processes should be
 run in 2 different containers.
 
 The easiest way to do this is defining these processes as
-Docker Compose services is a `docker-compose.yml` file:
+Docker Compose services is a `kafka-cluster/docker-compose.yml` file:
 
 ***
-I will use a couple of images that I build. These are fairly simple
+I will use a couple of Docker images. These are fairly simple
 and you can find their source code here:
 [Apache Kafka](https://github.com/jeqo/docker-image-apache-kafka),
 [Apache Zookeeper](https://github.com/jeqo/docker-image-apache-zookeeper), and
@@ -59,7 +58,7 @@ services:
 {{< /highlight >}}
 
 This configuration defines 2 services: `kafka` and `zookeeper`. The `kafka`
-service link and environment variable `ZOOKEEPER_CONNECT` configure the access
+service `link` and environment variable `ZOOKEEPER_CONNECT` configure the access
 from `kafka` to `zookeeper` service.
 
 If we try to start these configuration with `docker-compose up -d`,
@@ -137,8 +136,8 @@ ls /brokers/ids
 
 # Scaling Topics
 
-In Kafka, `Topics` are distributed in `Partitions`. `Partitions` allows **scalability**, letting `Topics`
-fit in several nodes, and **parallelism**, allowing different instances from the same `Consumer Group` to
+In Kafka, `Topics` are distributed in `Partitions`. `Partitions` allows **scalability**, enabling `Topics`
+to fit in several nodes, and **parallelism**, allowing different instances from the same `Consumer Group` to
 consume messages in parallel.
 
 Apart from this, Kafka manage how this `Partitions` are replicated, to achieve high availability. In

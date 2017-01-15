@@ -10,7 +10,7 @@ publishdir = "public"
 MetaDataFormat = "yaml"
 PygmentsStyle = "default"
 
-disqusShorname = "jeqo"
+disqusShortname = "jeqoblog"
 
 [author]
     name = "Jorge Quilcate Otoya"
