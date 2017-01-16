@@ -11,6 +11,7 @@ MetaDataFormat = "yaml"
 PygmentsStyle = "default"
 
 disqusShortname = "jeqoblog"
+googleAnalytics = "UA-49047812-3"
 
 [author]
     name = "Jorge Quilcate Otoya"
