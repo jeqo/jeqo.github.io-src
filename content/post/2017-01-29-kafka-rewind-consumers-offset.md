@@ -16,7 +16,7 @@ messages. So, each *Consumer Group* can manage its *OffSet* independently.
 This offers the possibility to rollback in time and reprocess messages from
 the beginning of a *topic* and regenerate the current status of the system.    
 
-But how to do this?
+But how to do it (programmatically)?
 
 <!--more-->
 
@@ -46,37 +46,225 @@ consumed by `offset`, by `partition`.
 In this first scenario, we will see how to manage offsets from *command-line*
 so it will be easy to implement in your application.
 
-### Case 1: Back to the Beginning
+When you're working from the terminal, you can use `console-consumer` without
+`group.id`, so no `consumer-offset` will be recorded by the `cluster`.
 
+In this case, going back to the beginning will as easy as add
+`--from-beginning` option to the command line:
 
+//TODO
 
-### Case 2: Back to a specific OffSet
+But, what happen if you use `group.id` property, this won't work:
 
+//TODO
 
-### Case 3: Back to a specific Timestamp
+So, how to go back to the beginning?
 
+We can use `--offset` option to with three alternatives:
+
+```
+--offset <String: consume offset>        The offset id to consume from (a non-  
+                                           negative number), or 'earliest'      
+                                           which means from beginning, or       
+                                           'latest' which means from end        
+                                           (default: latest)
+```
 
 ## From Java Clients
 
-### Case 1: Back to the Beginning
+So, from `command-line` is pretty easy to go back in time in the log. But
+how to do it from your application?
+
+If you're using Kafka Consumers in your applications, you have to options
+(with Java):
+
+* [Kafka Consumer API](http://kafka.apache.org/documentation/#consumerapi)
+
+* [Kafka Streams API](http://kafka.apache.org/documentation/#streamsapi)   
+
+Long story short: If you need stateful and stream processing capabilities,
+go with Kafka Streams.
+If you need simple one-by-one consumption of messages by topics, go with
+Kafka Consumer.
+
+At this moment this are the options to rewind offsets with these APIs:
+
+- Kafka Consumer API support go back to the beginning of the topic, go back
+to a specific offset, and go back to a specific offset by timestamps.
+
+- Kafka Streams API only support to go back to the earliest offset of the
+`input topics`, and is well explained by Matthias J. Sax in his
+post [[1]](https://www.confluent.io/blog/data-reprocessing-with-kafka-streams-resetting-a-streams-application/)
+
+So I will focus in programmatically options available in Kafka Consumer:
+
+Before continue, let's show a simple Kafka Producer and Consumer with Java:
+
+KafkaSimpleProducer.java:
 
 
-### Case 2: Back to a specific OffSet
+{{< highlight java >}}
+public static void main(String[] args) {
+    ...
+    Properties properties = new Properties();
+    properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+    properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+    properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
+    Producer<String, String> producer = new KafkaProducer<>(properties);
 
-### Case 3: Back to a specific Timestamp
+    IntStream.rangeClosed(1, 100)
+            .boxed()
+            .map(number -> new ProducerRecord<>(
+                    "topic-1",
+                    number.toString(),
+                    number.toString()))
+            .map(record -> producer.send(record))
+            .forEach(result -> printMetadata(result));
+    producer.close();
+}
+{{</ highlight >}}
 
+This will create 100 `records` in topic `topic-1`
 
+A simple Consumer will look something like this:
+
+{{< highlight java >}}
+public static void main(String[] args) {
+    Properties props = new Properties();
+    props.put("bootstrap.servers", "localhost:9092");
+    props.put("group.id", "test");
+    props.put("enable.auto.commit", "true");
+    props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+    props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+
+    KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+    consumer.subscribe(Arrays.asList("topic-1"));
+
+    while (true) {
+        ConsumerRecords<String, String> records = consumer.poll(100);
+
+        for (ConsumerRecord<String, String> record : records)
+            System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+    }
+}
+{{</ highlight >}}
+
+This will poll each `100ms` for records and print them out.
+
+Now let's check how to rewind offsets in different scenarios. Consumer API has
+add `#seek` operations to achieve this behavior. I will show a naive way to use
+these operations using flags but it shows the point:
+
+### Rewind to earliest offset
+
+The easiest options is to go back to the beginning of the topic, that not
+always will be `offset=0`. This will depends on the compation //TODO
+option that will be cleaning old records based on time or size, but
+this also deserves its own post.
+
+To go to the beginning we can use `#seekToBeginning(topicPartition)`
+operation to go back to earliest offset:
+
+{{< highlight java >}}
+boolean flag = true;
+
+while (true) {
+    ConsumerRecords<String, String> records = consumer.poll(100);
+
+    if (flag) {
+        consumer.seekToBeginning(
+            Stream.of(new TopicPartition("topic-1", 0)).collect(toList()));
+        flag = false;
+    }
+
+    for (ConsumerRecord<String, String> record : records)
+        //Consume record
+}
+{{</ highlight >}}
+
+Once the seek is done, we can continue our processing as before.
+
+### Rewind to specific offset
+
+If we can recognized the specific record from where we need to reprocess,
+we can use `#seek(topicPartition, offset)`
+
+{{< highlight java >}}
+boolean flag = true;
+
+while (true) {
+    ConsumerRecords<String, String> records = consumer.poll(100);
+
+    if(flag) {
+        consumer.seek(new TopicPartition("topic-1", 0), 90);
+        flag = false;
+    }
+
+    for (ConsumerRecord<String, String> record : records)
+        System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+}
+{{</ highlight >}}
+
+In this case, we will consume from `record` with `offset=90`
+
+### Rewind to offset by timestamps
+
+What if you don't know exactly the `offset id` to go back to, but you know
+you want to go back 1 hour or 10 min.
+
+For these, since release `10.1.0.1` (TODO validate), there are a couple of
+improvements [[2]](https://cwiki.apache.org/confluence/display/KAFKA/KIP-32+-+Add+timestamps+to+Kafka+message)
+[[3]](https://cwiki.apache.org/confluence/display/KAFKA/KIP-33+-+Add+a+time+based+log+index)
+were added and a new `seek` operation was added: `#offsetsForTimes`.
+
+Here is how to use it:
+
+{{< highlight java >}}
+boolean flag = true;
+
+while (true) {
+    ConsumerRecords<String, String> records = consumer.poll(100);
+
+    if(flag) {
+        Map<TopicPartition, Long> query = new HashMap<>();
+        query.put(
+                new TopicPartition("simple-topic-1", 0),
+                Instant.now().minus(10, MINUTES).toEpochMilli());
+
+        Map<TopicPartition, OffsetAndTimestamp> result = consumer.offsetsForTimes(query);
+
+        result.entrySet()
+                .stream()
+                .forEach(entry -> consumer.seek(entry.getKey(), entry.getValue().offset()));
+
+        flag = false;
+    }
+
+    for (ConsumerRecord<String, String> record : records)
+        System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+}
+{{</ highlight >}}
+
+In this case, we are using a query first to get the offset inside a timestamp (10 minutes ago)
+and then using that offset to go back with `#seek` operation.
+
+As you can see, for each operation I have to define the specific `topic partition`
+to go back to, so this can get tricky if you have more than one partition, so I
+would recommend to use `#offsetsForTimes` in those cases to get an aligned result
+and avoid inconsistencies in your consumers.
+
+Source code: [https://github.com/jeqo/post-kafka-rewind-consumer-offset](https://github.com/jeqo/post-kafka-rewind-consumer-offset)
 
 ****
 **References**
 
-* https://cwiki.apache.org/confluence/display/KAFKA/KIP-32+-+Add+timestamps+to+Kafka+message
+1. https://www.confluent.io/blog/data-reprocessing-with-kafka-streams-resetting-a-streams-application/
 
-* https://cwiki.apache.org/confluence/display/KAFKA/KIP-33+-+Add+a+time+based+log+index
+2. https://cwiki.apache.org/confluence/display/KAFKA/KIP-32+-+Add+timestamps+to+Kafka+message
 
-* https://cwiki.apache.org/confluence/display/KAFKA/FAQ#FAQ-HowcanIrewindtheoffsetintheconsumer?
+3. https://cwiki.apache.org/confluence/display/KAFKA/KIP-33+-+Add+a+time+based+log+index
 
-* http://stackoverflow.com/questions/22558933/in-kafka-how-to-get-the-exact-offset-according-producing-time
+4. https://cwiki.apache.org/confluence/display/KAFKA/FAQ#FAQ-HowcanIrewindtheoffsetintheconsumer
 
 ****
