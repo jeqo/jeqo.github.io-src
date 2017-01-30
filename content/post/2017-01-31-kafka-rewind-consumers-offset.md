@@ -9,12 +9,13 @@ categories:
 ---
 
 One of the most important features from *Apache Kafka* is how it manages
-Multiple Consumers. Each *Consumer Group* has a current *OffSet*, that
-determine at what point in a *Topic*, this *Consumer Group* has consume
-messages. So, each *Consumer Group* can manage its *OffSet* independently.
+Multiple Consumers. Each `consumer Group` has a current `offset`, that
+determine at what point in a `topic` this `consumer group` has consume
+messages. So, each `consumer group` can manage its `offset` independently,
+by `partition`.
 
 This offers the possibility to rollback in time and reprocess messages from
-the beginning of a *topic* and regenerate the current status of the system.    
+the beginning of a `topic` and regenerate the current status of the system.    
 
 But how to do it (programmatically)?
 
@@ -28,13 +29,12 @@ Source code: [https://github.com/jeqo/post-kafka-rewind-consumer-offset](https:/
 
 ### Topics and Offsets
 
-First thing to understand to achieve Consumer Rewind, is rewind over what?
-Because `topics` are divided into `partitions`. This partitions allows
-*parallelism*, because each partitions accepts `writes` from `producers`. So,
-each partition has its own `offset`.
+First thing to understand to achieve Consumer Rewind, is: rewind over what?
+Because `topics` are divided into `partitions`. Records sent from `Producers`
+are balanced between them, so each partition has its own `offset` index.
 
 Each `record` has its own `offset` that will be used by `consumers` to define
-which messages has been consumed.
+which messages has been consumed from the **log**.
 
 ### Consumers and Consumer Groups
 
@@ -42,12 +42,16 @@ Once we understand that `topics` have `partitions` and `offsets` by `partition`
 we can now understand how `consumers` and `consumer groups` work.
 
 `Consumers` are grouped by `group.id`. This property identify you as a
-`consumer`, so the `broker` knows which was the last `record` you have
+`consumer group`, so the `broker` knows which was the last `record` you have
 consumed by `offset`, by `partition`.
 
-Before continue, let's show a simple Kafka Producer and Consumer with Java:
+This partitions allows *parallelism*, because members from a `consumer group`
+can consume `records` from `partitions` independently, in parallel.
 
-KafkaSimpleProducer.java:
+
+Before continue, let's check a simple Kafka Producer implemented with Java:
+
+`KafkaSimpleProducer.java`:
 
 
 {{< highlight java >}}
@@ -72,7 +76,7 @@ public static void main(String[] args) {
 }
 {{</ highlight >}}
 
-This will create 100 `records` in topic `topic-1`, with `offset` from 0-99
+This will create 100 `records` in topic `topic-1`, with `offsets` from 0-99
 
 ## From Command-Line
 
@@ -80,8 +84,10 @@ In this first scenario, we will see how to manage offsets from *command-line*
 so it will give us an idea of how to implement it in our application.
 
 When you're working from the terminal, you can use `kafka-console-consumer` without
-`group.id`, a new `group.id` is generated using `console-consumer-${new Random().nextInt(100000)}`
-so unless you use the same `group.id` afterwards it would be as you create a new consumer group each time.
+`group.id`, a new `group.id` is generated using:
+`console-consumer-${new Random().nextInt(100000)}`.
+So unless you use the same `group.id` afterwards it would be as you create a
+new consumer group each time.
 
 By default, when you connect to a `topic` as a `consumer` with `console` you
 go to the `latest` offset, so you won't see any new message until new records

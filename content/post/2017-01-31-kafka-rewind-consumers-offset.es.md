@@ -8,48 +8,49 @@ categories:
 - integration
 ---
 
-//TODO
+Una de las características más importantes de *Apache Kafka* es el manejo
+de múltiples consumidores. Cada `consumer group` tiene un `offset`, que
+determina hasta que punto del `topic` se encuentra consumido por `consumer group`.
+Así, cada `consumer group` puede manejar los `offset` independientemente, por
+partición.
 
-One of the most important features from *Apache Kafka* is how it manages
-Multiple Consumers. Each *Consumer Group* has a current *OffSet*, that
-determine at what point in a *Topic*, this *Consumer Group* has consume
-messages. So, each *Consumer Group* can manage its *OffSet* independently.
+Esto ofrece la posibilidad de retroceder en el tiempo y reprocesar mensaje desde
+el inicio de un `topic` y regenerar el estado actual del sistema.
 
-This offers the possibility to rollback in time and reprocess messages from
-the beginning of a *topic* and regenerate the current status of the system.    
-
-But how to do it (programmatically)?
+Pero, cómo realizar esto de forma programática?
 
 <!--more-->
 
 ****
-Source code: [https://github.com/jeqo/post-kafka-rewind-consumer-offset](https://github.com/jeqo/post-kafka-rewind-consumer-offset)
+Código fuente: [https://github.com/jeqo/post-kafka-rewind-consumer-offset](https://github.com/jeqo/post-kafka-rewind-consumer-offset)
 ****
 
-## Basic Concepts
+## Conceptos Básicos
 
-### Topics and Offsets
+### Topics y Offsets
 
-First thing to understand to achieve Consumer Rewind, is rewind over what?
-Because `topics` are divided into `partitions`. This partitions allows
-*parallelism*, because each partitions accepts `writes` from `producers`. So,
-each partition has its own `offset`.
+Lo primero por entender para lograr retroceder los consumidores en Kafka es:
+retroceder sobre qué? Cada `topic` esta dividido en `partitions`. Los
+registros enviados por los `Producers` son balanceados entre las `partitions`,
+así cada partición tiene su propio índice de `offsets`.
 
-Each `record` has its own `offset` that will be used by `consumers` to define
-which messages has been consumed.
+Cada `record` tiene un `offset` asignado que será usado por los `consumers`
+para definir qué mensajes han sido consumidos del **log**.
 
-### Consumers and Consumer Groups
+### Consumers y Consumer Groups
 
-Once we understand that `topics` have `partitions` and `offsets` by `partition`
-we can now understand how `consumers` and `consumer groups` work.
+Una vez entendido que los `topics` tienen `partitions` y `offsets` por `partition`
+podemos pasar a definir como trabajan los `consumers` y `consumer groups`.
 
-`Consumers` are grouped by `group.id`. This property identify you as a
-`consumer`, so the `broker` knows which was the last `record` you have
-consumed by `offset`, by `partition`.
+`Consumers` están agrupados por `group.id`. Ésta propiedad identifica a cada  
+`consumer group`, así el `broker` conoce cúal fue el último `record` consumido
+por `offset`, por `partition`.
 
-Before continue, let's show a simple Kafka Producer and Consumer with Java:
 
-KafkaSimpleProducer.java:
+Antes de continuar, revisemos la clase que funcionará como un `Kafka Consumer`
+simple implementado en Java:
+
+`KafkaSimpleProducer.java`:
 
 
 {{< highlight java >}}
@@ -74,15 +75,21 @@ public static void main(String[] args) {
 }
 {{</ highlight >}}
 
-This will create 100 `records` in topic `topic-1`, with `offset` from 0-99
+Este `producer` creará 100 `records` en el topic `topic-1`, con `offsets`
+de `0` a `99`.
 
-## From Command-Line
+## Desde Línea de Comandos
 
-In this first scenario, we will see how to manage offsets from *command-line*
-so it will give us an idea of how to implement it in our application.
+En este primer escenario revisaremos como manejar los offsets de `consumers`
+desde *línea de comandos*, para tener una idea de como implementarlo en
+nuestra aplicación.
 
-When you're working from the terminal, you can use `kafka-console-consumer` without
-`group.id`, a new `group.id` is generated using `console-consumer-${new Random().nextInt(100000)}`
+Cuando trabajas desde un terminal, si se puede utilizar `kafka-console-consumer`
+sin `group.id` definido, un nuevo `group.id` es generado internamente:
+`console-consumer-${new Random().nextInt(100000)}`.
+
+//TODO
+
 so unless you use the same `group.id` afterwards it would be as you create a new consumer group each time.
 
 By default, when you connect to a `topic` as a `consumer` with `console` you
