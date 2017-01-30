@@ -1,5 +1,5 @@
 ---
-title: Kafka: Rewind Consumer Offsets
+title: Kafka - Rewind Consumer Offsets
 date: 2017-01-31
 section: post
 tags:
