@@ -1,6 +1,6 @@
 ---
 title: Kafka: Rewind Consumer Offsets
-date: 2017-01-29
+date: 2017-01-31
 section: post
 tags:
 - kafka
@@ -172,8 +172,8 @@ these operations using flags but it shows the point:
 ### Rewind to earliest offset
 
 The easiest options is to go back to the beginning of the topic, that not
-always will be `offset=0`. This will depends on the compation //TODO
-option that will be cleaning old records based on time or size, but
+always will be `offset=0`. This will depends on the `retention` policy
+option sthat will be cleaning old records based on time or size, but
 this also deserves its own post.
 
 To go to the beginning we can use `#seekToBeginning(topicPartition)`
