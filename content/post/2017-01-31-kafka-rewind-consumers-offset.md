@@ -136,10 +136,12 @@ At this moment this are the options to rewind offsets with these APIs:
 to a specific offset, and go back to a specific offset by timestamps.
 
 - Kafka Streams API only support to go back to the earliest offset of the
-`input topics`, and is well explained by Matthias J. Sax in his
-post [[1]](https://www.confluent.io/blog/data-reprocessing-with-kafka-streams-resetting-a-streams-application/)
+`input topics`, and is well explained by [Matthias J. Sax](https://github.com/mjsax)
+in his post
+[[1]](https://www.confluent.io/blog/data-reprocessing-with-kafka-streams-resetting-a-streams-application/).
 
-So I will focus in programmatically options available in Kafka Consumer.
+So I will focus in programmatically options available in `Kafka Consumer`.
+
 A simple Consumer will look something like this:
 
 {{< highlight java >}}
