@@ -1,5 +1,5 @@
 ---
-title: Rewind Kafka Consumer Offsets
+title: Kafka: Rewind Consumer Offsets
 date: 2017-01-29
 section: post
 tags:
@@ -19,6 +19,10 @@ the beginning of a *topic* and regenerate the current status of the system.
 But how to do it (programmatically)?
 
 <!--more-->
+
+****
+Source code: [https://github.com/jeqo/post-kafka-rewind-consumer-offset](https://github.com/jeqo/post-kafka-rewind-consumer-offset)
+****
 
 ## Basic Concepts
 
@@ -40,63 +44,6 @@ we can now understand how `consumers` and `consumer groups` work.
 `Consumers` are grouped by `group.id`. This property identify you as a
 `consumer`, so the `broker` knows which was the last `record` you have
 consumed by `offset`, by `partition`.
-
-## From Command-Line
-
-In this first scenario, we will see how to manage offsets from *command-line*
-so it will be easy to implement in your application.
-
-When you're working from the terminal, you can use `console-consumer` without
-`group.id`, so no `consumer-offset` will be recorded by the `cluster`.
-
-In this case, going back to the beginning will as easy as add
-`--from-beginning` option to the command line:
-
-//TODO
-
-But, what happen if you use `group.id` property, this won't work:
-
-//TODO
-
-So, how to go back to the beginning?
-
-We can use `--offset` option to with three alternatives:
-
-```
---offset <String: consume offset>        The offset id to consume from (a non-  
-                                           negative number), or 'earliest'      
-                                           which means from beginning, or       
-                                           'latest' which means from end        
-                                           (default: latest)
-```
-
-## From Java Clients
-
-So, from `command-line` is pretty easy to go back in time in the log. But
-how to do it from your application?
-
-If you're using Kafka Consumers in your applications, you have to options
-(with Java):
-
-* [Kafka Consumer API](http://kafka.apache.org/documentation/#consumerapi)
-
-* [Kafka Streams API](http://kafka.apache.org/documentation/#streamsapi)   
-
-Long story short: If you need stateful and stream processing capabilities,
-go with Kafka Streams.
-If you need simple one-by-one consumption of messages by topics, go with
-Kafka Consumer.
-
-At this moment this are the options to rewind offsets with these APIs:
-
-- Kafka Consumer API support go back to the beginning of the topic, go back
-to a specific offset, and go back to a specific offset by timestamps.
-
-- Kafka Streams API only support to go back to the earliest offset of the
-`input topics`, and is well explained by Matthias J. Sax in his
-post [[1]](https://www.confluent.io/blog/data-reprocessing-with-kafka-streams-resetting-a-streams-application/)
-
-So I will focus in programmatically options available in Kafka Consumer:
 
 Before continue, let's show a simple Kafka Producer and Consumer with Java:
 
@@ -125,8 +72,74 @@ public static void main(String[] args) {
 }
 {{</ highlight >}}
 
-This will create 100 `records` in topic `topic-1`
+This will create 100 `records` in topic `topic-1`, with `offset` from 0-99
 
+## From Command-Line
+
+In this first scenario, we will see how to manage offsets from *command-line*
+so it will give us an idea of how to implement it in our application.
+
+When you're working from the terminal, you can use `kafka-console-consumer` without
+`group.id`, a new `group.id` is generated using `console-consumer-${new Random().nextInt(100000)}`
+so unless you use the same `group.id` afterwards it would be as you create a new consumer group each time.
+
+By default, when you connect to a `topic` as a `consumer` with `console` you
+go to the `latest` offset, so you won't see any new message until new records
+arrive after you connect.
+
+In this case, going back to the beginning of the topic will as easy as add
+`--from-beginning` option to the command line:
+
+<script type="text/javascript" src="https://asciinema.org/a/101246.js" id="asciicast-101246" async></script>
+
+But, what happen if you use `group.id` property, it will only work the first time,
+but `offset` gets commited to cluster:
+
+<script type="text/javascript" src="https://asciinema.org/a/101248.js" id="asciicast-101248" async></script>
+
+<script type="text/javascript" src="https://asciinema.org/a/101250.js" id="asciicast-101250" async></script>
+
+So, how to go back to the beginning?
+
+We can use `--offset` option to with three alternatives:
+
+```
+--offset <String: consume offset>        The offset id to consume from (a non-  
+                                           negative number), or 'earliest'      
+                                           which means from beginning, or       
+                                           'latest' which means from end        
+                                           (default: latest)
+```
+
+<script type="text/javascript" src="https://asciinema.org/a/101252.js" id="asciicast-101252" async></script>
+
+## From Java Clients
+
+So, from `command-line` is pretty easy to go back in time in the log. But
+how to do it from your application?
+
+If you're using Kafka Consumers in your applications, you have to options
+(with Java):
+
+* [Kafka Consumer API](http://kafka.apache.org/documentation/#consumerapi)
+
+* [Kafka Streams API](http://kafka.apache.org/documentation/#streamsapi)   
+
+Long story short: If you need stateful and stream processing capabilities,
+go with Kafka Streams.
+If you need simple one-by-one consumption of messages by topics, go with
+Kafka Consumer.
+
+At this moment this are the options to rewind offsets with these APIs:
+
+- Kafka Consumer API support go back to the beginning of the topic, go back
+to a specific offset, and go back to a specific offset by timestamps.
+
+- Kafka Streams API only support to go back to the earliest offset of the
+`input topics`, and is well explained by Matthias J. Sax in his
+post [[1]](https://www.confluent.io/blog/data-reprocessing-with-kafka-streams-resetting-a-streams-application/)
+
+So I will focus in programmatically options available in Kafka Consumer.
 A simple Consumer will look something like this:
 
 {{< highlight java >}}
@@ -253,8 +266,6 @@ As you can see, for each operation I have to define the specific `topic partitio
 to go back to, so this can get tricky if you have more than one partition, so I
 would recommend to use `#offsetsForTimes` in those cases to get an aligned result
 and avoid inconsistencies in your consumers.
-
-Source code: [https://github.com/jeqo/post-kafka-rewind-consumer-offset](https://github.com/jeqo/post-kafka-rewind-consumer-offset)
 
 ****
 **References**
