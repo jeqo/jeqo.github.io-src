@@ -175,7 +175,7 @@ public static void main(String[] args) {
 }
 {{</ highlight >}}
 
-Este consumidor buscará por records cada `100ms` y los imprimirá en la consola.
+Este consumidor buscará por records por `100ms` y los imprimirá en la consola.
 
 Ahora veamos como regresar `offsets` en distintos escenarios. `Consumer API`
 tiene operaciones `#seek` que permiten estas funcionalidades. Mostraré una

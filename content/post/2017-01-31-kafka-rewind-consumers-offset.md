@@ -171,7 +171,7 @@ public static void main(String[] args) {
 }
 {{</ highlight >}}
 
-This will poll each `100ms` for records and print them out.  In this case
+This will poll by `100ms` for records and print them out.  In this case
 it should print 100 records.
 
 Now let's check how to rewind `offsets` in different scenarios. Consumer API has
