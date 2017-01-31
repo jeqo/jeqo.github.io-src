@@ -9,7 +9,7 @@ categories:
 ---
 
 One of the most important features from *Apache Kafka* is how it manages
-Multiple Consumers. Each `consumer Group` has a current `offset`, that
+Multiple Consumers. Each `consumer group` has a current `offset`, that
 determine at what point in a `topic` this `consumer group` has consume
 messages. So, each `consumer group` can manage its `offset` independently,
 by `partition`.
