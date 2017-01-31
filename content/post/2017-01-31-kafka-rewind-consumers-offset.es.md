@@ -87,30 +87,29 @@ nuestra aplicación.
 Cuando trabajas desde un terminal, si se puede utilizar `kafka-console-consumer`
 sin `group.id` definido, un nuevo `group.id` es generado internamente:
 `console-consumer-${new Random().nextInt(100000)}`.
+Así que a menos que se utilize el mismo `group.id` luego, será como si
+creara un nuevo `consumer group` cada vez que se inice un terminal con
+`kafka-console-consumer`.
 
-//TODO
+Por defecto, cuando se conecta a un `topic` como un `consumer` se inicia con
+el *último* `offset`, así que no se recibirán nuevos `records` a menos que nuevos
+mensajes arriben luego de iniciada la conexión.
 
-so unless you use the same `group.id` afterwards it would be as you create a new consumer group each time.
-
-By default, when you connect to a `topic` as a `consumer` with `console` you
-go to the `latest` offset, so you won't see any new message until new records
-arrive after you connect.
-
-In this case, going back to the beginning of the topic will as easy as add
-`--from-beginning` option to the command line:
+En este caso, para ir hacia el inicio del topic sería suficiente con agregar
+la opción `--from-beginning` a la línea de comandos:
 
 <script type="text/javascript" src="https://asciinema.org/a/101246.js" id="asciicast-101246" async></script>
 
-But, what happen if you use `group.id` property, it will only work the first time,
-but `offset` gets commited to cluster:
+Pero, qué pasaría si se usa la propiedad `group.id`?, La ópcion `--from-beginning`
+solo funcionaría la primera vez, ya que el `offset` sería registrado en el clúster::
 
 <script type="text/javascript" src="https://asciinema.org/a/101248.js" id="asciicast-101248" async></script>
 
 <script type="text/javascript" src="https://asciinema.org/a/101250.js" id="asciicast-101250" async></script>
 
-So, how to go back to the beginning?
+Así que, cómo se regresaría al inicio del log en este caso?
 
-We can use `--offset` option to with three alternatives:
+Podemos usar la opción `--offset` con estas tres alternativas:
 
 ```
 --offset <String: consume offset>        The offset id to consume from (a non-  
@@ -122,45 +121,47 @@ We can use `--offset` option to with three alternatives:
 
 <script type="text/javascript" src="https://asciinema.org/a/101252.js" id="asciicast-101252" async></script>
 
-## From Java Clients
+## Desde Clientes Java
 
-So, from `command-line` is pretty easy to go back in time in the log. But
-how to do it from your application?
+Ahora, luego de ver que desde la línea de comandos en sencillo regresar en el
+tiempo sobre el log; pero, cómo hacer éstas operaciones desde una aplicación?
 
-If you're using Kafka Consumers in your applications, you have to options
-(with Java):
+Si estás utilizando Kafka Consumers en tu aplicación, tienes las siguientes
+opciones (con Java):
 
 * [Kafka Consumer API](http://kafka.apache.org/documentation/#consumerapi)
 
 * [Kafka Streams API](http://kafka.apache.org/documentation/#streamsapi)   
 
-Long story short: If you need stateful and stream processing capabilities,
-go with Kafka Streams.
-If you need simple one-by-one consumption of messages by topics, go with
-Kafka Consumer.
+Haciendo la historia corta: Si necesitas capacidades de procesar mensajes
+desde Kafka de forma *stateful* (manteniendo el estado), es recomendable
+utilizar `Kafka Streams API`.
+Si necesitas una API simple para consumir mensajes uno a uno, utiliza
+`Kafka Consumer API`.
 
-At this moment this are the options to rewind offsets with these APIs:
+Al momento de escribir este post, éstas son las opciones para hacer *rewind*
+de `offsets` desde estas APIs:
 
-- Kafka Consumer API support go back to the beginning of the topic, go back
-to a specific offset, and go back to a specific offset by timestamps.
+- `Kafka Consumer API` soporta regresar al *inicio* de topic, ir a un
+`offset` específico, o regresar a un punto en el tiempo (timestamp).
 
-- Kafka Streams API only support to go back to the earliest offset of the
-`input topics`, and is well explained by [Matthias J. Sax](https://github.com/mjsax)
-in his post
+- `Kafka Streams API` en este momemnto solo soporta regresar al `offset` inicial
+de los `input topics`, y se encuentra bien explicado por [Matthias J. Sax](https://github.com/mjsax)
+en su post:
 [[1]](https://www.confluent.io/blog/data-reprocessing-with-kafka-streams-resetting-a-streams-application/).
 
-So I will focus in programmatically options available in `Kafka Consumer`.
+Así que me enfocaré en las opciones disponibles desde el API de `Kafka Consumer`.
 
-A simple Consumer will look something like this:
+Un consumidor simple luciría así:
 
 {{< highlight java >}}
 public static void main(String[] args) {
     Properties props = new Properties();
-    props.put("bootstrap.servers", "localhost:9092");
-    props.put("group.id", "test");
-    props.put("enable.auto.commit", "true");
-    props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-    props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+    props.put(ConsumerConfig.GROUP_ID_CONFIG, "test");
+    props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
+    props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+    props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
 
     KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
     consumer.subscribe(Arrays.asList("topic-1"));
@@ -174,21 +175,20 @@ public static void main(String[] args) {
 }
 {{</ highlight >}}
 
-This will poll each `100ms` for records and print them out.
+Este consumidor buscará por records cada `100ms` y los imprimirá en la consola.
 
-Now let's check how to rewind offsets in different scenarios. Consumer API has
-add `#seek` operations to achieve this behavior. I will show a naive way to use
-these operations using flags but it shows the point:
+Ahora veamos como regresar `offsets` en distintos escenarios. `Consumer API`
+tiene operaciones `#seek` que permiten estas funcionalidades. Mostraré una
+forma sencilla de agregar estas operaciones utilizando `flags`:
 
-### Rewind to earliest offset
+### Regresar al `offset` inicial
 
-The easiest options is to go back to the beginning of the topic, that not
-always will be `offset=0`. This will depends on the `retention` policy
-option sthat will be cleaning old records based on time or size, but
-this also deserves its own post.
+La opción más común es regresar al inicio del `topic`, que no siempre será
+`offset=0`. Esto dependerá de la política de `retention` que removerá los
+`records` antiguos por tiempo o por tamaño del `topic`; pero este tema
+merece su propio post.
 
-To go to the beginning we can use `#seekToBeginning(topicPartition)`
-operation to go back to earliest offset:
+Para ir al inicio de `topic` usaremos la operación `#seekToBeginning(topicPartition)`:
 
 {{< highlight java >}}
 boolean flag = true;
@@ -207,12 +207,14 @@ while (true) {
 }
 {{</ highlight >}}
 
-Once the seek is done, we can continue our processing as before.
+Una vez realizada la búsqueda del `offset` inicial, para el `topic=topic-1`
+en la `partition=0` se reprocesarán los `records` nuevamente.
 
-### Rewind to specific offset
+### Regresar a un `offset` específico
 
-If we can recognized the specific record from where we need to reprocess,
-we can use `#seek(topicPartition, offset)`
+Si podemos reconocer los `records` específicos (por `partition`) a los que
+necesitamos regresar para reprocesar el log, podemos utilizar
+`#seek(topicPartition, offset)` directamente.
 
 {{< highlight java >}}
 boolean flag = true;
@@ -230,19 +232,27 @@ while (true) {
 }
 {{</ highlight >}}
 
-In this case, we will consume from `record` with `offset=90`
+En este casoo, retrocederemos en en `topic=topic-1` `partition=0`
+hasta el `record` con `offset=90` y reprocesaremos los siguiente `records`
+del log.
 
-### Rewind to offset by timestamps
+***
+NOTA: Puede resultar engorroso mapear todos los offsets por partición cuando
+tienes varias particiones. Por esto es que la adición de `timestamps` ayuda
+a resolver este tema.
+***
 
-What if you don't know exactly the `offset id` to go back to, but you know
-you want to go back 1 hour or 10 min.
+### Regrasar a un `offset` por `timestamp`
 
-For these, since release `10.1.0.1` (TODO validate), there are a couple of
-improvements [[2]](https://cwiki.apache.org/confluence/display/KAFKA/KIP-32+-+Add+timestamps+to+Kafka+message)
+Si no conoces exactamente el `offset id` del `record` desde donde necesitar
+reprocesar el log, pero sabes si necesitas regresar 1 hora o 10 minutos atrás
+el nuevo índice de `timestamp` puede ser útil.
+
+Desde el release `0.10.1.0`, hay un par de mejoras
+[[2]](https://cwiki.apache.org/confluence/display/KAFKA/KIP-32+-+Add+timestamps+to+Kafka+message)
 [[3]](https://cwiki.apache.org/confluence/display/KAFKA/KIP-33+-+Add+a+time+based+log+index)
-were added and a new `seek` operation was added: `#offsetsForTimes`.
-
-Here is how to use it:
+que fueron implementadas, y una nueva operación fue agregada al
+`Kafka Consumer API`: `#offsetsForTimes`:
 
 {{< highlight java >}}
 boolean flag = true;
@@ -270,16 +280,16 @@ while (true) {
 }
 {{</ highlight >}}
 
-In this case, we are using a query first to get the offset inside a timestamp (10 minutes ago)
-and then using that offset to go back with `#seek` operation.
+En este caso primero estamos consultando cuál es el `offset` al que tengo que
+regresar si quiero reprocesar los `records` de hacer 10 minutos,
+y luego con el `offset` adecuado, utilizamos la operación `#seek`.
 
-As you can see, for each operation I have to define the specific `topic partition`
-to go back to, so this can get tricky if you have more than one partition, so I
-would recommend to use `#offsetsForTimes` in those cases to get an aligned result
-and avoid inconsistencies in your consumers.
+En el código fuente se ha agregado los pasos para buscar las particiones por
+`topic`. Esto permitirá reproducir estos pasos en escenarios en los que tengamos
+más de una partición por `topic`.
 
 ****
-**References**
+**Referencias**
 
 1. https://www.confluent.io/blog/data-reprocessing-with-kafka-streams-resetting-a-streams-application/
 
