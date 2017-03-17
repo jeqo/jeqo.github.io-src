@@ -23,27 +23,70 @@ googleAnalytics = "UA-49047812-3"
     tag = "tags"
     category = "categories"
 
-[[menu.main]]
+
+[Languages]
+[Languages.en]
+    weight = 1
+
+[[Languages.en.menu.top]]
+    name = "Blog"
+    pre = ""
+    weight = -100
+    url = "/post/"
+
+[[Languages.en.menu.top]]
+    name = "Talks"
+    pre = ""
+    weight = -90
+    url = "/talk/"
+
+[[Languages.en.menu.main]]
     name = "GitHub"
     pre = ""
     weight = -100
     url = "https://github.com/jeqo/"
-[[menu.main]]
+[[Languages.en.menu.main]]
     name = "Twitter"
     pre = ""
     weight = -90
     url = "https://twitter.com/jeqo89"
-[[menu.main]]
+[[Languages.en.menu.main]]
     name = "RSS"
     pre = ""
     weight = -80
     url = "index.xml"
 
-[Languages]
-    [Languages.en]
-        weight = 1
 
-    [Languages.es]
-        baseurl = "https://jeqo.github.io/es"
-        weight = 2
-        description = "desarrollo de 'back-end', integración, 'devops', etc."
+
+[Languages.es]
+    baseurl = "https://jeqo.github.io/es"
+    weight = 2
+    description = "desarrollo de 'back-end', integración, 'devops', etc."
+
+[[Languages.es.menu.top]]
+    name = "Blog"
+    pre = ""
+    weight = -100
+    url = "/post/"
+
+[[Languages.es.menu.top]]
+    name = "Presentaciones"
+    pre = ""
+    weight = -90
+    url = "/talk/"
+
+[[Languages.es.menu.main]]
+    name = "GitHub"
+    pre = ""
+    weight = -100
+    url = "https://github.com/jeqo/"
+[[Languages.es.menu.main]]
+    name = "Twitter"
+    pre = ""
+    weight = -90
+    url = "https://twitter.com/jeqo89"
+[[Languages.es.menu.main]]
+    name = "RSS"
+    pre = ""
+    weight = -80
+    url = "index.xml"
