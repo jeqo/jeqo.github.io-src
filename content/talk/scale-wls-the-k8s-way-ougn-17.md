@@ -8,13 +8,13 @@ categories:
 - Devops, Oracle
 ---
 
-Presented at OUGN 2017 (http://ougn.no/varseminar-2017/)
+Presented at [OUGN 2017](http://ougn.no/varseminar-2017/)
 
 <!--more-->
 
 # Slides
 
-<script async class="speakerdeck-embed" data-id="11469ea5680643f898394b4790088747" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+{{% speakerdeck 11469ea5680643f898394b4790088747 %}}
 
 # Source-Code
 

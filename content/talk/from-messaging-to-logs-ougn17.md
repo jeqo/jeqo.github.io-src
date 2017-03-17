@@ -11,13 +11,13 @@ categories:
 - back-end
 ---
 
-Presented at OUGN 2017 (http://ougn.no/varseminar-2017/)
+Presented at [OUGN 2017](http://ougn.no/varseminar-2017/)
 
 <!--more-->
 
 # Slides
 
-<script async class="speakerdeck-embed" data-id="b57a55a2c9c14049a8503e281d13959c" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+{{% speakerdeck b57a55a2c9c14049a8503e281d13959c %}}
 
 # Source-Code
 

@@ -11,13 +11,17 @@ categories:
 - back-end
 ---
 
-Presentado al Perú JUG (https://twitter.com/perujug/)
+Presentado al [Perú JUG](https://twitter.com/perujug/)
 
 <!--more-->
 
+# Video
+
+[Hangout](https://youtu.be/gZCzD5bCdBA)
+
 # Diapositivas
 
-<script async class="speakerdeck-embed" data-id="a0a61a9ec75f4a8c9a49b5756b1f5f80" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+{{% speakerdeck a0a61a9ec75f4a8c9a49b5756b1f5f80 %}}
 
 # Código Fuente
 
