@@ -7,6 +7,7 @@ theme = "jeqo-theme"
 contentdir = "content"
 layoutdir = "layouts"
 publishdir = "public"
+
 MetaDataFormat = "yaml"
 PygmentsStyle = "default"
 
@@ -17,12 +18,11 @@ googleAnalytics = "UA-49047812-3"
     name = "Jorge Quilcate Otoya"
 
 [params]
-    description = "back-end development, integration, devops, etc."
+    description = "back-end, integration, devops, etc."
 
 [taxonomies]
     tag = "tags"
     category = "categories"
-
 
 [Languages]
 [Languages.en]
@@ -56,12 +56,10 @@ googleAnalytics = "UA-49047812-3"
     weight = -80
     url = "index.xml"
 
-
-
 [Languages.es]
-    baseurl = "https://jeqo.github.io/es"
+    url = "/es/"
     weight = 2
-    description = "desarrollo de 'back-end', integración, 'devops', etc."
+    description = "back-end, integration, devops, etc."
 
 [[Languages.es.menu.top]]
     name = "Blog"
@@ -79,7 +77,7 @@ googleAnalytics = "UA-49047812-3"
     name = "GitHub"
     pre = ""
     weight = -100
-    url = "https://github.com/jeqo/"
+    url = "https://github.com/jeqo"
 [[Languages.es.menu.main]]
     name = "Twitter"
     pre = ""
