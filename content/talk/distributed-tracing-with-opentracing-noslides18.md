@@ -12,6 +12,10 @@ Presented at [NoSlidesConf 2017](http://www.noslidesconf.net/)
 
 <!--more-->
 
+# Video
+
+{{% youtube hqV4P6Ej7DM %}}
+
 # Slides
 
 No Slides ;)

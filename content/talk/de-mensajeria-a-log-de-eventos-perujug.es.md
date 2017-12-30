@@ -17,7 +17,7 @@ Presentado al [Perú JUG](https://twitter.com/perujug/)
 
 # Video
 
-[Hangout](https://youtu.be/gZCzD5bCdBA)
+{{% youtube gZCzD5bCdBA %}}
 
 # Diapositivas
 
