@@ -1,0 +1,14 @@
+    <div class="navbar">
+        <ul class="navbar-list" style="...">
+            {{ range .Site.Menus.main }}
+            <li class="navbar-item"><a class="navbar-link" href="{{ .URL }}">{{ .Name }}</a></li>
+            {{ end }}
+        </ul>
+    </div>
+    <div class="copyright">
+        <p>{{ with .Site.Copyright | safeHTML }}{{.}}{{ else }}&copy; {{.Now.Format "2006"}}. {{ .Site.Title }}. All rights reserved. {{end}}</p>
+    </div>
+    {{ template "_internal/google_analytics_async.html" . }}
+</div>
+</body>
+</html>

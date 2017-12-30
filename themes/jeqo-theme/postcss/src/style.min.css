@@ -1,0 +1,101 @@
+@lost flexbox flex;
+$codeTextColor: #866c6c;
+$linkHoverColor: #aeaeae;
+$linkActiveColor: #585858;
+$linkTextColor: #676767;
+$headerLinkTextColor: #fff;
+$copyrightTextColor: #676767;
+$textColor:#fff;
+$headlineTextColor:#676767;
+body {  line-height: 1.6;
+  font-weight: 400;
+  font-family: Hack, "Lora", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background:#181818;color:$textColor;
+  }
+a:hover, .post-list-pagination{color:$textColor;}
+a:hover{text-decoration: underline;}
+.wrap {
+  lost-center: 1140px 30px flex;
+  lost-utility: clearfix;
+}
+h1,h2,h3,h4,h5,h6 {color: $headlineTextColor;}
+.header, .navbar { lost-column: 12/12;}
+.header a{
+  text-decoration: none;
+  color: $headerLinkTextColor;
+  opacity: 1;
+  transition: opacity .55s ease-in-out;
+  -moz-transition: opacity .55s ease-in-out;
+  -webkit-transition: opacity .55s ease-in-out;
+}
+.header a.active{
+  color: $linkActiveColor; }
+.header a:hover{
+  opacity: 0.5;
+  }
+.header, .tags {color:#fff;font-weight:700;}
+a.navbar-link, a.post-title-link{font-weight:700;}
+code {color: $codeTextColor;}
+a {color: $linkTextColor;}
+.navbar-list {
+  list-style: none;
+  margin-bottom: 0;
+  }
+.navbar-item {
+  position: relative;
+  float: left;
+  margin-bottom: 0; }
+.navbar-link {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: .2rem;
+  margin-right: 35px;
+  text-decoration: none;
+  color: $linkTextColor; }
+  .navbar-link.active {
+  color: $linkActiveColor; }
+  .navbar-link:hover {
+  color: $linkHoverColor;
+}
+.copyright{
+  lost-column: 12/12;
+  font-size:small; color: $copyrightTextColor;
+}
+.content-tags, .post-title {
+  lost-column: 8/12 0;
+}
+.content-full {
+  lost-column: 12/12;
+}
+.pagination{
+  lost-column: 12/12;
+  text-align:center;
+}
+.tags {
+  lost-column: 3/12 0;
+  border-left: 3px solid #808080;  padding-left: 8px; margin-top: 4px;
+  font-size:small;
+}
+.tags a {  font-size:small;}
+.tags a, .pagination a{
+  color: $linkTextColor;
+  text-decoration: none;
+}
+a.tag-link:hover, .pagination a:hover{
+color: $linkHoverColor;
+text-decoration: underline;
+}
+p { margin-top: 5px; }
+.empty {
+  lost-column: 12/12;
+}
+.post-title-link {
+font-weight: 700;
+font-size: 30px;
+color: $linkTextColor;
+text-decoration: none;
+ }
+.post-title-link:hover {
+color: $linkHoverColor;
+}
