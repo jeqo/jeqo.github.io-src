@@ -1,5 +1,5 @@
 ---
-title: Kafka - Retroceder Offsets de Consumidores
+title: Retroceder Offsets de Consumidores de Kafka
 date: 2017-01-31
 section: post
 tags:

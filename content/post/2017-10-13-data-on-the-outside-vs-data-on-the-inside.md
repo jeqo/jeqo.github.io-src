@@ -1,10 +1,11 @@
 ---
-title: Review - Data on the Outside vs Data on the Inside
+title: Data on the Outside vs Data on the Inside
 date: 2017-10-13
 section: post
 tags:
 - distributed systems
 - papers
+- reviews
 categories:
 - reviews
 ---
