@@ -10,10 +10,6 @@ categories:
 - reviews
 ---
 
-* Link: [cidrdb.org/cidr2005/papers/P12.pdf](cidrdb.org/cidr2005/papers/P12.pdf)
-* Author: Pat Helland
-* Year: 2005
-
 The relevance of this paper today is as it was in 2005.
 It is fascinating how technologies have changed these 12 years
 and if we just change terms like XML to JSON, SOA to Micro-Services
@@ -101,12 +97,17 @@ XML and SQL are discussed as a way to represent data. Where XML extensibility an
 relational capabilities are key depending on the context (i.e. inside or outside data).
 XML is unbounded vs Relational bounded representations.
 
-![outside vs inside](../../static/images/2017-10-13-data-on-the-outside-vs-data-on-the-inside/outside-vs-inside.png)
+![outside vs inside](/images/2017-10-13-data-on-the-outside-vs-data-on-the-inside/outside-vs-inside.png)
 
 And finally compare the benefits and weakness of the 3 ways to represent data: XML, SQL and Objects:
 
-![xml vs sql vs objects](../../static/images/2017-10-13-data-on-the-outside-vs-data-on-the-inside/sql-xml-object.png)
+![xml vs sql vs objects](/images/2017-10-13-data-on-the-outside-vs-data-on-the-inside/sql-xml-object.png)
 
 Concluding:
 
 > We simply need all three of these representations and we need to use them in a fashion that plays to their respective strenghts!
+
+* Link: [cidrdb.org/cidr2005/papers/P12.pdf](cidrdb.org/cidr2005/papers/P12.pdf)
+* Author: Pat Helland
+* Year: 2005
+
