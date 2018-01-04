@@ -39,6 +39,11 @@ googleAnalytics = "UA-49047812-3"
     pre = ""
     weight = -90
     url = "/talk/"
+[[Languages.en.menu.top]]
+    name = "Notes"
+    pre = ""
+    weight = -80
+    url = "/note/"
 
 [[Languages.en.menu.main]]
     name = "GitHub"
@@ -72,6 +77,12 @@ googleAnalytics = "UA-49047812-3"
     pre = ""
     weight = -90
     url = "/talk/"
+
+[[Languages.es.menu.top]]
+    name = "Notas"
+    pre = ""
+    weight = -90
+    url = "/note/"
 
 [[Languages.es.menu.main]]
     name = "GitHub"
