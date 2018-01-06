@@ -1,7 +1,7 @@
 ---
 title: Data on the Outside vs Data on the Inside
-date: 2017-10-13
-section: post
+date: 2018-01-06
+section: note
 tags:
 - distributed systems
 - papers
@@ -9,6 +9,13 @@ tags:
 categories:
 - reviews
 ---
+
+I found this paper as relevant and accurate today as it was in 2005, when it was published. 
+It is fascinating how even 12 years later and with new technologies in vogue, 
+same concepts keep applying.
+
+
+--------
 
 The relevance of this paper today is as it was in 2005.
 It is fascinating how technologies have changed these 12 years
@@ -110,4 +117,3 @@ Concluding:
 * Link: [cidrdb.org/cidr2005/papers/P12.pdf](cidrdb.org/cidr2005/papers/P12.pdf)
 * Author: Pat Helland
 * Year: 2005
-
