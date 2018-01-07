@@ -1,5 +1,5 @@
 +++
-title = "About me"
+title = "About"
 slug = "about"
 menu = "top"
 draft = false
@@ -44,6 +44,6 @@ Theme is a fork of 'darksimplicity' theme. Source can be found [here](https://th
 
 It contains: 
 
-* [Posts](/post/)
-* [Talks](/talk/)
-* [Notes](/note/)
+* [Posts](/posts/)
+* [Talks](/talks/)
+* [Notes](/notes/)

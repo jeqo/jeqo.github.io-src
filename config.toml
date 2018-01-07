@@ -2,101 +2,118 @@ languageCode = "en-us"
 title = "@jeqo"
 baseurl = "https://jeqo.github.io/"
 
-theme = "jeqo-theme"
-
-contentdir = "content"
-layoutdir = "layouts"
-publishdir = "public"
+theme = "jeqo-theme-2"
 
 MetaDataFormat = "yaml"
-PygmentsStyle = "default"
+PygmentsCodeFences = true
+PygmentsStyle = "colorful"
 
-disqusShortname = "jeqoblog"
-googleAnalytics = "UA-49047812-3"
-
-[author]
-    name = "Jorge Quilcate Otoya"
+# Copyright notice. This is displayer in the footer.
+copyright = "&copy; Copyright @jeqo"
 
 [params]
-    description = "back-end, integration, devops, etc."
-
-[taxonomies]
-    tag = "tags"
-    category = "categories"
+  paginate = 10
+  # Social accounts. Link to these accounts are displayed in the header and
+  # footer
+  twitter = "jeqo89"
+  #facebook = "Your Facebook username"
+  #googleplus = "Your Google+ account URL" # https://plus.google.com/u/0/xxxxxx
+  github = "jeqo"
+  #gitlab = "Your GitLab username"
+  #youtube = "Your YouTube username"
+  linkedin = "jeqo89"
+  # Disqus shortname
+  disqus = "jeqoblog"
+  # Google Analytics API key.
+  ga_api_key = "UA-49047812-3"
+  author = "Jorge Quilcate Otoya"
+  authorwebsite = "jeqo.github.com"
+  avatar = "/images/jeqo.jpg"
+  contact = "mailto:quilcate.jorge@gmail.com"
+  bio = "peruvian, husband, software engineer"
+  # Short subtitle/tagline. This is displayed in the header.
+  subtitle = "back-end, integration, devops"
+  # Logo image. This is displayed ogp image.
+  # logo = "/path/to/logo"
+  favicon = "/images/favicon.ico"
 
 [Languages]
 [Languages.en]
     weight = 1
 
-[[Languages.en.menu.top]]
-    name = "Blog"
+[[Languages.en.menu.main]]
+    name = "Posts"
     pre = ""
     weight = -100
-    url = "/post/"
+    url = "/posts"
 
-[[Languages.en.menu.top]]
+[[Languages.en.menu.main]]
     name = "Talks"
     pre = ""
     weight = -90
-    url = "/talk/"
+    url = "/talks"
 
-[[Languages.en.menu.top]]
+[[Languages.en.menu.main]]
     name = "Notes"
     pre = ""
     weight = -80
-    url = "/note/"
+    url = "/notes"
 
 [[Languages.en.menu.main]]
-    name = "GitHub"
+    name = "About"
     pre = ""
-    weight = -100
-    url = "https://github.com/jeqo/"
-[[Languages.en.menu.main]]
-    name = "Twitter"
-    pre = ""
-    weight = -90
-    url = "https://twitter.com/jeqo89"
-[[Languages.en.menu.main]]
-    name = "RSS"
-    pre = ""
-    weight = -80
-    url = "index.xml"
+    weight = -70
+    url = "/about"
 
 [Languages.es]
-    url = "/es/"
+    url = "/es"
     weight = 2
-    description = "back-end, integration, devops, etc."
 
-[[Languages.es.menu.top]]
-    name = "Blog"
+[[Languages.es.menu.main]]
+    name = "Posts"
     pre = ""
     weight = -100
-    url = "/post/"
+    url = "/posts"
 
-[[Languages.es.menu.top]]
+[[Languages.es.menu.main]]
     name = "Presentaciones"
     pre = ""
     weight = -90
-    url = "/talk/"
+    url = "/talks"
 
-[[Languages.es.menu.top]]
+[[Languages.es.menu.main]]
     name = "Notas"
     pre = ""
     weight = -80
-    url = "/note/"
+    url = "/notes"
 
 [[Languages.es.menu.main]]
-    name = "GitHub"
+    name = "Acerca"
     pre = ""
-    weight = -100
-    url = "https://github.com/jeqo"
-[[Languages.es.menu.main]]
-    name = "Twitter"
-    pre = ""
-    weight = -90
-    url = "https://twitter.com/jeqo89"
-[[Languages.es.menu.main]]
-    name = "RSS"
-    pre = ""
-    weight = -80
-    url = "index.xml"
+    weight = -70
+    url = "/about"
+
+[related]
+  # Only include matches with rank >= threshold. This is a normalized rank between 0 and 100.
+  threshold = 80
+
+  # To get stable "See also" sections we, by default, exclude newer related pages.
+  includeNewer = false
+
+  # Will lower case keywords in both queries and in the indexes.
+  toLower = false
+
+  [[related.indices]]
+  name = "keywords"
+  weight = 150
+  [[related.indices]]
+  name  = "author"
+  toLower = true
+  weight = 30
+  [[related.indices]]
+  name  = "tags"
+  weight = 100
+  [[related.indices]]
+  name  = "date"
+  weight = 10
+  pattern = "2017"

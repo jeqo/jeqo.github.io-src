@@ -1,5 +1,5 @@
 +++
-title = "Acerca de"
+title = "Acerca"
 slug = "about"
 menu = "top"
 draft = false
@@ -43,6 +43,6 @@ El tema es un fork de 'darksimplicity'. Las fuentes de tema pueden ser ubicadas 
 
 Este sitio contiene: 
 
-* [Blog](/es/post/)
-* [Presentaciones](/es/talk/)
-* [Notas](/es/note/)
+* [Blog](/es/posts/)
+* [Presentaciones](/es/talks/)
+* [Notas](/es/notes/)
