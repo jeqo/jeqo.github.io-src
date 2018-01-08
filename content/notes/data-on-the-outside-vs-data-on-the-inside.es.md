@@ -1,15 +1,13 @@
 ---
 title: Data on the Outside vs Data on the Inside
-date: 2018-01-06
+date: 2018-01-08
 section: notes
 tags:
 - distributed systems
-- papers
-- reviews
 - microservices
+- pat helland
 categories:
-- reviews
-draft: true
+- papers
 ---
 
 Encuentro este *paper* tan relevante y preciso hoy como lo fue en 2005, cuando fue publicado.
@@ -18,11 +16,11 @@ siguen aplicando.
 
 Sobre todo encuentro esencial evaluar los conceptos propuestos por **Pat Helland**
 en relación a *Microservicios*: En este *paper* se describen los retos que afrontan los 
-desarrolladores cuando salen de un entorno *monolítico*, donde se puede confiar en 
-que todos los componentes están ubicados en un mismo entorno (i.e. un mismo servidor), 
-y se tienen que enfrentar a una realidad donde ya no se puede confiar en que todos los 
-componentes estan en mismo espacio/tiempo, y métodos como transacciones atómicas 
-implementado con *two-phase commit* no son recomendables ya que atenta directamente contra
+desarrolladores cuando salen de un entorno *monolítico* (donde se puede confiar en 
+que todos los componentes están ubicados en un mismo entorno - i.e. un mismo servidor), 
+y se tienen que enfrentar a una realidad donde ya no se puede confiar en que todos las partes
+del sistema están en mismo espacio/tiempo; y métodos como transacciones atómicas, 
+implementado por protocolos como  *two-phase commit*, no son recomendables ya que atentan directamente contra
 uno de los objetivos de distribuir componentes, que es aumentar la disponibilidad. 
 
 Pat inicia su sustentación introduciendo las características de una *Arquitectura Orientada a Servicios* 
@@ -35,7 +33,7 @@ Pat inicia su sustentación introduciendo las características de una *Arquitect
 Más importante, define las implicancias de Transacciones en SOA:
 
 > "Para participar en una transacción [ACID](https://en.wikipedia.org/wiki/ACID) require que 
-> los participantes esten dispuestos a mantener **bloquear** registros en la base de datos
+> los participantes esten dispuestos **a mantener bloqueados registros en la base de datos**
 > hasta que el coordinador de transacciones decida *confirmar* o *abortar* la transacción. 
 > Para los componentes independientes, este es ceder seriamente sus niveles de independencia
 > y require mucha **confianza** de que el sistema coordinador va a realizar esa decisión 
@@ -110,115 +108,91 @@ que llega a través de mensajes es de la logica de aplicación del mismo servici
 
 ## *Data on the Outside: Immutability*
 
-Cuando estamos fuera de un *servicio* 
+Cuando estamos fuera de un *servicio* los datos parte de los mensajes deberían ser inmutables, esto permite que los mensajes 
+sean los mismo sin importar cuando hacemos referencia, ni donde. 
+
+En esta parte, el autor hace importantes recomendaciones acerca de como identificar registros en una SOA:
+
+> "La inmutabilidad no es suficiente para asegurar que no habrán confusiones. La interpretaciones de los contenidos de 
+> los datos debe ser inequivoca. **Datos estables** no son ambigüos y su interpretación no cambian en relación al tiempo/espacio."  
+
+Además los registros deben ser identificados tanto con un identificador independiente a la version, como con un identificador 
+dependiente.
+
+> Para enlazarse con un identificador independiente de la versión, primero es necesario convertir hacia un identificador 
+> dependiente a la versión.
+
+La idea general es poder referenciar información que no cambia, por ejemplo: Cuando estás realizando una compra on-line, 
+los productos que compras tienen un precio en el tiempo en el que se ejecuta la compra. Si tu boleta no referencia al 
+producto con un identificador relacionado a la versión, va a referencia a la "versión actual" del producto, afectando el
+cálculo del monto total de la compra.
 
 ## *Data on the Outside: Reference Data* 
 
+Este es uno de los puntos más importantes desde mi punto de vista, ya que es donde mayores retos se presentan: Cómo compartir
+información que mi servicio es dueño de una forma eficiente para que otros servicios tengan acceso? 
+
+En este capítulo Pat ahonda más a detaller en la importancia de identificadores dependientes e independientes de una versión y define
+3 usos de *Datos de Referencia*:
+
+> * **Operandos**: contienen información publicada por un servicio en anticipado, que posiblemente otro servicio envie un *operador* 
+> con referencia a estos valores.
+> 
+> * **Artefactos Historicos**: describen que paso en el pasado dentro de los confines del servicio.
+> 
+> * **Colecciones Compartidas**: contien información que se mantiene como común entre un conjunto de servicios relacionados. 
+> Un servicio es el encargado de custodiar y manejar los cambios a parte de la colleción. Los otros servicios usan información
+> un tanto atrazada. 
+
+Para mayor información acerca de como enfrentar este reto, Ben Stopford ha escrito un post acerca de como lidiar con la dicotomía 
+entre Datos y Servicios: https://www.confluent.io/blog/data-dichotomy-rethinking-the-way-we-treat-data-and-services/
+
+
 ## *Data on the Inside*
+
+Luego de analizar las implicancias de la gestión de datos fuera de los límites de un servicio, se hace una revisión sobre 
+las características de datos dentro de un servicio, tomando SQL como la forma más común de acceso a datos.
+
+> **SQL y DDL viven en el "ahora"**
+> 
+> Esta noción de "ahora" es en el dominio temporal del servicio, compuesto por la lógica del servicio y los datos contenidos en 
+> su base de datos.
+
+Pero más importante aún me parece las consideraciones para almacenar la data que ingresa a los servicios (i.e. como 
+guardar las solicitudes que recibimos desde otros servicios).
+
+> Muchas veces, un mensaje de entrada se mantiene como una copia binaria exacta para auditoría y no-repudio, mientras 
+> que su contendio se conviente a una forma más adecuada dentro del mismo servicio. 
+
+Esta técnica podría estar relacionada a como manejar "comandos" en un enfoque de *Event Sourcing* y 
+*CQRS*. Por ejemplo, Capital One tiene una implementación de referencia que incluye el almacenamiento de los 
+comandos como parte de su arquitectura: https://github.com/capitalone/cqrs-manager-for-distributed-reactive-services
 
 ## *Representations of Data*
 
---------
+XML y SQL son discutidos como dos enfoques para representar datos, donde la extensibilidad de XML y las capacidades
+relacionales de SQL son claves dependiendo del context donde se utiliza (dentro o fuera de un servicio).
 
-The relevance of this paper today is as it was in 2005.
-It is fascinating how technologies have changed these 12 years
-and if we just change terms like XML to JSON, SOA to Micro-Services
-or Relational Database to NoSQL Data Stores, the concepts will be
-still accurate.
+> Es la combinación de jerarquía, identificadores explicitos y bien definidos (URIs), mecanismos claros para manejar 
+> esquemas antiguos dentro de un nuevo esquema, y la extensibilidad que le da a XML prominencia en la representacion 
+> de *outside data*
 
-Pat Helland explains the dichotomy (as Ben Stopford called in his [post](https://www.confluent.io/blog/data-dichotomy-rethinking-the-way-we-treat-data-and-services/))
-between data behind a Service boundary and data on the outside when
-you follow a service-oriented architecture.
+> SQL is claramente el líder para representar *inside data*
 
-He highlight key challenges that will be need to be embraced if
-the decision to follow this path is taken, like:
+![outside vs inside](/images/notes/data-on-the-outside-vs-data-on-the-inside/outside-vs-inside.png)
 
-> "[In SOA] atomic transactions with two-phase commit **do not occur** accross multiple services."
+*Actuamente podríamos agregar JSON como opción para XML, y NoSQL como acceso a datos internos.*
 
-and
+Para finalmente comparar los beneficios y debilidades de 3 formas de representar datos: XML, SQL y Objectos:
 
-> "Data owned by a service is, in general, **never allowed out of it** unless it is
-> processed by application logic"
+![xml vs sql vs objects](/images/notes/data-on-the-outside-vs-data-on-the-inside/sql-xml-object.png)
 
-But this is just the beginning. Here is one quote I found amazing:
+Concluyendo:
 
-> **"Going to SOA is like going from Newton's physics to Einstein's physics**
->
-> Newton's time marched forward uniformly with instant knowledge at a distance.
->
-> Before SOA, distributed computing strove to make many systems look like one with RPC, 2PC, etc.
->
-> In Einstein's universe, everything is relative to one's perspective.
->
-> SOA has "now" inside and the "past" arriving in messages"
+> Simplemente necesitamos de los tres tipos de representaciones y necesitamos utilizarlos de una forma respectiva a sus fortalezas!
 
-Everyone that is thinking to break a monolith system into a bunch of services
-shall read this and ensure that the benefits worth taking these challenges.
+## Referencias
 
-As Adrian Colyer call it in its review here: https://blog.acolyer.org/2016/09/13/data-on-the-outside-versus-data-on-the-inside/
-
-> Perhaps we should rename the “extract microservice” refactoring operation to “change model of time and space” ;).
-
-The service developer that is aware of this challenge will have present that
-the application logic will have to reconcile the "now" inside a service and
-the "then" arriving as messages.
-
-> **The world is no longer flat!!** SOA is recognizing that there is more than
-> one computer working together.
-
-From this first part we can conclude 2 main issues that have to be embrace in a SOA:
-
-* ACID transaction won't be part of your toolbox
-* Reconcile "now" and "then" is part of the application logic
-
-Then this paper describes Data on the Ouside and Data on the Inside characteristics.
-On one side, data on the outside:
-
-> Data on the outside must be immutable and/or versioned data
-
-Time-stamping, versioning, and not reusing important identifier, Helland says, are
-excellent techniques to keep you messages immutable.
-
-Two concepts are stablished when talking about data:
-
-* Operators: action information that is part of a message. (e.g. Order amount, items)
-* Operands: reference data, that gives context to the Operators. (e.g. Dapartment information linked to an Order)
-
-And about Reference Data, Helland says:
-
-> Each piece of reference data has both a *version independent identifier* and
-> multiple versions, each of which is labeled iwth a *version dependent identifier*.
-> For each piece, there is exactly one publishing service.
-
-This concept of Reference Data is one key concept that in my experience creates
-the most difficult scenarios in a SOA. Sharing data is a key feature and implement it
-correctly is usually difficult: how much data should be shared? how do we control the access
-to sensitive data on the consumer sides? Which approach should be taken to implement this
-funcionality, request/response, messaging, log-oriented?
-
-Nowadays I would say that Apache Kafka is a good fit to express and propagate`Reference Data`.
-
-On the other side, to work with Data on the Inside we should take some considerations:
-
-* Transactionality is ensured inside a service.
-* Incoming Data is usually kept stored as a binary copy for auditing and non-repudiation.
-
-XML and SQL are discussed as a way to represent data. Where XML extensibility and SQL
-relational capabilities are key depending on the context (i.e. inside or outside data).
-XML is unbounded vs Relational bounded representations.
-
-![outside vs inside](/images/2017-10-13-data-on-the-outside-vs-data-on-the-inside/outside-vs-inside.png)
-
-And finally compare the benefits and weakness of the 3 ways to represent data: XML, SQL and Objects:
-
-![xml vs sql vs objects](/images/2017-10-13-data-on-the-outside-vs-data-on-the-inside/sql-xml-object.png)
-
-Concluding:
-
-> We simply need all three of these representations and we need to use them in a fashion that plays to their respective strenghts!
-
-## Referencia
-
-* Link: [cidrdb.org/cidr2005/papers/P12.pdf](cidrdb.org/cidr2005/papers/P12.pdf)
-* Author: Pat Helland
-* Year: 2005
+* Link: [cidrdb.org/cidr2005/papers/P12.pdf](http://cidrdb.org/cidr2005/papers/P12.pdf)
+* Autor: Pat Helland
+* Año: 2005
