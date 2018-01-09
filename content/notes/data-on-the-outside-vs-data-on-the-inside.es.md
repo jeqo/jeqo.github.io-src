@@ -6,6 +6,7 @@ tags:
 - distributed systems
 - microservices
 - pat helland
+- transactions
 categories:
 - papers
 ---
@@ -23,7 +24,7 @@ del sistema están en mismo espacio/tiempo; y métodos como transacciones atómi
 implementado por protocolos como  *two-phase commit*, no son recomendables ya que atentan directamente contra
 uno de los objetivos de distribuir componentes, que es aumentar la disponibilidad. 
 
-Pat inicia su sustentación introduciendo las características de una *Arquitectura Orientada a Servicios* 
+El autor inicia su sustentación introduciendo las características de una *Arquitectura Orientada a Servicios* 
 (SOA), actualmente relevante a Arquitecturas de Microservicios:
 
 > "Cada *servicio* esta compuesto de una cantidad de código y datos que son privados para ese servicio.
@@ -55,10 +56,10 @@ son serializables y nos dan la ilusión de que estamos en un "ahora".
 
 > "La Serializabilidad transaccional te hacen sentir solo"
  
-Podemos asumir que las operaciones que estamos ejecutando: una precede a otra, una sigue a otra,
+Podemos asumir que dos operaciones concurrentes que estemos ejecutando: una precede a otra, una sigue a otra,
 o son completamente independientes.
 
-Cuando salimos de los límites de un *servicio* las cosas cambian completamente:
+Pero una vez que salimos de los límites de un *servicio* las cosas cambian completamente:
 
 > "Los contenidos de un mensaje (e.g. *request* o *response*) son siempre del  pasado! Nunca son de 'ahora'."
 >
@@ -92,7 +93,8 @@ Esta cita me parece clave considerar cuando se esta evaluando migrar de una arqu
 una distribuida, como Microservicios: Los beneficios tienen que ser mayores a la complejidad que implica 
 trabajar en base a leyes distintas, como aprender las teorías de Einstein luego de estar acostumbrado a las leyes de Newton.
 
-Como Adrian Colyer describe en [su revisión del *paper*](https://blog.acolyer.org/2016/09/13/data-on-the-outside-versus-data-on-the-inside/):
+Como [Adrian Colyer](https://twitter.com/adriancolyer) describe en 
+[su revisión del *paper*](https://blog.acolyer.org/2016/09/13/data-on-the-outside-versus-data-on-the-inside/):
 
 > Quizás debamos renombrar la operacion de refactorización “extraer microservicios” a “cambiar el modelo de espacio y timepo” ;).
 
@@ -108,7 +110,7 @@ que llega a través de mensajes es de la logica de aplicación del mismo servici
 
 ## *Data on the Outside: Immutability*
 
-Cuando estamos fuera de un *servicio* los datos parte de los mensajes deberían ser inmutables, esto permite que los mensajes 
+Cuando estamos fuera de un *servicio*, los datos (parte de los mensajes) deberían ser inmutables, esto permite que los mensajes 
 sean los mismo sin importar cuando hacemos referencia, ni donde. 
 
 En esta parte, el autor hace importantes recomendaciones acerca de como identificar registros en una SOA:
@@ -130,9 +132,9 @@ cálculo del monto total de la compra.
 ## *Data on the Outside: Reference Data* 
 
 Este es uno de los puntos más importantes desde mi punto de vista, ya que es donde mayores retos se presentan: Cómo compartir
-información que mi servicio es dueño de una forma eficiente para que otros servicios tengan acceso? 
+información que mi servicio es dueño de una forma eficiente y consistente para que otros servicios puedan consumir? 
 
-En este capítulo Pat ahonda más a detaller en la importancia de identificadores dependientes e independientes de una versión y define
+En este capítulo el autor ahonda más a detalle en la importancia de identificadores dependientes e independientes de una versión y define
 3 usos de *Datos de Referencia*:
 
 > * **Operandos**: contienen información publicada por un servicio en anticipado, que posiblemente otro servicio envie un *operador* 
@@ -144,8 +146,10 @@ En este capítulo Pat ahonda más a detaller en la importancia de identificadore
 > Un servicio es el encargado de custodiar y manejar los cambios a parte de la colleción. Los otros servicios usan información
 > un tanto atrazada. 
 
-Para mayor información acerca de como enfrentar este reto, Ben Stopford ha escrito un post acerca de como lidiar con la dicotomía 
-entre Datos y Servicios: https://www.confluent.io/blog/data-dichotomy-rethinking-the-way-we-treat-data-and-services/
+Para mayor información acerca de como enfrentar este reto, [Ben Stopford](https://twitter.com/benstopford) 
+ha escrito un post acerca de como lidiar con la dicotomía 
+entre Servicios tratando de encapsular datos y Sistemas de Datos tratando de exponerlos: 
+https://www.confluent.io/blog/data-dichotomy-rethinking-the-way-we-treat-data-and-services/
 
 
 ## *Data on the Inside*
@@ -154,6 +158,8 @@ Luego de analizar las implicancias de la gestión de datos fuera de los límites
 las características de datos dentro de un servicio, tomando SQL como la forma más común de acceso a datos.
 
 > **SQL y DDL viven en el "ahora"**
+> 
+> Cada transacción es significativa solo dentro del contexto del esquema definido por una transacción anterior.
 > 
 > Esta noción de "ahora" es en el dominio temporal del servicio, compuesto por la lógica del servicio y los datos contenidos en 
 > su base de datos.
@@ -181,7 +187,8 @@ relacionales de SQL son claves dependiendo del context donde se utiliza (dentro 
 
 ![outside vs inside](/images/notes/data-on-the-outside-vs-data-on-the-inside/outside-vs-inside.png)
 
-*Actuamente podríamos agregar JSON como opción para XML, y NoSQL como acceso a datos internos.*
+*Actuamente podríamos transladar similares beneficios y debilidades a JSON como opción para datos fuera del servicio, 
+y bases de datos NoSQL para datos internos.*
 
 Para finalmente comparar los beneficios y debilidades de 3 formas de representar datos: XML, SQL y Objectos:
 
