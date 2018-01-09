@@ -45,7 +45,15 @@ Por lo tanto, solo se deberían considerar transacciones atómicas solo entre co
 que tienen un alto nivel de confianza, por ejemplo: *brokers* de Kafka confian internamente 
 en el servicio de Zookeeper para asignar la réplica líder de una partición.
 
-//TODO describing Operators, Operands and Reference Data
+Luego, introduce 2 conceptos importantes a lo largo del *paper*: 
+
+> - **Operadores**: corresponde a la intención del mensaje. Frecuentemente, el operador refleja una función de negocio en el 
+> dominio del servicio. 
+> - **Operandos**: Mensajes pueden contener operandos para los operadores. Los operandos son información adicional requeridos por 
+> el mensaje operador para calificar la intensión del servicio. Operandos son usualmente obtenidos a partir de *Datos de Referencia*
+> publicados por un servico para facilitar su invocación más adelante. 
+
+{{< zoom-img src="/images/notes/data-on-the-outside-vs-data-on-the-inside/operatos-operands.png" >}}
 
 ## *Data: Then and Now*
 
@@ -185,14 +193,14 @@ relacionales de SQL son claves dependiendo del context donde se utiliza (dentro 
 
 > SQL is claramente el líder para representar *inside data*
 
-![outside vs inside](/images/notes/data-on-the-outside-vs-data-on-the-inside/outside-vs-inside.png)
+{{< zoom-img src="/images/notes/data-on-the-outside-vs-data-on-the-inside/outside-vs-inside.png" >}}
 
 *Actuamente podríamos transladar similares beneficios y debilidades a JSON como opción para datos fuera del servicio, 
 y bases de datos NoSQL para datos internos.*
 
 Para finalmente comparar los beneficios y debilidades de 3 formas de representar datos: XML, SQL y Objectos:
 
-![xml vs sql vs objects](/images/notes/data-on-the-outside-vs-data-on-the-inside/sql-xml-object.png)
+{{< zoom-img src="/images/notes/data-on-the-outside-vs-data-on-the-inside/sql-xml-object.png" >}}
 
 Concluyendo:
 

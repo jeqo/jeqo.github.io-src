@@ -39,7 +39,15 @@ Hence we can only consider atomic transactions when there is a high level of tru
 For instance, *brokers* in Apache Kafka trust internally in Zookeeper service to assign a leader replica 
 for each partition to a broker. 
 
-//TODO describe operators operands and reference data.
+Then, a couple of concepts are introduced here that are important along the paper:
+
+> - **Operators**: correspond to the intended purpose for the message. Frequently, 
+> the operator reflects a business function in the domain of the service.
+> - **Operandos**: The operands are additional information required by the
+> operator message to fully qualify the intent of the sending service. Operands are typically obtained from reference
+> data published by a service to facilitate its later invocation with an operator message.
+
+{{< zoom-img src="/images/notes/data-on-the-outside-vs-data-on-the-inside/operatos-operands.png" >}}
 
 ## Data: Then and Now
 
