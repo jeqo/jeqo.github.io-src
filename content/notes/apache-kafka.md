@@ -8,6 +8,8 @@ categories:
 - notes
 ---
 
+<!--more-->
+
 ## Contributions
 
 * KIP-122: Add Reset Consumer Group Offsets tooling https://cwiki.apache.org/confluence/display/KAFKA/KIP-122%3A+Add+Reset+Consumer+Group+Offsets+tooling

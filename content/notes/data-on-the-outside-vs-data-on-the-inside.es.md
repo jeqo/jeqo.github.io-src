@@ -15,6 +15,8 @@ Encuentro este *paper* tan relevante y preciso hoy como lo fue en 2005, cuando f
 Es fascinante como luego de 12 años y con nuevas tecnologías en voga, los mismos conceptos 
 siguen aplicando. 
 
+<!--more-->
+
 Sobre todo encuentro esencial evaluar los conceptos propuestos por **Pat Helland**
 en relación a *Microservicios*: En este *paper* se describen los retos que afrontan los 
 desarrolladores cuando salen de un entorno *monolítico* (donde se puede confiar en 

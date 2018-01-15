@@ -1,6 +1,6 @@
 ---
 title: Data on the Outside vs Data on the Inside
-date: 2018-01-06
+date: 2018-01-08
 section: notes
 tags:
 - distributed systems
@@ -14,6 +14,8 @@ categories:
 I found this paper as relevant and accurate today as it was in 2005, when it was published. 
 It is fascinating how even 12 years later and with new technologies in vogue, 
 same concepts keep applying.
+
+<!--more-->
 
 Overall, I found esential to evaluate concepts proposed here by **Pat Helland** in relation
 with Microservices: This paper is describing challenges that we, as developers, will have to deal when 
@@ -186,6 +188,8 @@ And finally compares strengths and weaknesses from three ways of representing da
 Concluding:
 
 > We simply need all three of these representations and we need to use them in a fashion that plays to their respective strengths!
+
+## References
 
 * Link: [cidrdb.org/cidr2005/papers/P12.pdf](http://cidrdb.org/cidr2005/papers/P12.pdf)
 * Author: **Pat Helland**

@@ -5,6 +5,6 @@ section: notes
 tags:
 - scala
 categories:
-- notes
+- programming languages
 draft: true
 ---
