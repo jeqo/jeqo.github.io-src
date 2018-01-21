@@ -1,6 +1,7 @@
 ---
-title: Immutability Changes Evrything
-date: 2018-01-16
+title: Immutability Changes Everything
+date: 2018-01-26
+draft: true
 ---
 
 Immutability is one of those concepts that could appear simple 
