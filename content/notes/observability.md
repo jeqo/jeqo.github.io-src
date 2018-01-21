@@ -9,7 +9,7 @@ tags:
 categories: 
 - devops
 - operations
-draft: true
+draft: false
 ---
 
 <!--more-->
