@@ -16,6 +16,15 @@ draft: false
 
 ## References
 
+### Projects
+
+#### OpenCensus
+
+* Specifications https://github.com/census-instrumentation/opencensus-specs
+
+> Context API, Tags API, Stats API, Trace API -> Exporters
+
+
 ### Papers
 
 * Benjamin Sigelman et al. 
