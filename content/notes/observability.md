@@ -24,6 +24,12 @@ draft: false
 
 > Context API, Tags API, Stats API, Trace API -> Exporters
 
+#### OpenZipkin
+
+* B3 Propagation https://github.com/openzipkin/b3-propagation
+
+> Trace Context consists on: Trace Id, Parent Span Id, Span Id and Flags, that includes Parent Sampling Decition and Debugging option.
+
 
 ### Papers
 
