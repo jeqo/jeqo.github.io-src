@@ -30,6 +30,23 @@ draft: false
 
 > Trace Context consists on: Trace Id, Parent Span Id, Span Id and Flags, that includes Parent Sampling Decition and Debugging option.
 
+* Zipkin API https://github.com/openzipkin/zipkin-api and Swagger: https://zipkin.io/zipkin-api/#/
+
+#### Spigo
+
+Repository: https://github.com/jeqo/spigo
+
+##### Implementation
+
+`tooling/archius.go` contains all configuration options.
+
+`actors/edda.go` start microservices.
+
+`tooling/architecture.go` manage Spigo
+
+`tooling/asgard.go` create nodes (i.e. start specific node depending on type assigned on architecture)
+
+`actors/eureka.go` works as service registry.
 
 ### Papers
 
