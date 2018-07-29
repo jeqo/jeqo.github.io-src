@@ -1,10 +1,7 @@
 {{ partial "header.html" . }}
-{{ range .Data.Pages.GroupByDate "2006" }}
-  <h3>{{ .Key }}</h3>
-  {{ range .Pages }}
+  {{ range where .Pages "Section" "posts" }}
     {{ .Render "li" }}
   {{ end }}
-{{ end }}
 {{ partial "pagination.html" .Paginator }}
 {{ partial "siteinfo.html" . }}
 {{ partial "footer.html" . }}
