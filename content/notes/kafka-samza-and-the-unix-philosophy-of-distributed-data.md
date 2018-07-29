@@ -43,4 +43,25 @@ Then Kafka and Samza are explained as components to support Streaming data piple
 
 ## Discussion
 
+Kafka, on one side, is focused on making replicated logs as efficient and performant as possible.
+
+> Kafka's focus on the log abstraction is reminiscent of the Unix philosophy: **"Make each program do one thing well. To do a new job, build
+afresh rather than complicated old programs by adding 'new features'"**
+
+Samza on the other side, is focus on Stream processing: 
+
+> Each Samza Job is structurally simple: it is jost one step in a data processing pipeline, with Kafka topics as inputs and outputs. If Kafka is 
+like a streaming version of HDFS, then Samza is like a streaming version of MapReduce.
+
+> This principle again evokes a Unix maxim: **"Expect the output of every program to become the unput to another, as yet unknown, program."**
+
+> Kafka topics deliberately do not provide backpressure: the on-disk log acts as an almost-unbounded buffer for messages.
+
+### Unix as a Role Model
+
+> ... the log-oriented model of Kafka and Samza is fundamentally built on the idea of composing heterogeneous system through the uniform interface
+of a replicated, partitioned log.
+> Individual systems for data storage and processing are encouraged to do one thing well, and to use logs as input and output. 
+> Even though Kafka's logs are not the same as Unix pipes, they encourage composability, and thus Unix-style thinking.
+
 
