@@ -1,7 +1,7 @@
 {{ partial "header.html" . }}
-  {{ range where .Pages "Section" "posts" }}
+{{ range .Sections }}
+  {{ range where .Pages "Section" "in" "posts,talks" }}
     {{ .Render "li" }}
   {{ end }}
-{{ partial "pagination.html" .Paginator }}
-{{ partial "siteinfo.html" . }}
+{{ end }}
 {{ partial "footer.html" . }}
