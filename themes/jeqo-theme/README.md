@@ -18,7 +18,7 @@ Pickles is a modern, simple and beautiful Hugo theme.
 Use short code for Image Zoom.
 
 ```
-{{% zoom-img src="/images/default.jpg" %}}
+{{< zoom-img src="/images/default.jpg" >}}
 ```
 
 ## Features
