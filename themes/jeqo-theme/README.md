@@ -1,24 +1,97 @@
-# Dark Simplicity
+# Pickles [![Build Status](https://travis-ci.org/mismith0227/hugo_theme_pickles.svg?branch=master)](https://travis-ci.org/mismith0227/hugo_theme_pickles) [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/mismith0227/hugo_theme_pickles/blob/master/license.md) [![Standard - JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
-Dark Simplicity is a minimalist oriented theme with a dark color scheme for [Hugo](http://gohugo.io/).
+Pickles is a modern, simple and beautiful Hugo theme.
 
-## Supports the following built-in functions from Hugo:
+![screenshot](https://github.com/mismith0227/hugo_theme_pickles/blob/master/images/screenshot.png)
 
-* Menus, either add menu = "top" in the page parameters or add the proper parameters for each menu entry in your config.toml.
-* Pagination for posts type (paginates at five posts).
-* Taxonomy in the form of tags.
+## Overview
 
-## Supports the following parameters:
-* copyright, it supports safeHtml, so you can use HTML without problems.  Defaults to &copy; CurrentYear. All rights reserved.
-* description, puts a tagline like this: | sample tag line
-* google_analytics_id, put your google analytics id if you use it.
-* disqus_shortname, put your shortname for your disqus account if you use it.
+* Modern, Simple and beautiful design
+* Medium's Image Zoom（[zoom.js](https://github.com/fat/zoom.js/))
+* Social links（Twitter,Facebook,Instagram,Google+,GitHub,GitLab,npm,Codepen,Dribbble,500px,Flickr,Pinterest,Tumblr,Vimeo,YouTube,Linkedin）
+* Support for Related Content
+* Support for tags
+* Analytics with Google Analytics
+* Responsive design
+* SVG Sprite
 
-## Notable Features
-* Utilizes PostCSS Plugins including Lost, Font Magician, and CSSNano for Generating the CSS and Grid. Includes the original gulp config and css files so you can make modifications using the variables for easily changing colors used.
-* Uses some Google fonts.
-* Minimalist look and feel.
-* Supports Google Analytics.
-* Supports Disqus Comments.
+Use short code for Image Zoom.
 
-See exampleSite/config.toml file for example config.
+```
+{{% zoom-img src="/images/default.jpg" %}}
+```
+
+## Features
+
+* gulp
+* webpack
+* PostCSS
+* Babel
+* SVG Sprite
+* Standard
+
+## Installation
+
+In your hugo site directory, run:
+
+```shell
+$ mkdir themes
+$ cd themes
+$ git clone -b release https://github.com/mismith0227/hugo_theme_pickles
+```
+
+Or download it from the release branch
+
+[release](https://github.com/mismith0227/hugo_theme_pickles/tree/release)
+
+## Usage
+
+Use hugo's -t hugo_theme_pickles or --theme=hugo_theme_pickles option with hugo commands. Example:
+
+```shell
+$ hugo server -t hugo_theme_pickles -w -D
+```
+
+## Configuration
+
+You may specify following options in `config.toml` of your site to make use of
+this theme's features.
+
+For getting started with Pickles, copy the [config.toml](https://github.com/mismith0227/hugo_theme_pickles/blob/master/exampleSite/config.toml) file from the exampleSite directory inside Pickles’s repository to your site repository.
+
+```shell
+$ cp themes/hugo_theme_pickles/exampleSite/config.toml .
+```
+
+Now, you can start editing this file and add your own information!
+
+## Contributing
+
+Pull requests, bug fixes and new features are welcome!
+
+Please create feature branches from [develop](https://github.com/mismith0227/hugo_theme_pickles/tree/develop) and submit a PR for any change.
+
+## Development
+
+1. Install Node modules
+
+        $ yarn
+
+1. Run gulp. You don't need to install gulp globally.
+
+        // Development
+        $ yarn run dev
+        $ // On another tab
+        $ hugo server
+
+        // Production (compress)
+        $ yarn run prod
+        $ // On another tab
+        $ hugo server
+
+        // Build
+        $ yarn run build
+
+## License
+
+Open sourced under the MIT license.

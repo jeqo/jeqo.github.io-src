@@ -1,39 +1,21 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode | default "en-us" }}">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="theme" content="darksimplicity">
-  {{ .Hugo.Generator }}
-  {{ with .Site.Params.name }}<meta name="author" content="{{ . }}">{{ end }}
-  {{ with .Site.Params.role }}<meta name="description" content="{{ . }}">{{ end }}
-  <base href="{{ .Site.BaseURL }}">
-  <title>{{ .Title }}</title>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.020/css/hack-extended.min.css">
-  <link rel="stylesheet" href="{{ "/css/style.min.css" | relURL }}">  
-  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
-  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
-</head>
+<html lang="{{ .Site.LanguageCode }}">
+{{ partial "head.html" . }}
 <body>
-  <div class="wrap">
-    <div class="navbar">
-        <ul class="navbar-list" style="float:right">
-          {{ range .Site.Menus.top -}}
-          <li class="navbar-item">
-              <a class="navbar-link" href="{{ .URL | absLangURL }}">{{ .Name }}</a>
-          </li>
-          {{- end }}
-          {{ if .IsTranslated }}
-          <li class="navbar-item"><a class="navbar-link">|</a></li>
-          {{ range .Translations }}
-          <li class="navbar-item"><a class="navbar-link" href="{{ .Permalink }}">{{ .Lang }}</a></li>
-          {{ end}}
-        </ul>
-        {{ end }}
-    </div>
-    <div class="header">
-      <span style="font-size: 34px;">
-        <a href="{{ .Site.BaseURL  }}">{{ .Site.Title }}</a>
-      </span>
-      {{ if .Site.Params.description }}<span style="font-size:12px;">&nbsp;&nbsp;|&nbsp;&nbsp;<i>{{ .Site.Params.description }}</i> </span>{{end}}
-    </div>
+  <a href="#main" class="skip-link p-screen-reader-text">Skip to content</a>
+  {{ partial "svgpack-sprite.html" . }}
+  <header class="l-header">
+    {{ if .IsPage }}
+    <p class="c-title p-title"><a href="{{ .Site.BaseURL }}" class="p-title__link">{{ .Site.Title }}</a></p>
+    {{ else }}
+    <h1 class="c-title p-title"><a href="{{ .Site.BaseURL }}" class="p-title__link">{{ .Site.Title }}</a></h1>
+    {{ end }}
+    {{ with .Site.Params.subtitle }}
+    <p class="p-subtitle">
+      {{ . }}
+    </p>
+    {{ end }}
+  </header>
+  {{ partial "link.html" . }}
+  {{ partial "menu.html" . }}
+  <main id="main" class="l-main">

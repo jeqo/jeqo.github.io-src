@@ -2,7 +2,7 @@ languageCode = "en-us"
 title = "@jeqo"
 baseurl = "https://jeqo.github.io/"
 
-theme = "jeqo-theme-2"
+theme = "jeqo-theme"
 
 MetaDataFormat = "yaml"
 PygmentsCodeFences = true

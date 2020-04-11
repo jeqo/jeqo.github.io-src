@@ -1,12 +1,10 @@
-name = "Dark Simplicity"
+name = "Pickles"
 license = "MIT"
-licenselink = "https://github.com/kritoke/darksimplicity/blob/master/LICENSE.txt"
-description = "A Dark Minimalist Theme for Hugo utilizing the Lost Grid Framework."
-homepage = "http://github.com/kritoke/darksimplicity"
-tags = ["blog", "dark", "minimalist"]
+licenselink = "https://github.com/mismith0227/hugo_theme_pickles/blob/master/LICENSE.md"
+description = "Pickles is a modern, simple and beautiful Hugo theme"
+author = "Takuma Misumi"
+homepage = "https://pickles.work/"
+source_repo = "git@github.com:mismith0227/hugo_theme_pickles.git"
+tags = ["Responsive", "Blog", "Google analytics", "Disqus", "Clean", "Tags", "Minimal", "Minimalist", "Simple", "White", "Starter"]
 features = ["blog"]
-min_version = 0.18
-
-[author]
-    name = "Matt Rhone"
-    homepage = "http://matthewrhone.com"
+min_version = 0.27
