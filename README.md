@@ -4,7 +4,6 @@ Source code of [jeqo.github.io](https://jeqo.github.io).
 
 ## Content
 
-* Blog posts
+* Posts
 * Talks
-* Notes
 * About me
