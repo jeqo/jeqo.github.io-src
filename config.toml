@@ -16,17 +16,13 @@ copyright = "&copy; Copyright @jeqo"
   # Social accounts. Link to these accounts are displayed in the header and
   # footer
   twitter = "jeqo89"
-  #facebook = "Your Facebook username"
-  #googleplus = "Your Google+ account URL" # https://plus.google.com/u/0/xxxxxx
   github = "jeqo"
-  #gitlab = "Your GitLab username"
-  #youtube = "Your YouTube username"
   linkedin = "jeqo89"
   # Disqus shortname
   disqus = "jeqoblog"
   # Google Analytics API key.
   ga_api_key = "UA-49047812-3"
-  author = "Jorge Quilcate Otoya"
+  author = "Jorge Esteban Quilcate Otoya"
   authorwebsite = "jeqo.github.com"
   avatar = "/images/jeqo.jpg"
   contact = "mailto:quilcate.jorge@gmail.com"
@@ -34,7 +30,6 @@ copyright = "&copy; Copyright @jeqo"
   # Short subtitle/tagline. This is displayed in the header.
   subtitle = "back-end, integration, devops"
   # Logo image. This is displayed ogp image.
-  # logo = "/path/to/logo"
   favicon = "/images/favicon.ico"
 
 [Languages]
