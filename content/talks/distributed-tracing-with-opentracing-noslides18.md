@@ -14,7 +14,7 @@ Presented at [NoSlidesConf 2017](http://www.noslidesconf.net/)
 
 # Video
 
-{{% youtube hqV4P6Ej7DM %}}
+{{< youtube hqV4P6Ej7DM >}}
 
 # Slides
 

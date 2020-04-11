@@ -240,7 +240,7 @@ curl http://localhost:8080/hello/jorge
 
 And refresh the Jaeger UI:
 
-{{% zoom-img src="/images/2017-09-28-kafka-opentracing/first-trace.png" %}}
+{{< zoom-img src="/images/2017-09-28-kafka-opentracing/first-trace.png" >}}
 
 > Source code on branch: steps/step-02
 
@@ -287,7 +287,7 @@ tracing context on Kafka Headers (supported since v0.11.0).
 
 That's it, let's redeploy and test again.
 
-{{% zoom-img src="/images/2017-09-28-kafka-opentracing/second-traces-not-linked.png" %}}
+{{< zoom-img src="/images/2017-09-28-kafka-opentracing/second-traces-not-linked.png" >}}
 
 Wait!!! but we only run one request, why do we have 2 traces???
 
@@ -343,11 +343,11 @@ public class HelloWorldResource {
 First we inject the Tracer, then we get the span from Request,
 and finally we create an ActiveSpan that wraps the producer.
 
-{{% zoom-img src="/images/2017-09-28-kafka-opentracing/third-traces-together.png" %}}
+{{< zoom-img src="/images/2017-09-28-kafka-opentracing/third-traces-together.png" >}}
 
 And if we go to the detail we can get more insight from the execution:
 
-{{% zoom-img src="/images/2017-09-28-kafka-opentracing/trace-details.png" %}}
+{{< zoom-img src="/images/2017-09-28-kafka-opentracing/trace-details.png" >}}
 
 We can get a more deep understanding about the trace execution,
 how the callback works on the producer side, processing the metadata
@@ -428,7 +428,7 @@ Should be enough. Let's try it out:
  curl http://localhost:8080/hello/jorge
 ```
 
-{{% zoom-img src="/images/2017-09-28-kafka-opentracing/trace-with-consumer.png" %}}
+{{< zoom-img src="/images/2017-09-28-kafka-opentracing/trace-with-consumer.png" >}}
 
 That's great! Now we have how long it takes to receive a record on the
 consumer side.
@@ -472,7 +472,7 @@ we can use `TracingKafkaUtils` to extract it, and reference it:
         }
 ```
 
-{{% zoom-img src="/images/2017-09-28-kafka-opentracing/complete-trace.png" %}}
+{{< zoom-img src="/images/2017-09-28-kafka-opentracing/complete-trace.png" >}}
 
 > Source code on branch: steps/step-03
 
@@ -520,7 +520,7 @@ And in the consumer side, the same story:
 
 And you can filter now from the UI:
 
-{{% zoom-img src="/images/2017-09-28-kafka-opentracing/tags.png" %}}
+{{< zoom-img src="/images/2017-09-28-kafka-opentracing/tags.png" >}}
 
 ## Dropwizard Helpers
 

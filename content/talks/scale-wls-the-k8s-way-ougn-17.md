@@ -14,7 +14,7 @@ Presented at [OUGN 2017](http://ougn.no/varseminar-2017/)
 
 # Slides
 
-{{% speakerdeck 11469ea5680643f898394b4790088747 %}}
+{{< speakerdeck 11469ea5680643f898394b4790088747 >}}
 
 # Source-Code
 
