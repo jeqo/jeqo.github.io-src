@@ -2,7 +2,7 @@ languageCode = "en-us"
 title = "@jeqo"
 baseurl = "https://jeqo.github.io/"
 
-theme = "jeqo-theme-2"
+theme = "jeqo-theme"
 
 MetaDataFormat = "yaml"
 PygmentsCodeFences = true
@@ -16,17 +16,13 @@ copyright = "&copy; Copyright @jeqo"
   # Social accounts. Link to these accounts are displayed in the header and
   # footer
   twitter = "jeqo89"
-  #facebook = "Your Facebook username"
-  #googleplus = "Your Google+ account URL" # https://plus.google.com/u/0/xxxxxx
   github = "jeqo"
-  #gitlab = "Your GitLab username"
-  #youtube = "Your YouTube username"
   linkedin = "jeqo89"
   # Disqus shortname
   disqus = "jeqoblog"
   # Google Analytics API key.
   ga_api_key = "UA-49047812-3"
-  author = "Jorge Quilcate Otoya"
+  author = "Jorge Esteban Quilcate Otoya"
   authorwebsite = "jeqo.github.com"
   avatar = "/images/jeqo.jpg"
   contact = "mailto:quilcate.jorge@gmail.com"
@@ -34,7 +30,6 @@ copyright = "&copy; Copyright @jeqo"
   # Short subtitle/tagline. This is displayed in the header.
   subtitle = "back-end, integration, devops"
   # Logo image. This is displayed ogp image.
-  # logo = "/path/to/logo"
   favicon = "/images/favicon.ico"
 
 [Languages]
@@ -53,11 +48,11 @@ copyright = "&copy; Copyright @jeqo"
     weight = -90
     url = "/talks"
 
-[[Languages.en.menu.main]]
-    name = "Notes"
-    pre = ""
-    weight = -80
-    url = "/notes"
+#[[Languages.en.menu.main]]
+#    name = "Notes"
+#    pre = ""
+#    weight = -80
+#    url = "/notes"
 
 [[Languages.en.menu.main]]
     name = "About"
@@ -81,11 +76,11 @@ copyright = "&copy; Copyright @jeqo"
     weight = -90
     url = "/talks"
 
-[[Languages.es.menu.main]]
-    name = "Notas"
-    pre = ""
-    weight = -80
-    url = "/notes"
+#[[Languages.es.menu.main]]
+#    name = "Notas"
+#    pre = ""
+#    weight = -80
+#    url = "/notes"
 
 [[Languages.es.menu.main]]
     name = "Acerca"

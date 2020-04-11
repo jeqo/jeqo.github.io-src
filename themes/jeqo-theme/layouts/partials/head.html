@@ -30,20 +30,16 @@
 
   {{ if .IsPage }}
   <meta property="og:type" content="article" />
-  {{ with .Site.Params.facebook }}
-  <meta property="og:article:author" content="https://facebook.com/{{ . }}" />
-  {{ end }}
   {{ else }}
   <meta property="og:type" content="website" />
   {{ end }}
-  <!-- Hugo Version number -->
-  {{ .Hugo.Generator -}}
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+  
+  <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css'>
   <link rel="stylesheet" href="{{ .Site.BaseURL }}css/style.css" />
   {{- with .Site.Params.favicon }}
   <link rel='icon' type='image/x-icon' href="{{ . | absURL }}" />
   {{- end -}}
-  {{ if eq .URL "/" }}
+  {{ if eq .Params.url "/" }}
   <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
   {{ end }}
   <script type="text/javascript" src="{{ .Site.BaseURL }}js/bundle.js"></script>

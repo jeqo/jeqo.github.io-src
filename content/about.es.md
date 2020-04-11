@@ -1,48 +1,36 @@
 +++
 title = "Acerca"
 slug = "about"
+date = 2020-04-11
 menu = "top"
 draft = false
 +++
 
 # Jorge Esteban Quilcate Otoya
 
-Peruano, Casado, Ingeniero de Software, inmigrante en Noruega.
+Peruano, casado, ingeniero de software, e inmigrante en Noruega y el Reino Unido.
 
-Iniciando mi carrera en sistemas distribuidos.
+Disfrutando mi carrera trabajando en sistemas distribuidos.
 
-Empezando a contribuir a proyectos Open-Source desde 2016 (e.g. Apache Kafka)
-
-Trabajando como "back-end and integration developer" en SYSCO AS (Oslo, Norway). 
-Parte del equipo de Middleware.
-
-Trabajo mayormente con tecnologías JVM (Java, Scala).
+Empecé a contribuir en proyectos Open-Source desde 2016, incluyendo Apache Kafka y Zipkin.
 
 Intereses actuales: 
 
-* Observability,
+* Log-based streaming platform (Apache Kafka),
+* Stream processing (Kafka Streams),
 * Distributed Tracing (OpenTracing), 
-* Metrics (Prometheus), 
-* Chaos engineering,
-* Event Sourcing and CQRS,
-* Distributed Systems (microservices patterns), 
-* Distributed data stores (Apache Cassandra)
+* Metrics (Micrometer, Prometheus), 
 * Cluster Scheduling (Nomad, Kubernetes), 
-* Stream processing (Kafka Streams, Apache Flink)
-* Concurrency and Actor Systems 
-* Service Discovery (Consul, Zookeeper)
-* Blockchain
-* Sidecar Proxies (Envoy and Istio)
+* Automation (Docker, Ansible)
 
 ## Este sitio
 
-Este es el sitio web de Jorge Quilcate's desde 2014.
+Este es el sitio web de Jorge Quilcate desde 2014.
 
 Este sitio fue implementado anteriormente con Jekyll, pero ha sido migrado a [Hugo](https://gohugo.io) y desplegado en GitHub.
-El tema es un fork de 'darksimplicity'. Las fuentes de tema pueden ser ubicadas [aquí](https://themes.gohugo.io/darksimplicity/).
+El tema es un fork de 'pickles'. Las fuentes de tema pueden ser ubicadas [aquí](https://themes.gohugo.io/hugo_theme_pickles/).
 
 Este sitio contiene: 
 
 * [Blog](/es/posts/)
 * [Presentaciones](/es/talks/)
-* [Notas](/es/notes/)

@@ -12,14 +12,14 @@ Presented at [NoSlidesConf 2017](http://www.noslidesconf.net/)
 
 <!--more-->
 
-# Video
+## Video recording
 
-{{% youtube hqV4P6Ej7DM %}}
+{{< youtube hqV4P6Ej7DM >}}
 
-# Slides
+## Slides
 
 No Slides ;)
 
-# Source-Code
+## Source code
 
 https://github.com/jeqo/talk-observing-distributed-systems

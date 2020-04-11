@@ -15,10 +15,10 @@ Presented at [OUGN 2017](http://ougn.no/varseminar-2017/)
 
 <!--more-->
 
-# Slides
+## Slides
 
-{{% speakerdeck b57a55a2c9c14049a8503e281d13959c %}}
+{{< speakerdeck b57a55a2c9c14049a8503e281d13959c >}}
 
-# Source-Code
+## Source code
 
 https://github.com/jeqo/talk-kafka-messaging-logs

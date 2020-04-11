@@ -1,15 +1,12 @@
 {{ partial "header.html" . }}
-
-<section id="main">
-  <div>
-   <h1 id="title">{{ .Title }}</h1>
-   {{ $data := .Data }}
-    {{ range $key,$value := .Data.Terms.ByCount }}
-    <h2><a href="{{ $data.Plural }}/{{ $value.Name | urlize }}"> {{ $value.Name }} </a> {{ $value.Count }} </h2>
+{{ $baseurl := .Site.BaseURL | sanitizeurl }}
+<section>
+  <h2>{{ .Title }}</h2>
+  <ul>
+    {{ $data := .Data }}
+    {{ range $key, $value := .Data.Terms }}
+    <li><a href="{{ $baseurl }}/{{ $data.Plural }}/{{ $key | urlize }}">{{ $key }}</a> ({{ len $value }})</li>
     {{ end }}
-  </div>
+  </ul>
 </section>
-
-<aside id="meta"> </aside>
-
 {{ partial "footer.html" . }}

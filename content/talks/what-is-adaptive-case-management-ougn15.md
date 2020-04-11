@@ -12,6 +12,6 @@ Presented at [AMIS25 2016](http://www.amis.nl/en/events-eng/jubileumconferentie/
 
 <!--more-->
 
-# Slides
+## Slides
 
-{{% slideshare ovR0dcS7514Q0o %}}
+{{< slideshare ovR0dcS7514Q0o >}}

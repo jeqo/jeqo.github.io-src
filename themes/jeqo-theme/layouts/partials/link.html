@@ -1,0 +1,34 @@
+{{ if or ( .Site.Params.twitter ) ( .Site.Params.facebook ) ( .Site.Params.instagram ) ( .Site.Params.googleplus ) ( .Site.Params.github ) ( .Site.Params.gitlab ) ( .Site.Params.npm ) ( .Site.Params.codepen ) ( .Site.Params.dribbble ) ( .Site.Params.fivehundredpx ) ( .Site.Params.flickr ) ( .Site.Params.pinterest ) ( .Site.Params.tumblr ) ( .Site.Params.vimeo ) ( .Site.Params.youtube ) ( .Site.Params.linkedin ) }}
+<ul class="c-links">
+  {{ with .Site.Params.twitter }}
+  <li class="c-links__item">
+    <a href="https://twitter.com/{{ . }}" target="_blank">
+      <svg viewBox="0 0 64 64" class="c-links__icon">
+        <title>twitter</title>
+        <use xlink:href="#icon-twitter"></use>
+      </svg>
+    </a>
+  </li>
+  {{ end }}
+  {{ with .Site.Params.github }}
+  <li class="c-links__item">
+    <a href="https://github.com/{{ . }}" target="_blank">
+      <svg viewBox="0 0 64 64" class="c-links__icon">
+        <title>github</title>
+        <use xlink:href="#icon-github"></use>
+      </svg>
+    </a>
+  </li>
+  {{ end }}
+  {{ with .Site.Params.linkedin }}
+  <li class="c-links__item">
+    <a href="https://linkedin.com/in/{{ . }}" target="_blank">
+      <svg viewBox="0 0 64 64" class="c-links__icon">
+        <title>linkedin</title>
+        <use xlink:href="#icon-linkedin"></use>
+      </svg>
+    </a>
+  </li>
+  {{ end }}
+</ul>
+{{ end }}

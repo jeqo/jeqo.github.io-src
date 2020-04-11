@@ -1,7 +1,0 @@
-{{ partial "header.html" . }}
-  {{ range where .Pages "Section" "posts" }}
-    {{ .Render "li" }}
-  {{ end }}
-{{ partial "pagination.html" .Paginator }}
-{{ partial "siteinfo.html" . }}
-{{ partial "footer.html" . }}

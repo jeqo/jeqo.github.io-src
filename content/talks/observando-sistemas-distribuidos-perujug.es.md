@@ -16,11 +16,11 @@ Presentado en [PeruJUG](https://www.meetup.com/es-ES/Peru-Java-User-Group/events
 
 # Video
 
-{{% youtube ioElpA1IncU %}}
+{{< youtube ioElpA1IncU >}}
 
-# Slides
+## Slides
 
-{{% speakerdeck df40bec5b977467888eb9101edd06d28 %}}
+{{< speakerdeck df40bec5b977467888eb9101edd06d28 >}}
 
 # Código fuente
 

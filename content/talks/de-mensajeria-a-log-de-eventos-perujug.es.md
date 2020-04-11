@@ -17,11 +17,11 @@ Presentado al [Perú JUG](https://twitter.com/perujug/)
 
 # Video
 
-{{% youtube gZCzD5bCdBA %}}
+{{< youtube gZCzD5bCdBA >}}
 
 # Diapositivas
 
-{{% speakerdeck a0a61a9ec75f4a8c9a49b5756b1f5f80 %}}
+{{< speakerdeck a0a61a9ec75f4a8c9a49b5756b1f5f80 >}}
 
 # Código Fuente
 
