@@ -1,7 +1,7 @@
 ---
 title: Tracing Kafka applications
 date: 2017-09-28
-section: post
+section: posts
 tags:
 - kafka
 - tracing

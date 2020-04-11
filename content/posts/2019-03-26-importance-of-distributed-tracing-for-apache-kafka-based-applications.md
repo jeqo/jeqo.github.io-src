@@ -2,7 +2,7 @@
 ---
 title: The Importance of Distributed Tracing for Apache Kafka Based Applications
 date: 2019-03-26
-section: post
+section: posts
 tags:
 - kafka
 - zipkin
