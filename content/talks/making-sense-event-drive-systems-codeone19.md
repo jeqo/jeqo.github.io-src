@@ -14,10 +14,10 @@ Presented at [Oracle Code One 2019](https://events.rainfocus.com/widget/oracle/o
 
 <!--more-->
 
-# Slides
+## Slides
 
 {{< speakerdeck 54d3dfd0d60347c69f05484bc893f852 >}}
 
-# Source-Code
+## Source code
 
 https://github.com/jeqo/talk-kafka-zipkin

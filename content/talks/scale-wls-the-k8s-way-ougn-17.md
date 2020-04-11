@@ -12,10 +12,10 @@ Presented at [OUGN 2017](http://ougn.no/varseminar-2017/)
 
 <!--more-->
 
-# Slides
+## Slides
 
 {{< speakerdeck 11469ea5680643f898394b4790088747 >}}
 
-# Source-Code
+## Source code
 
 https://github.com/jeqo/talk-scale-wls-k8s-way
