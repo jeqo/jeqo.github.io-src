@@ -1,7 +1,5 @@
 {{ partial "header.html" . }}
-{{ range .Sections }}
-  {{ range where .Pages "Section" "in" "posts,talks" }}
-    {{ .Render "li" }}
-  {{ end }}
+{{ range first 10 (where site.RegularPages "Section" "in" site.Params.mainSections) }}
+  {{ .Render "li" }}
 {{ end }}
 {{ partial "footer.html" . }}

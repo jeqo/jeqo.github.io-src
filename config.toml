@@ -8,7 +8,6 @@ MetaDataFormat = "yaml"
 PygmentsCodeFences = true
 PygmentsStyle = "colorful"
 
-# Copyright notice. This is displayer in the footer.
 copyright = "&copy; Copyright @jeqo"
 
 [params]
@@ -26,6 +25,7 @@ copyright = "&copy; Copyright @jeqo"
   bio = ""
   subtitle = "data streaming, observability, automation"
   favicon = "/images/favicon.ico"
+  mainSections = ["posts", "talks"]
 
 [Languages]
 [Languages.en]
