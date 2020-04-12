@@ -8,7 +8,7 @@ draft = false
 
 # Jorge Esteban Quilcate Otoya
 
-Peruvian, husband, software engineer, and immigrant in Norway and th e UK.
+Peruvian, husband, software engineer, and immigrant in Norway and the UK.
 
 Enjoying my journey working on distributed systems.
 
