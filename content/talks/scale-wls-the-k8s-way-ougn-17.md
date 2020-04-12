@@ -1,5 +1,5 @@
 ---
-title: Scaling WebLogic, the Kubernetes way - OUGN 2017
+title: Scaling WebLogic, the Kubernetes way @ OUGN 2017
 date: 2017-03-09
 section: talks
 tags:

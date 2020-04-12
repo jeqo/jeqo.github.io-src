@@ -1,5 +1,5 @@
 ---
-title: From Messaging to Logs with Apache Kafka - OUGN 2017
+title: From Messaging to Logs with Apache Kafka @ OUGN 2017
 date: 2017-03-10
 section: talks
 tags:

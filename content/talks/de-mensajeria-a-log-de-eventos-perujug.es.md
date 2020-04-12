@@ -1,5 +1,5 @@
 ---
-title: De Mensajería a Log de Eventos con Apache Kafka - Perú JUG
+title: De Mensajería a Log de Eventos con Apache Kafka @ Perú JUG
 date: 2017-02-16
 section: talks
 tags:

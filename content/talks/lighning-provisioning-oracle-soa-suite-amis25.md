@@ -1,5 +1,5 @@
 ---
-title: Lightning Quick Provisioning and DevOps for Oracle SOA Suite 12c - AMIS 25
+title: Lightning Quick Provisioning and DevOps for Oracle SOA Suite 12c @ AMIS 25
 date: 2016-05-02
 section: talks
 tags:

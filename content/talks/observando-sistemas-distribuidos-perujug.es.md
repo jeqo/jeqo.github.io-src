@@ -1,5 +1,5 @@
 ---
-title: Observando Sistemas Distribuidos - OUGN 2017
+title: Observando Sistemas Distribuidos @ OUGN 2017
 date: 2017-12-18
 section: talks
 tags:

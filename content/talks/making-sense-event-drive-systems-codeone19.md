@@ -1,5 +1,5 @@
 ---
-title:  Making sense of Event-Driven Systems - Oracle Code One 2019
+title:  Making sense of Event-Driven Systems @ Oracle Code One 2019
 date: 2019-09-19
 section: talks
 tags:

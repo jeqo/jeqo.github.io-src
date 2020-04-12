@@ -1,5 +1,5 @@
 ---
-title:   The Importance of Observability for Kafka-based applications with Zipkin - Oslo Apache Kafka Meetup
+title:   The Importance of Observability for Kafka-based applications with Zipkin @ Oslo Apache Kafka Meetup
 date: 2018-09-10
 section: talks
 tags:

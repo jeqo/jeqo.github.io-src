@@ -1,5 +1,5 @@
 ---
-title: What is Adaptive Case Management? - OUGN 15
+title: What is Adaptive Case Management? @ OUGN 15
 date: 2015-05-02
 section: talks
 tags:

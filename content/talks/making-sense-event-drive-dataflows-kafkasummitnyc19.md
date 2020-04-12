@@ -1,5 +1,5 @@
 ---
-title:  Making sense of Event-Driven Systems - Kafka Summit 2019
+title:  Making sense of Event-Driven Systems @ Kafka Summit 2019
 date: 2019-04-02
 section: talks
 tags:

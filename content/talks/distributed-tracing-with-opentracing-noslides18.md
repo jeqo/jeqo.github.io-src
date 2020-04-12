@@ -1,5 +1,5 @@
 ---
-title: Distributed Tracing with OpenTracing - NoSlidesConf 2017
+title: Distributed Tracing with OpenTracing @ NoSlidesConf 2017
 date: 2017-11-25
 section: talks
 tags:
