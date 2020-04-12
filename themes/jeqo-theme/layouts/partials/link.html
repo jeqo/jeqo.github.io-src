@@ -20,6 +20,16 @@
     </a>
   </li>
   {{ end }}
+  {{ with .Site.Params.keybase }}
+  <li class="c-links__item">
+    <a href="https://keybase.io/{{ . }}" target="_blank">
+      <svg viewBox="0 0 64 64" class="c-links__icon">
+        <title>linkedin</title>
+        <use xlink:href="#icon-keybase"></use>
+      </svg>
+    </a>
+  </li>
+  {{ end }}
   {{ with .Site.Params.linkedin }}
   <li class="c-links__item">
     <a href="https://linkedin.com/in/{{ . }}" target="_blank">
