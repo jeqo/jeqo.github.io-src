@@ -10,6 +10,8 @@ categories:
 - observability
 ---
 
+> for a more updated version, check <https://jeqo.github.io/posts/2019-03-26-importance-of-distributed-tracing-for-apache-kafka-based-applications/>
+
 Tracing is one of the hardest time in integration or microservice development: 
 knowing how a request impact your different components, and if your components
 have behave as expected.
