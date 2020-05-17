@@ -24,6 +24,18 @@ Intereses actuales:
 * Cluster Scheduling (Nomad, Kubernetes), 
 * Automation (Docker, Ansible)
 
+## Contribuciones de Codigo Abierto
+
+* KIP-122: Add Reset Consumer Group Offsets tooling https://cwiki.apache.org/confluence/display/KAFKA/KIP-122%3A+Add+Reset+Consumer+Group+Offsets+tooling
+
+* KIP-171 - Extend Consumer Group Reset Offset for Stream Application https://cwiki.apache.org/confluence/display/KAFKA/KIP-171+-+Extend+Consumer+Group+Reset+Offset+for+Stream+Application
+
+* KIP-222 - Add Consumer Group operations to Admin API https://cwiki.apache.org/confluence/display/KAFKA/KIP-222+-+Add+Consumer+Group+operations+to+Admin+API
+
+* KIP-244: Add Record Header support to Kafka Streams https://cwiki.apache.org/confluence/display/KAFKA/KIP-244%3A+Add+Record+Header+support+to+Kafka+Streams
+
+* Trabajo con la comunidad OpenZipkin en Zipkin core, la libreria Brave, el almacenamiento basado en Kafka, y mas.
+
 ## Este sitio
 
 Este es el sitio web de Jorge Quilcate desde 2014.
@@ -34,4 +46,5 @@ El tema es un fork de 'pickles'. Las fuentes de tema pueden ser ubicadas [aquí]
 Este sitio contiene: 
 
 * [Blog](/es/posts/)
+* [Notas](/es/notes/)
 * [Presentaciones](/es/talks/)

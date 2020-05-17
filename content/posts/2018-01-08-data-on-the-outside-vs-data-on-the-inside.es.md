@@ -1,7 +1,6 @@
 ---
 title: Data on the Outside vs Data on the Inside
 date: 2018-01-08
-section: notes
 tags:
 - distributed systems
 - microservices

@@ -1,7 +1,6 @@
 ---
-title: Kafka, Samza and the Unix Philosophy of Distributed Data
+title: Notes on Kafka, Samza and the Unix Philosophy of Distributed Data
 date: 2018-07-27
-section: notes
 tags:
 - kafka
 - samza

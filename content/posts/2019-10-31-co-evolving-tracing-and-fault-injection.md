@@ -1,7 +1,6 @@
 ---
-title: Co-evolving Tracing and Fault Injection with Box of Pain
+title: Notes on Co-evolving Tracing and Fault Injection with Box of Pain
 date: 2019-10-31
-section: notes
 tags:
 - distributed systems
 - tracing

@@ -38,9 +38,15 @@ copyright = "&copy; Copyright @jeqo"
     url = "/posts"
 
 [[Languages.en.menu.main]]
-    name = "Talks"
+    name = "Notes"
     pre = ""
     weight = -90
+    url = "/notes"
+
+[[Languages.en.menu.main]]
+    name = "Talks"
+    pre = ""
+    weight = -80
     url = "/talks"
 
 [[Languages.en.menu.main]]
@@ -60,9 +66,15 @@ copyright = "&copy; Copyright @jeqo"
     url = "/es/posts"
 
 [[Languages.es.menu.main]]
-    name = "Presentaciones"
+    name = "Notas"
     pre = ""
     weight = -90
+    url = "/es/notes"
+
+[[Languages.es.menu.main]]
+    name = "Presentaciones"
+    pre = ""
+    weight = -80
     url = "/es/talks"
 
 [[Languages.es.menu.main]]
