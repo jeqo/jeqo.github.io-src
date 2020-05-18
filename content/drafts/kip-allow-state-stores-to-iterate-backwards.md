@@ -1,4 +1,7 @@
-# KIP: Allow Kafka Streams State Stores to iterate backwards
+---
+title: "KIP: Allow Kafka Streams State Stores to iterate backwards"
+date: 2020-05-18
+---
 
 ## Motivation
 
