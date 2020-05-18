@@ -5,19 +5,19 @@ date: 2020-05-18
 
 ## Motivation
 
-Fetching a range of results from Kafka Streams state stores comes with a default iterator to go through elements from oldest to newest direction.
+Fetching range of results from Kafka Streams state stores comes with a default iterator to traverse elements from oldest to newest, e.g `ReadOnlyWindowStore#fetch(K key, long fromTime, long toTime)` mentions: 
 
-e.g `ReadOnlyWindowStore#fetch(K key, long fromTime, long toTime)` mentions: "For each key, the iterator guarantees ordering of windows, starting from the oldest/earliest"
+> For each key, the iterator guarantees ordering of windows, starting from the oldest/earliest"
 
-Similar guarantees are provided on other fetch operations.
+Similar guarantees are provided on other fetch and range operations.
 
-While abstracting the exposure of how `iterator` is built, this constraints the usage of local state store for some use cases:
+This constraints the usage of local state store on some use cases:
 
-When windowing records, and an operation wants to return the last `N` values inserted withing a time range with `M` records, then currently there is no option other than iterating from oldest to newest---iterating `M` records, where `M` >> `N`.  
+When storing windows of records, and an operation wants to return the last `N` values inserted withing a time range with `M` records: currently there is no option other than iterating from oldest to newest, traversing `M` records; where `M` >> `N`.  
 
-If a _backward read direction_ becomes available, then we started from the head of the range and return the first `N` value.
+If a _backward read direction_ option becomes available, then we could start from the latest element on the range and go backwards, returning the first `N` value more efficiently.
 
-At [Zipkin Kafka-based storage](github.com/openzipkin-contrib/zipkin-storage-kafka), we are planning to use this feature to replace KeyValueStores (one for traces indexed by id, and another with trace_ids indexed by timestamp) for one WindowStore. A backward read direction will allow queries to support: "within this time range, find the last traces that match this criteria", and return latest values quickly.
+At [Zipkin Kafka-based storage](github.com/openzipkin-contrib/zipkin-storage-kafka), we are planning to use this feature to replace two KeyValueStores (one for traces indexed by id, and another with trace_ids indexed by timestamp) for one WindowStore. A backward read direction will allow to support queries like: "within this time range, find the last traces that match this criteria", and return latest values quickly.
 
 ### Reference issues
 
