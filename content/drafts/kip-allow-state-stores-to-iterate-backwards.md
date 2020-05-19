@@ -1,21 +1,21 @@
 ---
-title: "KIP: Allow Kafka Streams State Stores to iterate backwards"
+title: "KIP: Allow Kafka Streams State Stores to be iterated backwards"
 date: 2020-05-18
 ---
 
 ## Motivation
 
-Fetching range of results from Kafka Streams state stores comes with a default iterator to traverse elements from oldest to newest, e.g `ReadOnlyWindowStore#fetch(K key, long fromTime, long toTime)` mentions: 
+Fetching range of records from Kafka Streams state stores comes with an iterator to traverse elements *from oldest to newest*, e.g `ReadOnlyWindowStore#fetch(K key, long fromTime, long toTime)` mentions: 
 
 > For each key, the iterator guarantees ordering of windows, starting from the oldest/earliest"
 
 Similar guarantees are provided on other fetch and range operations.
 
-This constraints the usage of local state store on some use cases:
+This APIs constraint the usage of local state store for some use-cases:
 
-When storing windows of records, and an operation wants to return the last `N` values inserted withing a time range with `M` records: currently there is no option other than iterating from oldest to newest, traversing `M` records; where `M` >> `N`.  
+When storing records on time windows, or records by key; and an operation wants to return the _last_ `N` values inserted withing a time range containing `M` records: Currently there is no alternative other than iterating records from oldest to newest--traversing `M` records, where `M` >> `N`.  
 
-If a _backward read direction_ option becomes available, then we could start from the latest element on the range and go backwards, returning the first `N` value more efficiently.
+If a _backward read direction_ option becomes available, then we could start from the latest record within a time range and go _backwards_, returning the first `N` value more efficiently.
 
 At [Zipkin Kafka-based storage](github.com/openzipkin-contrib/zipkin-storage-kafka), we are planning to use this feature to replace two KeyValueStores (one for traces indexed by id, and another with trace_ids indexed by timestamp) for one WindowStore. A backward read direction will allow to support queries like: "within this time range, find the last traces that match this criteria", and return latest values quickly.
 
@@ -103,4 +103,4 @@ final NavigableSet<String> rev = map.descendingKeySet();
 
 ## Compatibilily, Deprecation, and Migration Plan
 
-Default methods would be in-place to not affect previous versions.
+Default methods would be in-place avoid affecting previous versions.
