@@ -1,0 +1,103 @@
+---
+title: Notes on Java Security
+date: 2020-06-16
+tags:
+  - security
+  - java
+---
+
+== Security Standards
+
+=== Hashing
+
+==== Hash Functions
+
+.Cryptographic Hash Functions
+What makes a `hash function` a Cryptographic Hash Function (CHF) is that is a one-way function: _practically infeasible to invert._
+
+==== MD5
+
+From https://en.wikipedia.org/wiki/MD5[Wikipedia]:
+
+> The MD5 message-digest algorithm is a widely used hash function producing a 128-bit hash value. Although MD5 was initially designed to be used as a cryptographic hash function, it has been found to suffer from extensive vulnerabilities. It can still be used as a checksum to verify data integrity, but only against unintentional corruption. It remains suitable for other non-cryptographic purposes, for example for determining the partition for a particular key in a partitioned database.
+
+Examples:
+
+[bash]
+----
+$ echo "hello world" | md5sum 
+6f5902ac237024bdd0c176cb93063dc4
+$ echo "hello world" | md5sum 
+6f5902ac237024bdd0c176cb93063dc4
+$ echo "hello world " | md5sum
+edf02967b5ae298061db1f1ad2a6b6b4
+----
+
+===== SHA-1 (Secure Hash Algorithm 1)
+
+.From Wikipedia
+> SHA-1 (Secure Hash Algorithm 1) is a cryptographic hash function which takes an input and produces a 160-bit (20-byte) hash value known as a message digest – typically rendered as a hexadecimal number, 40 digits long.
+> [...] As of 2020, chosen-prefix attacks against SHA-1 are now practical[8] as such, it is recommended to remove SHA-1 from products as soon as possible and use instead SHA-256 or SHA-3. Replacing SHA-1 is urgent where it is used for signatures. 
+
+Examples:
+
+[bash]
+----
+$ echo "hello world " | sha1sum 
+313c9923a67853f9000ede0db473abc06d50c9e7  -
+----
+
+===== SHA-2
+
+.From Wikipedia
+> SHA-2 includes significant changes from its predecessor, SHA-1. The SHA-2 family consists of six hash functions with digests (hash values) that are 224, 256, 384 or 512 bits: SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/224, SHA-512/256.
+
+Examples:
+
+[bash]
+----
+$ echo "hello world " | openssl dgst -sha256
+ce4a4484a607ce2a5319550baf2386cbf63298090ed589133116caf9b38f9bde
+$ echo "hello world " | openssl dgst -sha512
+3060f0e2028911f23a73f115781bbf994196287ca8ef4a240ab3de59376d81569e1091a976428bb1d23739ef826d778045e36e7f2e77af76c8599fed1ba3fc61
+----
+
+=== SSL/TLS
+
+=== SASL
+
+==== Authentication Methods
+
+===== Digest-MD5
+
+.Further reading
+
+- https://docs.oracle.com/javase/jndi/tutorial/ldap/security/digest.html
+
+=== LDAP
+
+==== Implementation
+
+Authentication information is defined in an `IinitialDirContext` map where the following fields are required:
+
+* `Content.SECURITY_AUTHENTICATION`
+* `Content.SECURITY_PRINCIPAL`
+* `Content.SECURITY_CREDENTIALS`
+
+Principal and Credentials depend on the `SECURITY_AUTHENTICATION`.
+
+==== Authentication Mechanisms
+
+.LDAP v2
+
+* anonymous
+* simple (clear-text password)
+* Kerberos v4
+
+.LDAP v3
+
+* anonymous
+* simple (clear-text password)
+* SASL authentication
+
+=== Java implementation: JAAS
