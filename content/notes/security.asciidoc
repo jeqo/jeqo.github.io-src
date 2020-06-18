@@ -68,11 +68,38 @@ $ echo "hello world " | openssl dgst -sha512
 
 ==== Authentication Methods
 
+.From https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer[Wikipedia]
+> A SASL mechanism implements a series of challenges and responses. Defined SASL mechanisms[1] include:
+- EXTERNAL, where authentication is implicit in the context (e.g., for protocols already using IPsec or TLS)
+
+- ANONYMOUS, for unauthenticated guest access
+- PLAIN, a simple cleartext password mechanism, defined in RFC 4616
+- OTP, a one-time password mechanism. Obsoletes the SKEY mechanism.
+- SKEY, an S/KEY mechanism.
+- CRAM-MD5, a simple challenge-response scheme based on HMAC-MD5.
+- DIGEST-MD5 (historic[2]), partially HTTP Digest compatible challenge-response scheme based upon MD5. DIGEST-MD5 offered a data security layer.
+- SCRAM (RFC 5802), modern challenge-response scheme based mechanism with channel binding support
+- NTLM, an NT LAN Manager authentication mechanism
+- GS2- family of mechanisms supports arbitrary GSS-API mechanisms in SASL.[3] It is now standardized as RFC 5801.
+- GSSAPI, for Kerberos V5 authentication via the GSSAPI. GSSAPI offers a data-security layer.
+- BROWSERID-AES128, for Mozilla Persona authentication[4]
+- EAP-AES128, for GSS EAP authentication[5]
+- GateKeeper (& GateKeeperPassport), a challenge-response mechanism developed by Microsoft for MSN Chat
+- OAUTHBEARER, OAuth 2.0 bearer tokens (RFC 6750), communicated through TLS[6]
+- OAUTH10A, OAuth 1.0a message-authentication-code tokens (RFC 5849, Section 3.4.2)[6]
+
 ===== Digest-MD5
 
 .Further reading
 
 - https://docs.oracle.com/javase/jndi/tutorial/ldap/security/digest.html
+
+===== SCRAM
+
+.From Wikipedia
+> In cryptography, the Salted Challenge Response Authentication Mechanism (SCRAM) is a family of modern, password-based challenge–response authentication mechanisms providing authentication of a user to a server. As it is specified for Simple Authentication and Security Layer (SASL), it can be used for password-based logins to services like SMTP and IMAP (e-mail), or XMPP (chat).
+
+> Although all clients and servers have to support the SHA-1 hashing algorithm, SCRAM is, unlike CRAM-MD5 or DIGEST-MD5, independent from the underlying hash function.[3] All hash functions defined by the IANA can be used instead.
 
 === LDAP
 
