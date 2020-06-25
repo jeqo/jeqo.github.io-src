@@ -23,7 +23,7 @@ From https://en.wikipedia.org/wiki/MD5[Wikipedia]:
 
 Examples:
 
-[bash]
+[source,bash]
 ----
 $ echo "hello world" | md5sum 
 6f5902ac237024bdd0c176cb93063dc4
@@ -41,7 +41,7 @@ edf02967b5ae298061db1f1ad2a6b6b4
 
 Examples:
 
-[bash]
+[source,bash]
 ----
 $ echo "hello world " | sha1sum 
 313c9923a67853f9000ede0db473abc06d50c9e7  -
@@ -54,7 +54,7 @@ $ echo "hello world " | sha1sum
 
 Examples:
 
-[bash]
+[source,bash]
 ----
 $ echo "hello world " | openssl dgst -sha256
 ce4a4484a607ce2a5319550baf2386cbf63298090ed589133116caf9b38f9bde
@@ -100,6 +100,11 @@ $ echo "hello world " | openssl dgst -sha512
 > In cryptography, the Salted Challenge Response Authentication Mechanism (SCRAM) is a family of modern, password-based challenge–response authentication mechanisms providing authentication of a user to a server. As it is specified for Simple Authentication and Security Layer (SASL), it can be used for password-based logins to services like SMTP and IMAP (e-mail), or XMPP (chat).
 
 > Although all clients and servers have to support the SHA-1 hashing algorithm, SCRAM is, unlike CRAM-MD5 or DIGEST-MD5, independent from the underlying hash function.[3] All hash functions defined by the IANA can be used instead.
+
+SCRAM: 
+* Salted Challenge Response Authentication Mechanism.
+* Family of SASL mechanisms to address security concerns with traditional mechanisms, e.g PLAIN, DIGEST-MD5.
+* Defined in https://tools.ietf.org/html/rfc5802#section-3[RFC-5802].
 
 === LDAP
 
