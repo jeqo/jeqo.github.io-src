@@ -62,7 +62,85 @@ $ echo "hello world " | openssl dgst -sha512
 3060f0e2028911f23a73f115781bbf994196287ca8ef4a240ab3de59376d81569e1091a976428bb1d23739ef826d778045e36e7f2e77af76c8599fed1ba3fc61
 ----
 
+
+=== Ciphers
+
+Algorithms to secure a network connection that uses TLS.
+
+*Key exchange algorithm*: Used to exchange a key between 2 devices.
+
+*Bulk encryption algorithm*: used to encrypt the data being sent.
+
+*Message authentication code algorithm* (MAC): provides data integrity checks to ensure data sent does not change in transit.
+
+.Naming Scheme
+`[protocol]_[key exchange alg.]_[block cipher]_[message authentication alg.]`
+
+e.g. `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256` where:
+
+- Protocol: `TLS`
+- Key exchange algorithm: `ECDHE_RSA`
+- Block cipher: `AES_128_GCM`
+- MAC: `SHA256`
+
+
+=== Key Exchange Algorithms
+
+The *encryption key* is _public_ and distinct from the *decryption key* which is kept _secret_ (private).
+
+==== RSA (Rivest-Shamir-Adleman)
+
+From https://en.wikipedia.org/wiki/RSA_(cryptosystem)[Wikipedia]
+
+Asymmetry is based on the practical difficulty of factoring the product of 2 large prime numbers.
+
+> RSA is a relatively slow algorithm, and because of this, it is less commonly used to directly encrypt user data. More often, RSA passes encrypted shared keys for symmetric key cryptography which in turn can perform bulk encryption-decryption operations at much higher speed. 
+
+==== DSA (Digital Signature Algorithm)
+
+From https://en.wikipedia.org/wiki/Digital_Signature_Algorithm[Wikipedia]
+
+> DSA is based on the algebraic properties of modular exponentiation, together with the discrete logarithm problem, which is considered to be computationally intractable.
+
+==== ECDSA (Elliptic Curve Digital Signature Algorithm)
+
+From https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm[Wikipedia]:
+
+> As with elliptic-curve cryptography in general, the bit size of the public key believed to be needed for ECDSA is about twice the size of the security level, in bits. For example, at a security level of 80 bits (meaning an attacker requires a maximum of about 2 80 {\displaystyle 2^{80}} 2^{80} operations to find the private key) the size of an ECDSA public key would be 160 bits, whereas the size of a DSA public key is at least 1024 bits. On the other hand, the signature size is the same for both DSA and ECDSA: approximately 4 t {\displaystyle 4t} 4t bits, where t {\displaystyle t} t is the security level measured in bits, that is, about 320 bits for a security level of 80 bits. 
+
+=== Public Key Certificates
+
+==== X.509
+
+
+=== Block encryption algorithms
+
+==== DES (Data Encryption Standard)
+
+==== AES (Advanced Encryption Standard)
+
+It supersedes the DES. The algorithm described by AES is a sumetric key algorithm, meaning the same key is used for both encrypting and decrypting the data.
+
 === SSL/TLS
+
+==== Key and Certificate Managements
+
+> Source: https://www.feistyduck.com/library/openssl-cookbook/online/ch-openssl.html#openssl-key-and-certificate-management
+
+===== Key Generation
+
+*Key algorithm*
+
+> RSA, DSA, and ECDSA
+
+*Key size*
+
+> Today, 2,048-bit RSA keys are considered secure, and that’s what you should use. Aim also to use 2,048 bits for DSA keys and at least 256 bits for ECDSA.
+
+*Key passphrase*
+
+> passphrases should be viewed only as a mechanism for protecting private keys when they are not installed on production systems. In other words, it’s all right to keep passphrases on production systems, next to the keys. If you need better security in production, you should invest in a hardware solution.
+
 
 === SASL
 

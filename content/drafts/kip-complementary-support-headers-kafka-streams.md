@@ -7,7 +7,7 @@ date: 2020-05-31
 
 Headers are transiently passed over a Kafka Streams topology. To act on them, Processor API has to be used since ([KIP-244](https://cwiki.apache.org/confluence/display/KAFKA/KIP-244%3A+Add+Record+Header+support+to+Kafka+Streams+Processor+API)).
 
-Although current support is useful for instrumentation, it becomes cumbersome to use headers for common Kafka Streams DSL operations (e.g filtering based on header value) as it require using some sort of `Transformer` implementation.
+Although current support is useful for instrumentations that need to access headers, it becomes cumbersome for users to access headers on common Kafka Streams DSL operations (e.g filtering based on header value) as requires using a `Transformer`/`Processor` implementation.
 
 ### Related JIRA issues
 
@@ -19,6 +19,17 @@ Although current support is useful for instrumentation, it becomes cumbersome to
 1. Include `ValueAndHeaders` serde to serialize values if needed.
 1. Include KStreams operator to map headers into the value pair: `ValueAndHeaders`.
 1. Include KStreams operator to set and remove headers.
+
+In accordance with KStreams DSL Grammar, we introduce the following elements:
+
+* **KStream** DSLObject with new operations:
+  * **setHeader** DSLOperation
+  * **setHeaders** DSLOperation
+  * **removeHeader** DSLOperation
+  * **removeHeaders** DSLOperation
+  * **removeAllHeaders** DSLOperation
+  * **removeAllHeaders** DSLOperation
+  * **withHeaders** DSLOperation
 
 ## New or Changed Public Interfaces
 
@@ -76,11 +87,17 @@ public interface SetHeaderAction<K, V> {
 This new APIs will allow usages similar to:
 
 ```java
-kstream.withHeaders()
-       .filter((k, v) -> v.headers().lastValue())
-       .mapValues((k, v) -> {v.headers().add("foo", "bar".getBytes()); return v;})
-       .setHeaders((k, v) -> v.headers())
-       .mapValues((k, v) -> v.value())
+kstream.withHeaders() // headers mapped to value
+       .filter((k, v) -> v.headers().headers("k").iterator().hasNext())
+       .filter((k, v) -> Arrays.equals(v.headers().lastHeader("k").value(), "v".getBytes())) // filtering based on header value
+       .groupByKey(Grouped.with(Serdes.String(), new ValueAndHeadersSerde<>(Serdes.String()))) // val/headers serialization
+       .reduce((oldValue, newValue) -> {
+         newValue.headers().add("reduced", "yes".getBytes()); // user deciding how to merge headers
+         return new ValueAndHeaders<>(oldValue.value().concat(newValue.value()), newValue.headers());
+       })
+       .mapValues((k, v) -> {v.headers().add("foo", "bar".getBytes()); return v;}) // mutate headers
+       .setHeader((k, v) -> new RecordHeader("newHeader", "val".getBytes())) // add more headers
+       .mapValues((k, v) -> v.value()) // return to value
        .to("output")
 ```
 
