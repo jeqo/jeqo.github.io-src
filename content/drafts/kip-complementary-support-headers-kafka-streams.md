@@ -1,5 +1,6 @@
 ---
-title: "KIP: Complementary support for headers in Kafka Streams"
+slug: kip-634
+title: "KIP-634: Complementary support for headers in Kafka Streams"
 date: 2020-05-31
 ---
 

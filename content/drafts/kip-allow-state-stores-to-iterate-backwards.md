@@ -1,6 +1,6 @@
 ---
 slug: kip-617
-title: "KIP: Allow Kafka Streams State Stores to be iterated backwards"
+title: "KIP-617: Allow Kafka Streams State Stores to be iterated backwards"
 date: 2020-05-18
 ---
 
@@ -57,83 +57,72 @@ There are 2 important ranges in Kafka Streams Stores:
 
 ### Reverse Key Ranges
 
-Add a new interface for reverse `KeyValueStore`
+Extend existing interface for reverse `KeyValueStore`
 
 ```java
-public interface ReadOnlyReverseKeyValueStore<K, V> {
-    KeyValueIterator<K, V> reverseRange(K from, K to);
-    KeyValueIterator<K, V> reverseAll();
+public interface ReadOnlyKeyValueStore<K, V> {
+    default KeyValueIterator<K, V> reverseRange(K from, K to) { 
+        throw new UnsupportedOperationException(); 
+    }
+    default KeyValueIterator<K, V> reverseAll() {
+        throw new UnsupportedOperationException(); 
+    }
 }
 ```
-
-And create a new interface on top of `KeyValueStore`:
-
-```java
-public interface KeyValueStoreWithReverseIteration<K, V> extends KeyValueStore<K, V>, ReadOnlyReverseKeyValueStore<K, V> {
-//...
-}
-```
-
 ### Backward Time Ranges
 
 Window and Session stores are based on a set of KeyValue Stores (Segments) organized by a time-based index.
 Therefore, for these stores time-range is more important than key-range to lookup for values.
 
-A new interfaces will be added for each Store type, including backward methods:
+Existing stores will be extended with backward methods:
 
 ```java
-public interface ReadOnlyBackwardWindowStore<K, V> {
-    @Deprecated
-    WindowStoreIterator<V> backwardFetch(K key, long timeFrom, long timeTo);
-    WindowStoreIterator<V> backwardFetch(K key, Instant from, Instant to) throws IllegalArgumentException;
-    @Deprecated
-    KeyValueIterator<Windowed<K>, V> backwardFetch(K from, K to, long timeFrom, long timeTo);
-    KeyValueIterator<Windowed<K>, V> backwardFetch(K from, K to, Instant fromTime, Instant toTime)
-            throws IllegalArgumentException;
-    KeyValueIterator<Windowed<K>, V> backwardAll();
-    @Deprecated
-    KeyValueIterator<Windowed<K>, V> backwardFetchAll(long timeFrom, long timeTo);
-    KeyValueIterator<Windowed<K>, V> backwardFetchAll(Instant from, Instant to) throws IllegalArgumentException;
+public interface ReadOnlyWindowStore<K, V> {
+    default WindowStoreIterator<V> backwardFetch(K key, Instant from, Instant to) throws IllegalArgumentException {
+        throw new UnsupportedOperationException(); 
+    }
+
+    default KeyValueIterator<Windowed<K>, V> backwardFetch(K from, K to, Instant fromTime, Instant toTime) throws IllegalArgumentException {
+        throw new UnsupportedOperationException(); 
+    }
+    
+    default KeyValueIterator<Windowed<K>, V> backwardAll() {
+        throw new UnsupportedOperationException(); 
+    }
+    
+    default KeyValueIterator<Windowed<K>, V> backwardFetchAll(Instant from, Instant to) throws IllegalArgumentException {
+        throw new UnsupportedOperationException(); 
+    }
 }
 ```
 
 ```java
-public interface ReadOnlyBackwardSessionStore<K, AGG> {
-    KeyValueIterator<Windowed<K>, AGG> backwardFetch(final K from, final K to);
-    KeyValueIterator<Windowed<K>, AGG> backwardFindSessions(final K key, final long earliestSessionEndTime, final long latestSessionStartTime);
-    KeyValueIterator<Windowed<K>, AGG> backwardFindSessions(final K keyFrom, final K keyTo, final long earliestSessionEndTime, final long latestSessionStartTime);
+public interface SessionStore<K, AGG> {
+    default KeyValueIterator<Windowed<K>, AGG> backwardFindSessions(final K key, final long earliestSessionEndTime, final long latestSessionStartTime) {
+        throw new UnsupportedOperationException(); 
+    }
+
+    default KeyValueIterator<Windowed<K>, AGG> backwardFindSessions(final K keyFrom, final K keyTo, final long earliestSessionEndTime, final long latestSessionStartTime) {
+        throw new UnsupportedOperationException(); 
+    }
+}
+
+public interface ReadOnlySessionStore<K, AGG> {
+    default KeyValueIterator<Windowed<K>, AGG> backwardFetch(final K key) {
+        throw new UnsupportedOperationException(); 
+    }
+    default KeyValueIterator<Windowed<K>, AGG> backwardFetch(final K from, final K to) {
+        throw new UnsupportedOperationException(); 
+    }
 }
 ```
-
-And both `SessionStore` and `WindowStore` will extend these new APIs:
-
-```java
-public interface WindowStoreWithBackwardInteration<K, V> extends WindowStore<K, V>, ReadOnlyBackwardWindowStore<K, V> {
-// ...
-}
-```
-
-```java
-public interface SessionStoreWithBackwardIteration<K, AGG> extends SessionStore<K, AGG>, ReadOnlyBackwardSessionStore<K, AGG> {
-//...
-}
-```
-
-Class hierarchy will change from:
-
-{{< zoom-img src="/images/drafts/kip-allow-state-stores-to-iterate-backwards/as-is.png" >}}
-
-To: 
-
-{{< zoom-img src="/images/drafts/kip-allow-state-stores-to-iterate-backwards/to-be.png" >}}
 
 ## Compatibilily, Deprecation, and Migration Plan
 
-As new top interfaces will be implemented by internal components (e.g. RocksDB, InMemory, etc). supporting old one already, current users won't be affected.
-
-New users will be able to choose between current APIs (forward-only) or proposed ones (forward+backward).
+New methods will have default implementations to avoid affecting current implementations.
 
 ## Rejected Alternatives
 
+* ~~Create a parallel hierarchy of interfaces for backward operation. Even though this option seems like the best way to extend functionality, it was proved to not work in practice in KIP-614 discussion as interfaces get wrapped in different layers (Metered, Caching, Logging) so all the current hierarchy to create stores with Kafka Streams DSL will have to be duplicated.~~
 * ~~Initially it was considered to have additional parameter on all readOnlyStore methods e.g. Store#fetch(keyFrom, keyTo, timeFrom, timeTo, ReadDirection.FORWARD|BACKWARD), but has been declines as passing arguments in inverse is more intuitive. As this could cause unexpected effects in future versions, a flag has been added to overcome this.~~
 * Implicit ordering by flipping `from` and `to` variables has been discouraged in favor of a more explicit approach based on new interfaces that make explicit the availability of reverse and backward fetch operations.
