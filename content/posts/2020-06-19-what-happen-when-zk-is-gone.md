@@ -4,6 +4,7 @@ date: 2020-06-19
 tags:
 - kafka
 - zookeeper
+draft: yes
 ---
 
 This post will try to answer this question:
