@@ -1,0 +1,24 @@
+---
+title: Notas sobre Todo Open-Source
+date: 2020-08-27
+tags:
+  - open-source
+---
+
+Software se esta comiendo el mundo.
+
+Uno de los motores mas importantes que ha permitido un crecimiendo y adopcion de tecnologias informaticas de manera tan disruptiva ha sido el movimiento open-source.
+
+El significado de open-source puede ser debatible. Para algunos significa software gratis, para otros software de código abierto. Para mi es un marco de trabajo para compartir conocimiento libremente, en comunidad.
+
+En el mundo de software, a lo largo de los ultimos 40 o 50 anios se ha discutido sobre la viabilidad y éxito de los proyectos open-source. Probablemente la competencia entre Microsoft Windows y Linux ha sido las mas famosa. Hoy en dia podemos decir con hechos que open-source funciona--ver slogans como "Microsoft <3 Linux" y "Microsoft <3 Open-source". Y no solo "funciona", sino que ha revolucionado el mundo de software, convirtiendose en la medula espinal de la industria. Probablemente el numero de organizaciones a nivel mundial que no depende de proyectos de software open-source es cero.
+
+Aunque software sea el campo donde el movimiento open-source ha sido creado, no hay nada que limite reutilizar los mismo principios y mismas plataformas en otros campos.
+
+Sin dejar de ser revolucionario, ni tampoco una panacea donde todo funciona en armonia, el movimiento open-source ha demostrado que funciona en el sistema actual, donde las grandes companias han cambiado el discurso de hace 10-15 anios donde el software de codigo cerrado era "mejor" que open-source. Companias que siguen utilizando ese discurso simplemente quedan en ridiculo, como Oracle en su carta enviada a la Casa Blanca.
+
+Esto me lleva a preguntarme, porque los mismos principios no pueden ser implementados en otros campos?
+
+La actual pandemia desnuda una vez mas los defectos del sistema actual. Nuestra incapacidad de reaccionar en conjunto, de compartir metodos de mitigacion y tratamiento del virus, entre muchos otros son ejemplo de lo poco preparados para colaborar.
+
+Considero que es mucho mas valioso para los estudiantes de ahora entender los principios y herramientas de Open-source (e.g. Git) , que aprender a programar en los colegios. Lo que hace que la carrera de computacion y programacion de software sea tan vanguardista es open-source: los foros de discucion abundan, las plataformas para iniciar son basicamente gratis (e.g. GitHub), los lenguages de programacion y librerias mas importantes son open-source (e.g. JavaScript, HTML, Python, etc).
