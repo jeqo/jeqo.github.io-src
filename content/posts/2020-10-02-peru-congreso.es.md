@@ -112,3 +112,12 @@ El blog busca darle fácil acceso a los proyectos.
 Y Twitter permite la publicación de actualizaciones para su discusión en esta plataforma.
 
 Actualmente estas exportaciones son ejecutadas manualmente de forma diaria. 
+
+Para mayores detalles técnicos: [aquí](https://github.com/jeqo/peru-congreso/blob/trunk/RATIONALE.md)
+
+## Conclusiones
+
+Este experimento funcionará hasta que el sitio del Congreso sea reemplazado. 
+Ojalá por uno mejorado y considerando las propuestas expuestas antes.
+
+Me atrevería incluso a exigir que tanto los datos, como el sitio web del Congreso─incluso los sistemas de gob.pe─deberían ser gestionados como proyectos de código abierto, para que sean auditables y mejorables por los ciudadanos.  
