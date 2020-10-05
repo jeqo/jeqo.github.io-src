@@ -77,6 +77,8 @@ Si uno quiere revisar un proyecto de ley, revisaría un "Pull Request", y vería
 
 Donde en vez de código fuente de software, veríamos específicamente los cambios propuestos en las leyes. Y cualquier ciudadano podría comentar específicamente que parte apoya o propone modificar previo a la aceptación.
 
+Obviamente, esta idea no es nueva. Me inspiré en esta charla de Ted <https://www.ted.com/talks/clay_shirky_how_the_internet_will_one_day_transform_government>
+
 ## Experimento: nuevo sitio web para el Congreso
 
 Si bien esta visión puede verse bastante lejana, se pueden ir experimentando algunas mejoras.
