@@ -6,10 +6,11 @@ msg := "rebuilding site"
 .PHONY: deploy
 deploy:
 	hugo
-	cd public/; git checkout main;
-	cd public/; git add -A
-	cd public/; git commit -m ${msg}
-	cd public/; git push origin main
+	cd public/; \
+		git checkout main && \
+		git add -A && \
+		git commit -m ${msg} && \
+		git push origin main
 
 test:
 	hugo serve -D
