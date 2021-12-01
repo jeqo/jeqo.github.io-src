@@ -38,6 +38,12 @@ copyright = "&copy; Copyright @jeqo"
     url = "/posts"
 
 [[Languages.en.menu.main]]
+    name = "TIL"
+    pre = ""
+    weight = -95
+    url = "/til"
+
+[[Languages.en.menu.main]]
     name = "Notes"
     pre = ""
     weight = -90
@@ -64,6 +70,12 @@ copyright = "&copy; Copyright @jeqo"
     pre = ""
     weight = -100
     url = "/es/posts"
+
+[[Languages.es.menu.main]]
+    name = "TIL"
+    pre = ""
+    weight = -95
+    url = "/til"
 
 [[Languages.es.menu.main]]
     name = "Notas"
