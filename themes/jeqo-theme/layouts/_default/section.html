@@ -1,5 +1,5 @@
 {{ partial "header.html" . }}
-<h2 class="c-title p-tag-title">{{ .Title }}</h2>
+<h2 class="c-title p-tag-title">{{ lower .Title }}</h2>
 {{ range .Data.Pages.GroupByDate "2006" }}
   <h3>{{ .Key }}</h3>
   {{ range .Pages }}
