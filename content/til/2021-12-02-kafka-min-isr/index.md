@@ -15,24 +15,24 @@ Things to remember:
 - If replicas available are equal to minimum ISR, then the topic partitions are at the edge of losing availability. If one broker becomes unavailable (e.g. restarting), then producers will fail to write data.
 - Topic configuration is inherited from the server. If broker configuration changes, it affects the _existing_ topics. Keep the topic defaults, unless it needs to be different than broker default for easier maintenance.
 
----
+<!--more-->
 
 When writing data on Kafka topics, it's often required for this data to be replicated across multiple brokers and enforce this replication as part of the writing process.
 This is enforced by the Producer when setting `acks=all`.
 `min.insync.replicas` define the minimum number of replicas required to acknowledge back to producers.
 
-![min.isr=2 1](minisr2-1.png)
+{{<zoom-img src="minisr2-1.png">}}
 
 > When all replicas are in-sync:
 > 1. Producer sends a request and Broker stores locally.
 > 2. Replica followers fetch changes increasing high-watermark (last offset acked by all replicas)
 > 3. Broker sends response back with acknowledge to the Producer.
 
-![min.isr=2 2](minisr2-2.png)
+{{<zoom-img src="minisr2-2.png">}}
 
 > When 1 out of 3 replicas is out of sync or down, same procedure.
 
-![min.isr=2 3](minisr2-3.png)
+{{<zoom-img src="minisr2-3.png">}}
 
 > When 2 out of 3 replicas are out of sync or down, there are not enough replicas to ack Producer.
 > Request fails.
@@ -40,11 +40,11 @@ This is enforced by the Producer when setting `acks=all`.
 By default `min.insync.replicas` is 1, therefore if _only_ 1 replica is part of the in-sync-replica (ISR) set, writing will be successful.
 This is usually considered a risky configuration as there could be failure scenarios where data is stored only in 1 broker and if that broker is lost (e.g. disk failure), then data is lost as it's not replicated yet.
 
-![min.isr=1 1](minisr1-1.png)
+{{<zoom-img src="minisr1-1.png">}}
 
 > Data will be written to only one partition
 
-![min.isr=1 2](minisr1-2.png)
+{{<zoom-img src="minisr1-2.png">}}
 
 > If data is not replicated yet, and broker fails, data will be lost.
 
