@@ -23,7 +23,7 @@ copyright = "&copy; Copyright @jeqo"
   avatar = "/images/jeqo.jpg"
   contact = "mailto:quilcate.jorge@gmail.com"
   bio = ""
-  subtitle = "data streaming, observability, automation"
+  subtitle = "data streaming, observability, automation, and random stuff"
   favicon = "/images/favicon.ico"
   mainSections = ["posts", "talks"]
 
