@@ -7,7 +7,8 @@ category:
   - books
 ---
 
-[Scale: The Universal Laws of Growth, Innovation, Sustainability, and the Pace of Life in Organisms, Cities, Economies, and Companies](https://www.amazon.com/Scale-Universal-Innovation-Sustainability-Organisms/dp/1594205582)
+[Scale: The Universal Laws of Growth, Innovation, Sustainability, and the Pace of Life in Organisms, Cities, Economies, and Companies](https://www.goodreads.com/book/show/31670196-scale) by Geoffrey B. West
+
 
 <!--more-->
 
