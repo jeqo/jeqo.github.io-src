@@ -56,9 +56,15 @@ copyright = "&copy; Copyright @jeqo"
     url = "/talks"
 
 [[Languages.en.menu.main]]
-    name = "About"
+    name = "Projects"
     pre = ""
     weight = -70
+    url = "/projects"
+
+[[Languages.en.menu.main]]
+    name = "About"
+    pre = ""
+    weight = -60
     url = "/about"
 
 [Languages.es]
@@ -90,9 +96,15 @@ copyright = "&copy; Copyright @jeqo"
     url = "/es/talks"
 
 [[Languages.es.menu.main]]
-    name = "Acerca"
+    name = "Proyectos"
     pre = ""
     weight = -70
+    url = "/projects"
+
+[[Languages.es.menu.main]]
+    name = "Acerca"
+    pre = ""
+    weight = -60
     url = "/about"
 
 [related]
