@@ -4,6 +4,7 @@ date: 2021-12-02
 section: til
 tags:
 - kafka
+- fault-tolerance
 categories: 
 - ops
 ---
