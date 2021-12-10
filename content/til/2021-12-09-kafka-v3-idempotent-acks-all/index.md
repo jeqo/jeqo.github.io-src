@@ -1,5 +1,5 @@
 ---
-title: Since v3.0 idempotency is enabled by default
+title: Kafka Producer idempotency is enabled by default since 3.0
 date: 2021-12-09
 section: til
 tags:
