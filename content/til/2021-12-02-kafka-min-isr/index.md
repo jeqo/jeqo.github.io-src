@@ -51,6 +51,7 @@ This is usually considered a risky configuration as there could be failure scena
 
 I used to confuse the purpose of this configuration as a way to minimize the number of replicas that need to acknowledge a message before replying to clients _in any scenario_.
 For instance, I thought that if replication factor (RF) is 4, and `min.isr` is 2, then _only 2 replicas are required to acknowledge messages back to clients at any time_.
+Similar confusion spotted [here](https://stackoverflow.com/questions/45778455/kafka-rack-id-and-min-in-sync-replicas#comment93887479_45783921).
 
 So, be mindful about the replication factor. All the replicas take part of the writing process when `acks=all`. The more replicas per topic partitions, the higher the changes for the replication to be slower — the more network and disk used as well.
 Choose a number of replicas that guarantee data is replicated across data centers (e.g. across racks, cloud availability zones, regions, etc.)

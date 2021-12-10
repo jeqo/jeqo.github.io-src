@@ -1,6 +1,6 @@
 ---
 title: Kafka data loss scenarios
-date: 2021-12-09
+date: 2021-12-10
 section: notes
 tags:
 - kafka
@@ -42,7 +42,32 @@ One can even end up ack'ng on 1 replica without `acks != all`:
 - (Obviously) if partition only have 1 replica.
 - If [`min.insync.replicas`](/til/2021-12-02-kafka-min-isr/) is equal to 1 and followers are unavailable — i.e. out of the ISR.
 
-Remember: [reducing `acks` doesn't really reduce the overall latency](/til/2021-12-09-kafka-reducing-acks/), and `acks=all` [is now the default](/til/2021-12-09-kafka-v3-idempotent-acks-all/).
+Remember: [reducing `acks` doesn't really reduce the overall latency](/til/2021-12-09-kafka-reducing-acks-and-latency/), and `acks=all` [is now the default](/til/2021-12-09-kafka-v3-idempotent-acks-all/).
 
 ## Choose availability in the face of potential data loss
 
+In the previous tradeoffs we are at the risk of data loss or data being unavailable — but you don't know unless you go to the broker and check :)
+
+{{<zoom-img src="data-loss-1.png">}}
+
+> Happy path, all replicas are in-sync
+
+{{<zoom-img src="data-loss-2.png">}}
+
+> Some replicas are down, data is written on the replicas available...
+
+{{<zoom-img src="data-loss-3.png">}}
+
+> Sudenly, the replicas with the latest data are not available any more...
+
+Under this scenario, there is a chance that non-insync replicas (i.e. not a member of the latest ISR set) are available then operators can choose: is it OK to stay unavailable until an insync replica is back? or should we choose to risk loosing data and allow the non-insync replicas to be the leader and accept writes?
+
+{{<zoom-img src="data-loss-4.png">}}
+
+> With some bad (or good?) luck, the replicas start to come back, but they include the replicas that do not contain the latest records...
+
+`unclean.leader.election.enable` is the flag that enables non-insync replicas to be the leader.
+If a non-insync replica is taking leadership, then data that is not synchronized will be lost:
+when replicas are back and they have data that is not synchronized, then that data is truncated out down to the latest synchronized message (i.e. high watermark).
+
+{{<zoom-img src="data-loss-5.png">}}
