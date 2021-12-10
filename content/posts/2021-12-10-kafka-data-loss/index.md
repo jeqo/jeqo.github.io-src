@@ -68,7 +68,7 @@ Under this scenario, there is a chance that non-insync replicas (i.e. not a memb
 
 `unclean.leader.election.enable` is the flag that enables non-insync replicas to be the leader.
 If a non-insync replica is taking leadership, then data that is not synchronized will be lost:
-when replicas are back and they have data that is not synchronized, then that data is truncated out down to the latest synchronized message (i.e. high watermark).
+when replicas are back and they have data that is not synchronized, then that data is truncated out down to the latest known synchronized message (i.e. high watermark).
 
 {{<zoom-img src="data-loss-5.png">}}
 
