@@ -72,4 +72,4 @@ when replicas are back and they have data that is not synchronized, then that da
 
 {{<zoom-img src="data-loss-5.png">}}
 
-Make sure to balance these trade-offs according to your needs.
+Make sure to balance these trade-offs according to your needs 🙌.
