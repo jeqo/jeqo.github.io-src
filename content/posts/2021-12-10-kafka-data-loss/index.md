@@ -1,7 +1,7 @@
 ---
 title: Kafka data loss scenarios
 date: 2021-12-10
-section: notes
+section: posts
 tags:
 - kafka
 - durability
@@ -71,3 +71,5 @@ If a non-insync replica is taking leadership, then data that is not synchronized
 when replicas are back and they have data that is not synchronized, then that data is truncated out down to the latest synchronized message (i.e. high watermark).
 
 {{<zoom-img src="data-loss-5.png">}}
+
+Make sure to balance these trade-offs according to your needs.
