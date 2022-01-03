@@ -15,4 +15,4 @@ Including pictures from books:
 
 <!--more-->
 
-{{< photos total=51 >}}
+{{< photos total=45 >}}
