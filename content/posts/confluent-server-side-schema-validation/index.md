@@ -1,5 +1,5 @@
 ---
-title: Schema Server-side validation with Confluent
+title: Server-side Schema validation with Confluent
 date: 2022-01-26
 section: posts
 tags:
