@@ -13,6 +13,7 @@ Kafka Streams applications could scale either horizontally (add more instances) 
 When scaled vertically, multiple tasks store multiple partitions locally.
 An interesting question is whether Kafka Streams gives access when reading (i.e. [Interactive Queries](https://docs.confluent.io/platform/current/streams/developer-guide/interactive-queries.html)) to these stores, and how does it manage to abstract the access to different stores managed by multiple tasks.
 
+<!--more-->
 The answer is yes, Kafka Streams abstracts away tasks and multiple stores.
 Internally it's implemented by using `CompositeReadOnly*Stores`:
 

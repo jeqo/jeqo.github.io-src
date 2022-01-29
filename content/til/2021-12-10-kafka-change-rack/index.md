@@ -12,6 +12,7 @@ categories:
 Kafka broker configuration includes a `rack` label to define the location of the broker.
 This is useful when placing replicas across the cluster to ensure replicas are spread across locations _as evenly as possible_.
 
+<!--more-->
 This label may need to change for different reasons.
 One I found today is if you want to redefine locations [to support Multi-Region clusters and Observers](https://docs.confluent.io/platform/current/multi-dc-deployments/multi-region.html#replica-placement).
 

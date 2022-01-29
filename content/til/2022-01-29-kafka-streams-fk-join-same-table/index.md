@@ -13,6 +13,7 @@ KTable to KTable foreign-key joins is one of the coolest features in Kafka Strea
 
 I was wondering whether this feature would handle FK-joins between values on the same table.
 
+<!--more-->
 Seems that the answer is yes:
 
 ```java

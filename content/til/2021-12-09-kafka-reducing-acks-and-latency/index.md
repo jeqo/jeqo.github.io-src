@@ -12,6 +12,7 @@ categories:
 Kafka Producers enforce durability across replicas by setting `acks=all` ([default since v3.0](/til/kafka-v3-idea)).
 As enforcing this guarantee requires waiting for replicas to sync, this increases latency; and reducing it tends to give the impression that latency gets reduced overall.
 
+<!--more-->
 When looking at the end-to-end latency (including production and consumption) this ends up not being the case: 
 
 Records are only available for consumption once the replicas have been updated and the leader can increase the high watermark.

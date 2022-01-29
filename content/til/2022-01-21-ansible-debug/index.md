@@ -16,6 +16,7 @@ I figured that there are better ways to deal with this[[2]](https://docs.ansible
 By using the debug mode, tasks will stop when failing (by default) and you'll be able to introspect into the task, variables, and context when things failed.
 Even better, you'll be able to re-execute if there was a transient error.
 
+<!--more-->
 ## References:
 
 [1] https://docs.ansible.com/ansible/latest/collections/ansible/builtin/debug_module.html
