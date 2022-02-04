@@ -13,6 +13,9 @@
       {{ range .Params.tags }}
       <a href="{{ $baseurl }}tags/{{ . | urlize }}" class="c-tag">{{ . }}</a>
       {{ end }}
+      {{ range .Params.categories }}
+      <a href="{{ $baseurl }}categories/{{ . | urlize }}" class="c-tag">{{ . }}</a>
+      {{ end }}
     </div>
   </header>
   {{ with .Params.thumbnail }}
