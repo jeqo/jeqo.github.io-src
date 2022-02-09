@@ -13,4 +13,4 @@ deploy:
 		git push origin main
 
 test:
-	hugo serve -D
+	hugo serve -D -F
