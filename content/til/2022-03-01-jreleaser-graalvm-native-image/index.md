@@ -39,5 +39,5 @@ I managed to take this inputs and apply it for a simple CLI to list Kafka topics
 
 Hope to share more details about building GraalVM images in another post.
 
-At the moment `JReleaser` seems to be focused on applications (e.g. CLI, executable JARs, etc.).
-If you are looking to publish a Java library, probably is enough using `mvn deploy` command.
+At the moment JReleaser seems to be focused on applications (e.g. CLI, executable JARs, etc.).
+If you are looking to publish a Java library, probably is enough using `mvn deploy` command — though JReleaser could be complementary.
