@@ -1,7 +1,8 @@
 ---
-title: Using JReleaser to release GraalVM native images
+title: Releasing OS-specific GraalVM native image binaries easier with JReleaser
 date: 2022-03-01
 section: til
+
 tags:
 - java
 - graalvm
@@ -11,6 +12,8 @@ categories:
 ---
 
 Packaging and releasing Java applications (e.g. CLI) tend to be cumbersome, and the user-experience tended not to be the best as users have to download a valid version of JRE, etc.
+
+<!--more-->
 
 [JReleaser](https://jreleaser.org/guide/latest/index.html) is an awesome tool that takes most of the heavy-lifting — including, but not limited, to packaging, distribution, notifications, etc. — and let you focus on your application details.
 

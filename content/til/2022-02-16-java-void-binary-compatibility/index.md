@@ -14,6 +14,8 @@ While [proposing changes to Kafka Streams DSL](https://cwiki.apache.org/confluen
 I was under the (wrong) impression that this change wouldn't affect users.
 I was also not considering that applications might just drop a new library without recompiling their application.
 
+<!--more-->
+
 This change is what is known as _source compatible_ but not _binary compatible_ — meaning the user will need to recompile their application.
 
 If you drop a newer version into your application expecting a void method would case this:
