@@ -32,7 +32,7 @@ kafkacat -b ${CCLOUD_BOOTSTRAP_SERVER} \
 % Reached stop timestamp for topic confluent-audit-log-events [2] at offset 80810: exiting
 ```
 
-[Datasette](TODO add link) has an awesome tool to turn JSON into sqlite table: https://sqlite-utils.datasette.io/en/stable/cli.html#inserting-newline-delimited-json.
+[Datasette](https://datasette.io/) has an awesome tool to turn JSON into sqlite table: https://sqlite-utils.datasette.io/en/stable/cli.html#inserting-newline-delimited-json.
 Then JSON outputs from `kcat` can be piped into `sqlite-utils` to produce a `sqlite` database, and complete when end timestamp is reached:
 
 ```shell
