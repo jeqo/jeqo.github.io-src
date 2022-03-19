@@ -2,7 +2,6 @@
 title: Kafka client applications with GraalVM
 date: 2022-03-18
 section: posts
-draft: true
 
 tags:
 - kafka
