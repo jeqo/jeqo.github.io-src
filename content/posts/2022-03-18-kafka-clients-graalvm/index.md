@@ -25,8 +25,8 @@ This post is going to explore the steps to package _vanilla_ Kafka client applic
 
 <!--more-->
 
-NOTE: I still don't fully understand how some of the details on how GraalVM work.
-I will try to make explicit along the post, so I will focus on how to build Kafka client applications binaries with GraalVM.
+NOTE: I still don't fully understand how some details on how GraalVM work.
+Still, I will try to make explicit along the post, so I will focus on how to build Kafka client applications binaries with GraalVM.
 
 The CLIs built with these configurations have been tested against plaintext clusters and Confluent Cloud (TLS, SASL Plain authentication), and _haven't_ been tested with Kerberos, SCRAM, or other authentication mechanisms.
 
