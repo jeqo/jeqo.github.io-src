@@ -35,3 +35,7 @@ Btw, not possible to decrease number of partitions, maybe because it could lead 
 ## Ideas
 
 If versioned topics end up being the right answer from a producer point-of-view, wouldn't be nice to have a consumer capability to continue the processing from `v2` without requiring changes?
+
+Threads:
+
+- https://confluentcommunity.slack.com/archives/C499EFQS0/p1649931078848389
