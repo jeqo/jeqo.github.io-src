@@ -11,23 +11,22 @@ categories:
 - ops
 ---
 
-Kafka quotas have been around for a while, since the initial versions of the project.
-Though not necessarily being enabled in most deployments.
+Kafka quotas have been around for a while since the initial versions of the project — though not necessarily being enabled in most deployments.
 
-This post is going through a bit of the history of quotas in the Kafka project, sharing some thoughts on how to start adopting the usage of quotas and giving some practical advice.
+This post goes through sharing some thoughts on how to start adopting the usage of quotas and giving some practical advice, and a bit of the history of quotas in the Kafka project.
 
 <!--more-->
 
 ## Why would you need to use quotas?
 
-Once you're in a multi-tenant environment where more than 1 team is using a Kafka cluster, it's recommended to use Quotas to avoid having any of the tenants over-consuming and monopolizing the resources available.
+Once you're in a multi-tenant environment (i.e. more than 1 team is using a Kafka cluster), it's recommended to use quotas to avoid having any of the tenants over-consuming or monopolizing the cluster resources available.
 
-This doesn't necessarily mean having quotas for each and every application, but starts with a good definition of default quotas for all applications, and then extending them for the outliers.
+This doesn't necessarily mean having quotas for each and every application, but it can start with a good default quotas definition for all applications, and then extending them only for the outliers.
 
-If you think about it, you would need to define only _1_ quota to get started; and, if fair enough, these can be the only quota to ever define.
+If you think about it, you may need to define only _1_ quota to get started; and, if fair enough, it can be the only quota to ever define.
 
-These default quotas represent the default SLA for customers: "these are the default inflow and outflow bandwidth your application will be allowed to use by default".
-If this is enough – the goal is to make these defaults _good_ enough, so you avoid getting every tenant to request for more — then no changes to quotas would be needed.
+This default quota represents the default SLA for customers: "these are the default ingress and egress bandwidth your application will be allowed to use by default".
+If this is enough – the goal is to make the defaults _good_ enough to avoid getting every tenant to request for more resources — then no changes of quotas would be needed.
 Only the outliers that require higher bandwidth will need additional quotas for their users.
 
 ## How do start adopting the usage of quotas?
@@ -37,24 +36,26 @@ Only the outliers that require higher bandwidth will need additional quotas for 
 Understanding the Kafka request lifecycle helps us to identify the resource to constraint:
 
 ![img.png](request-lifecycle.png)
-Source: https://developer.confluent.io/#kafka-internals
+> Source: https://developer.confluent.io/#kafka-internals
 
-To start with, we have read and write **throughput bandwidth** (i.e. produce/fetch rate) between clients and brokers.
+To start with, there is the read and write **throughput bandwidth** (i.e. produce/fetch rate) between clients and brokers.
 This metric is driven by the amount of data moved, and it's the first, most common, quota to enforce.
 
-These volume of data can be moved in many or fewer (usually batched) requests.
-The number of requests impact the processing load in the broker side.
+This volume of data can be moved in many or fewer (usually batched) requests.
+The number of requests impact the processing load required in the broker side.
 Kafka brokers have 2 thread pools to process these requests: network threads and IO threads.
-These become the second resource to operate.
+These thread pools are the second resource to operate.
 
-Another resource is the connections between client and brokers.
-Clients will open connections with certain frequency.
-Having an upper bound to the number of connections created will allow handling.
+Then, the connections between client and brokers.
+Clients open connections with a certain frequency.
+Having an upper bound to the number of connections created allow handling.
 
 Additionally, there are replication and controller mutation quotas that are for inter-broker communication.
-I won't dive into these as I haven't used them in the past.
+I won't dive into these as I haven't used them in the past and are applied between the brokers.
 
 ### Identify your applications
+
+>
 
 ### Define "good" defaults
 
