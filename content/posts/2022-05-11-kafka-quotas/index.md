@@ -10,26 +10,26 @@ categories:
 - ops
 ---
 
-Kafka quotas have been around for a while since the initial versions of the project — though not necessarily being enabled in most deployments.
+Kafka quotas have been around for a while since initial versions of the project — though not necessarily being enabled in most deployments that I have seen.
 
-This post goes through sharing some thoughts on how to start adopting the usage of quotas and giving some practical advice, and a bit of the history of quotas in the Kafka project.
+This post shares some thoughts on how to start adopting quotas and gives some practical advice, and a bit of the history of quotas in the Kafka project.
 
 <!--more-->
 
 ## Why quotas are important?
 
-Once you're in a multi-tenant environment (i.e. more than 1 team is using a Kafka cluster), it's recommended to use quotas to avoid having any of the tenants over-consuming or monopolizing the cluster resources available.
+Once more than 1 team / use-case start to share a Kafka cluster, there is an increasing need to avoid having any of the tenants over-consuming or monopolizing the cluster resources available.
+This is the role of Kafka quotas.
 
-This doesn't necessarily mean having quotas for each and every application, but it can start with a good default quotas definition for all applications, and then extend them only for the outliers.
+This doesn't necessarily mean having quotas for each and every application though, but it can start with a good default quotas definition for all applications, and then extend them only for the outliers.
+If you think about it, you may only need to define _1_ quota to get started; and just add new ones for the outliers — applications needing more (or maybe less?) than the defaults.
 
-If you think about it, you may need to define only _1_ quota to get started; and, if fair enough, it can be the only quota to ever define.
-
-This default quota represents the default SLA for customers: "these are the default ingress and egress bandwidth your application will be allowed to use by default".
-If this is enough – the goal is to make the defaults _good_ enough to avoid getting every tenant to request more resources — then no changes to quotas would be needed.
+This default quotas represents an initial SLA for customers: "these are the default ingress and egress bandwidth your application will be allowed to use by default".
+If this is enough – and the goal is to make the defaults _good_ enough to avoid getting every tenant to request more resources — then there is no need for additional quotas.
 Only the outliers that require higher bandwidth will need additional quotas for their users.
 
 Keep in mind that when quotas are reached, the behavior is to throttle — not to fail.
-This is something tenants will have to weigh on to accept a certain quota limit.
+Tenants have to weigh on this to accept a certain quota limit.
 
 ## How do start adopting the usage of quotas?
 
@@ -43,21 +43,21 @@ Understanding the Kafka request lifecycle helps us to identify the resource to c
 To start with, there is the read and write **throughput bandwidth** (i.e. produce/fetch rate) between clients and brokers.
 This metric is driven by the amount of data moved, and it's the first, most common, quota to enforce.
 
-This volume of data can be moved in many or fewer (usually batched) requests.
-The number of requests impacts the processing load required on the broker side.
-Kafka brokers have 2 thread pools to process these requests: network threads and IO threads.
-These thread pools are the second resource to operate.
+This volume of data can be moved in many (potentially batched) requests.
+The number of requests impacts the processing load required on the brokers.
+Kafka brokers have 2 main thread pools to process requests: network threads and IO threads.
+These **thread pools** are the second resource to operate.
 
-Then, the connections between clients and brokers.
+Then, the **connections created** between clients and brokers is the third one.
 Clients open connections with a certain frequency.
-Having an upper bound on the number of connections created helps to reduce the chances for DoS attacks.
+Having an upper bound on the number of connections created helps to reduce the chances for denial-of-service attacks.
 
 Additionally, there are replication and controller mutation quotas that are for inter-broker communication.
-I won't dive into these as I haven't used them in the past and are applied between the brokers.
+I won't dive into these as I haven't used them in the past. Though, consider that these become important when re-balancing a cluster.
 
 Estimating the rough amount of resources available per broker is a good exercise, though it can be hard to calculate.
 
-For throughput bandwidth (read/write), the network bandwidth is the resource, and it's shared by the OS processes, broker control plane (admin operations), and the data plane (read/write) including replication.
+For throughput bandwidth (read/write), the network bandwidth is the resource, and it's shared by the OS processes, broker control plane (admin operations), and the data plane (read/write) _including replication_.
 
 For processing rates, the formula is defined as `((num.io.threads + num.network.threads) * 100)%.`. By default, there are 8 IO threads and 3 network threads, leading to 11,000 processing units to allocate.
 Assuming the broker has 12 CPUs, then each processing unit can represent a milli-CPU.
@@ -73,7 +73,7 @@ Kafka clients can be identified by 2 metadata values:
 
 Both metadata values can be mixed to identify an application.
 User metadata tends to be easier to apply as if the cluster is secured then the value is always available.
-With `client.id` is more difficult as there is no out-of-the-box option to enforce it.
+With `client.id` it is more difficult as there is no out-of-the-box option to enforce it.
 
 Following the usage of user principal as the application identifier, it depends on how the credentials are used across the applications within a domain.
 
@@ -89,8 +89,8 @@ Let's say there is a Change Data Capture team running multiple connectors,
 
 In summary, assuming the cluster is secured, there are 2 ways to approach quotas:
 
-- Using `user` principal only.
-- Using `user` principal and `client.id`.
+1. Using `user` principal only: easier to manage though require to have credentials per component.
+2. Using `user` principal and `client.id`. When using this option, set up a specific `user` with default `client-id`. Avoid relying on client-id value.
 
 ### Define _good_ defaults
 
@@ -106,9 +106,9 @@ Kafka comes with a hierarchy to apply quotas:
     7. /config/clients/<client-id>
     8. /config/clients/<default>
 
-If `user` principal is enough to identify clients, then use (*) 6. first, for all/default users; and 3. for specific users.
+If `user` principal is enough to identify clients (approach 1.), then use (*) 6. first, for all/default users; and 3. for specific users.
 
-On the other hand, if user principal is shared and quotas apply per component, the use (**) 5. first, for all applications; and 2. for all components under a user principal.
+On the other hand, if user principal is shared and quotas apply per component (approach 2.), the use (**) 5. first, for all applications; and 2. for all components under a user principal.
 
 The purpose of the initial quota for all users (*) or for all components (**) is to define the default SLA for Kafka applications.
 In a multi-tenant environment, this is very useful.
@@ -130,14 +130,17 @@ For connections created, Confluent Cloud is also a good reference: 250 is the ma
 
 ### Monitor application quotas
 
-One very interesting side effect of enabling quotas is that a new set of metrics are enabled on the brokers.
+One very interesting effect of enabling quotas is that a new set of metrics are enabled on the brokers.
 These metrics start to track: resources used by applications and throttling.
 
 If these metrics are collected, then applications can be monitored from the broker side, reducing the need to monitor each application — which is still recommended but involved much more work.
 
+Make sure to stick to one way to identify applications.
+If quotas are applied to different identifiers (e.g. client-id, and on the other hand user) then the metrics will be harder to understand.
+
 ### Adjust quotas / Scale cluster
 
-Quotas are controlled by a broker.
+Quotas are controlled individually at the broker, without coordination with other brokers.
 This means that if an application is writing data to multiple partitions across different brokers, the quotas will only be collected per broker and validated on that scope.
 If new brokers are added to the cluster, and the cluster is rebalanced, the quotas will still be applied per individual broker.
 
