@@ -1,7 +1,9 @@
 {{ partial "header.html" . }}
 {{ $baseurl := .Site.BaseURL }}
 <article class="p-article">
+  
   <header>
+    <a href="{{ $baseurl }}{{ .Params.Section }}" class="c-tag">{{ .Params.Section }}</a>
     <h1>{{ .Title }}</h1>
     <div>
       <div class="c-time">
