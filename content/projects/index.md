@@ -12,16 +12,23 @@ https://github.com/apache/kafka
 Main contributions:
 
 - Author of the following improvement proposals (KIP):
-  - KIP-122: https://cwiki.apache.org/confluence/display/KAFKA/KIP-122%3A+Add+Reset+Consumer+Group+Offsets+tooling
-  - KIP-171: https://cwiki.apache.org/confluence/display/KAFKA/KIP-171+-+Extend+Consumer+Group+Reset+Offset+for+Stream+Application
-  - KIP-244: https://cwiki.apache.org/confluence/display/KAFKA/KIP-244%3A+Add+Record+Header+support+to+Kafka+Streams+Processor+API
-  - KIP-634: https://cwiki.apache.org/confluence/display/KAFKA/KIP-634%3A+Complementary+support+for+headers+and+record+metadata+in+Kafka+Streams+DSL
-  - KIP-666: https://cwiki.apache.org/confluence/display/KAFKA/KIP-666%3A+Add+Instant-based+methods+to+ReadOnlySessionStore
-  - KIP-667: https://cwiki.apache.org/confluence/display/KAFKA/KIP-667%3A+Remove+deprecated+methods+from+ReadOnlyWindowStore
+  - KIP-122: https://cwiki.apache.org/confluence/display/KAFKA/KIP-122%3A+Add+Reset+Consumer+Group+Offsets+tooling (Adopted)
+  - KIP-171: https://cwiki.apache.org/confluence/display/KAFKA/KIP-171+-+Extend+Consumer+Group+Reset+Offset+for+Stream+Application (Adopted)
+  - KIP-244: https://cwiki.apache.org/confluence/display/KAFKA/KIP-244%3A+Add+Record+Header+support+to+Kafka+Streams+Processor+API (Adopted)
+  - KIP-634: https://cwiki.apache.org/confluence/display/KAFKA/KIP-634%3A+Complementary+support+for+headers+and+record+metadata+in+Kafka+Streams+DSL (Discarded)
+  - KIP-666: https://cwiki.apache.org/confluence/display/KAFKA/KIP-666%3A+Add+Instant-based+methods+to+ReadOnlySessionStore (Adopted)
+  - KIP-667: https://cwiki.apache.org/confluence/display/KAFKA/KIP-667%3A+Remove+deprecated+methods+from+ReadOnlyWindowStore (Adopted)
+  - KIP-820: https://cwiki.apache.org/confluence/display/KAFKA/KIP-820%3A+Extend+KStream+process+with+new+Processor+API (Adopted)
+  - KIP-821: https://cwiki.apache.org/confluence/display/KAFKA/KIP-821%3A+Connect+Transforms+support+for+nested+structures (Voting in progress)
 - Helped with the implementation of:
   - KIP-478: 
     - https://cwiki.apache.org/confluence/display/KAFKA/KIP-478+-+Strongly+typed+Processor+API
     - https://issues.apache.org/jira/browse/KAFKA-8410
+
+Proof-of-concept:
+
+- Kafka CLIs: https://github.com/jeqo/kafka-cli
+- Other minor PoCs: https://github.com/jeqo/poc-apache-kafka/
 
 ### [Zipkin](https://zipkin.io/)
 

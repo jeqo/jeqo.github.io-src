@@ -11,6 +11,9 @@ deploy:
 		git add -A && \
 		git commit -m ${msg} && \
 		git push origin main
+	git add .
+	git commit -m 'updates'
+	git push origin main
 
 test:
 	hugo serve -D -F
