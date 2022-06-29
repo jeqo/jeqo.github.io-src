@@ -3,7 +3,9 @@
 <article class="p-article">
   
   <header>
+    {{ if .Params.Section }}
     <a href="{{ $baseurl }}{{ .Params.Section }}" class="c-tag">{{ .Params.Section }}</a>
+    {{ end }}
     <h1>{{ .Title }}</h1>
     <div>
       <div class="c-time">

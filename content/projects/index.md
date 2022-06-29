@@ -25,7 +25,7 @@ Main contributions:
     - https://cwiki.apache.org/confluence/display/KAFKA/KIP-478+-+Strongly+typed+Processor+API
     - https://issues.apache.org/jira/browse/KAFKA-8410
 
-Proof-of-concept:
+Proof-of-concepts:
 
 - Kafka CLIs: https://github.com/jeqo/kafka-cli
 - Other minor PoCs: https://github.com/jeqo/poc-apache-kafka/
