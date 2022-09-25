@@ -1,12 +1,12 @@
 ---
 title: Changing Kafka Broker's rack
 date: 2021-12-10
-section: til
 tags:
 - kafka
 - deployment
-categories: 
 - ops
+categories: 
+- til
 ---
 
 Kafka broker configuration includes a `rack` label to define the location of the broker.

@@ -6,9 +6,10 @@ section: til
 tags:
 - kafka
 - connect
+- dev
 
 categories:
-- dev
+- til
 ---
 
 When reading from/writing to Kafka topics, a serializer/deserializer (a.k.a `SerDe`s) is needed to process record key and value bytes.

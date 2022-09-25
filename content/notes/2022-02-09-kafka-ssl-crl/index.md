@@ -1,14 +1,13 @@
 ---
 title: Enable Certificate Revocation on Kafka clusters
 date: 2022-02-09
-section: til
 tags:
 - kafka
 - ssl
-
-categories:
 - ops
 - security
+categories:
+- til
 ---
 
 Recently I got a question on how to manage revoked SSL certificates in Kafka clusters.

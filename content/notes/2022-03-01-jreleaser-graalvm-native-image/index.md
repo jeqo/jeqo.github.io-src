@@ -1,14 +1,12 @@
 ---
 title: Releasing OS-specific GraalVM native image binaries easier with JReleaser
 date: 2022-03-01
-section: til
-
 tags:
 - java
 - graalvm
-
-categories:
 - dev
+categories:
+- til
 ---
 
 Packaging and releasing Java applications (e.g. CLI) tend to be cumbersome, and the user-experience tended not to be the best as users have to download a valid version of JRE, etc.

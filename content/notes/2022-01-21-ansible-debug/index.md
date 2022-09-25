@@ -1,12 +1,12 @@
 ---
 title: Ansible has a debug mode to pause and troubleshoot
 date: 2022-01-21
-section: til
 tags:
 - ansible
 - automation
-categories:
 - ops
+categories:
+- til
 ---
 
 I have been running Ansible for a while now.

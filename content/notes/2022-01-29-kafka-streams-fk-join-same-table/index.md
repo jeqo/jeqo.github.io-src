@@ -1,13 +1,12 @@
 ---
 title: Kafka Streams FK-join within the same KTable
 date: 2022-01-29
-section: til
 tags:
 - kafka-streams
 - streaming-joins
-
-categories:
 - dev
+categories:
+- til
 ---
 
 KTable to KTable foreign-key joins is one of the coolest features in Kafka Streams.

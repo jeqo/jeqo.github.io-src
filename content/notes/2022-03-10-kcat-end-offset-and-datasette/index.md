@@ -1,17 +1,17 @@
 ---
 title: Explore Kafka data with kcat, sqlite, and Datasette
 date: 2022-03-10
-section: til
 
 tags:
 - datasette
 - sqlite
 - kcat
 - kafka
-
-categories:
 - dev
 - data
+
+categories:
+- til
 ---
 
 I have been playing with Datasette and sqlite for a bit, trying to collect and expose data efficiently for others to analyze.

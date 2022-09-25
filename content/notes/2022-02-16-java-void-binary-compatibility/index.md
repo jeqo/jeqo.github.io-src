@@ -5,9 +5,9 @@ section: til
 tags:
 - java
 - compatibility
-
-categories:
 - dev
+categories:
+- til
 ---
 
 While [proposing changes to Kafka Streams DSL](https://cwiki.apache.org/confluence/display/KAFKA/KIP-820%3A+Extend+KStream+process+with+new+Processor+API), I propose changing the return type of one method from `void` to `KStream<KOut, VOut`.

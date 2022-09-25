@@ -6,16 +6,14 @@ section: posts
 tags:
 - kafka
 - cli
-
+- tools
 categories:
-- dev
-- ops
 - poc
 ---
 
-Looking into ways to make it possible to reproduce time-based conditions in Kafka applications
+Looking for alternative ways to reproduce time-based conditions in Kafka Streams applications
 —e.g. if you're doing some sort of join or windowing based on time—
-I created a [CLI tool](https://github.com/jeqo/kafka-cli/tree/main/emulator) to do 2 things:
+I ended up creating a [CLI tool](https://github.com/jeqo/kafka-cli/tree/main/emulator) to support a couple of features:
 
 - Record events from topics, including their timestamps and gap
 - Replay events, including waiting periods between them

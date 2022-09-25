@@ -6,9 +6,8 @@ section: til
 tags:
 - sqlite
 - database
-
 categories:
-- data
+- til
 ---
 
 I found that the use-cases for sqlite keep increasing now the JSON is supported.

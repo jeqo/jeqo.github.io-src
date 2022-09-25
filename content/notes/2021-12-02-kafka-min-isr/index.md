@@ -1,12 +1,12 @@
 ---
 title: Use min.insync.replicas for fault-tolerance
 date: 2021-12-02
-section: til
 tags:
 - kafka
 - fault-tolerance
-categories: 
 - ops
+categories: 
+- til
 ---
 
 Things to remember:

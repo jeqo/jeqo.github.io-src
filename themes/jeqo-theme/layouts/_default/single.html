@@ -14,11 +14,11 @@
           {{ .Date.Format "Jan 2, 2006" }}
         </time>
       </div>
-      {{ range .Params.tags }}
-      <a href="{{ $baseurl }}tags/{{ . | urlize }}" class="c-tag">{{ . }}</a>
-      {{ end }}
       {{ range .Params.categories }}
       <a href="{{ $baseurl }}categories/{{ . | urlize }}" class="c-tag">{{ . }}</a>
+      {{ end }}
+      {{ range .Params.tags }}
+      <a href="{{ $baseurl }}tags/{{ . | urlize }}" class="c-tag">{{ . }}</a>
       {{ end }}
     </div>
   </header>

@@ -1,12 +1,12 @@
 ---
 title: Kafka Streams abstracts access to multiple tasks state stores when reading
 date: 2022-01-26
-section: til
 tags:
 - kafka-streams
 - api
-categories:
 - dev
+categories:
+- til
 ---
 
 Kafka Streams applications could scale either horizontally (add more instances) or vertically (add more threads).

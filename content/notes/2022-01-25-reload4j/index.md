@@ -1,12 +1,12 @@
 ---
 title: reload4j as drop-in replacement for log4j 1.x
 date: 2022-01-25
-section: til
 tags:
 - java
 - logging
-categories:
 - ops
+categories:
+- til
 ---
 
 TIL there is a drop-in replacement for log4j 1.x: [Reload4j](https://reload4j.qos.ch/).

@@ -15,9 +15,8 @@
   <a href="{{ .Permalink }}" class="c-article__btn p-list-article__btn">Read more</a></li>
   {{ end }}
   <div>
-    <a href="/{{ .Section }}" class="c-tag">{{ .Section }}</a>
     {{ range .Params.categories }}
-    <a href="/tags/{{ . | urlize }}/" class="c-tag">{{ . }}</a>
+    <a href="/categories/{{ . | urlize }}/" class="c-tag">{{ . }}</a>
     {{ end }}
     {{ range .Params.tags }}
     <a href="/tags/{{ . | urlize }}/" class="c-tag">{{ . }}</a>
