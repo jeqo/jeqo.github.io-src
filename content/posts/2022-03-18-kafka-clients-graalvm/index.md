@@ -7,9 +7,8 @@ tags:
 - kafka
 - cli
 - graalvm
+- dev
 
-categories:
-- development
 ---
 
 Shipping CLI binaries with Java hasn't been the most user-friendly experience.

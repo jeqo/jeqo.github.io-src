@@ -5,7 +5,6 @@ section: posts
 tags:
 - kafka
 - durability
-categories: 
 - ops
 ---
 

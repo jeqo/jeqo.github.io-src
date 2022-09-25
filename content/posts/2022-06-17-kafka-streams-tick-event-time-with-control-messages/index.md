@@ -5,9 +5,9 @@ section: posts
 
 tags:
 - kafka-streams
+- dev
 
 categories:
-- dev
 - poc
 ---
 

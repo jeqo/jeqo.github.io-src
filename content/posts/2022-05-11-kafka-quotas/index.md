@@ -5,9 +5,8 @@ section: posts
 
 tags:
 - kafka
-
-categories:
 - ops
+
 ---
 
 Kafka quotas have been around for a while since initial versions of the project — though not necessarily being enabled in most deployments that I have seen.
