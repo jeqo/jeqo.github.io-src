@@ -1,7 +1,6 @@
 ---
 title: Piggyback on Kafka Connect Schemas to process Kafka records in a generic way
 date: 2022-08-24
-section: til
 
 tags:
 - kafka
