@@ -40,7 +40,7 @@ Explanation: <https://regex101.com/r/2AxwfE/1>
 
 And the final script to ingest log files into sqlite database looks like this:
 
-```shell
+```bash
 sqlite-utils insert /tmp/kafka-logs.db logs server.log.2022-09-24-21 --text --convert "
 import re
 r = re.compile(r'^\[(?P<datetime>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3})\] (?P<level>\w+) (?P<log>(.+(\n(?\!\[).+|)+))', re.MULTILINE)

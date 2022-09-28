@@ -16,7 +16,6 @@ copyright = "&copy; Copyright @jeqo"
   github = "jeqo"
   keybase = "jeqo"
   linkedin = "jeqo89"
-  # disqus = "jeqoblog"
   giscus = true
   ga_api_key = "UA-49047812-3"
   author = "Jorge Esteban Quilcate Otoya"
@@ -27,6 +26,24 @@ copyright = "&copy; Copyright @jeqo"
   subtitle = "data streaming, observability, automation, and random stuff"
   favicon = "/images/favicon.ico"
   mainSections = ["posts", "talks", "notes"]
+
+
+
+[markup]
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = true
+    hl_Lines = ''
+    hl_inline = false
+    lineAnchors = ''
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    noHl = false
+    style = 'emacs'
+    tabWidth = 2
 
 [Languages]
 [Languages.en]
