@@ -41,7 +41,13 @@ Main contributions:
 - Maintaining Zipkin usage of Kafka as collector: https://github.com/openzipkin/zipkin-reporter-java
 - Kafka interceptors for Zipkin tracing: https://github.com/openzipkin-contrib/brave-kafka-interceptor
 
-### [Open Politica](https://openpolitica.com/)
+### Other contributions
+
+#### [Micrometer](https://micrometer.io/)
+
+- Kafka Clients instrumentation for Metrics: https://github.com/micrometer-metrics/micrometer/pull/1835
+
+#### [Open Politica](https://openpolitica.com/)
 
 https://github.com/openpolitica
 
