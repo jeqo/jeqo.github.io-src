@@ -55,3 +55,10 @@ def convert(text):
 
 The `row.update` allows to label rows as I'm planning to ingest logs from different hosts and potentially different components.
 
+Additionally, full-text search support can be added to the log column to allow custom searches:
+
+
+```
+sqlite-utils enable-fts /tmp/kafka-logs.db logs log
+```
+
