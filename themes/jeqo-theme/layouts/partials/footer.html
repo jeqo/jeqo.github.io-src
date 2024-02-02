@@ -4,24 +4,16 @@
     {{ partial "link.html" . }}
 
     <p class="p-copyright">
-      {{ with .Site.Copyright | safeHTML }}
-        {{ . }}
-      {{ else }}
-        {{ if .Site.Params.author }}
-          {{ if .Site.Params.authorwebsite }}
-            <a href="{{ .Site.Params.authorwebsite }}">{{ .Site.Params.author }}</a>
-          {{ else }}
-            {{ .Site.Params.author }}
-          {{ end }}
-        {{ end }}
-        &nbsp;&bull;&nbsp;
-        {{ .Site.LastChange.Format "2006" }}
+      {{- partial "cc_by.html" . }}
+      &nbsp;&bull;&nbsp;
+      {{ .Site.LastChange.Format "2006" }}
 
-        {{ if .Site.Title }}
-          &nbsp;&bull;&nbsp;
-          <a href="{{ "" | absLangURL }}">{{ .Site.Title }}</a>
-        {{ end }}
+      {{ if .Site.Title }}
+        &nbsp;&bull;&nbsp;
+        <a href="{{ "" | absLangURL }}">{{ .Site.Title }}</a>
       {{ end }}
+      &nbsp;&bull;&nbsp;
+      <a href="https://github.com/jeqo/jeqo.github.io-src">[source code]</a>
     </p>
   </footer>
 
