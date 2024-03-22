@@ -8,8 +8,6 @@ MetaDataFormat = "yaml"
 PygmentsCodeFences = true
 PygmentsStyle = "colorful"
 
-copyright = "&copy; Copyright @jeqo"
-
 [params]
   paginate = 10
   twitter = "jeqo89"
@@ -27,6 +25,9 @@ copyright = "&copy; Copyright @jeqo"
   favicon = "/images/favicon.ico"
   mainSections = ["posts", "talks", "notes"]
 
+[minify]
+  disableHTML = false
+  minifyOutput = true
 
 
 [markup]
