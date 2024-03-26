@@ -1,7 +1,7 @@
 +++
 title = "About"
 slug = "about"
-date = 2020-04-11
+date = 2024-03-23
 menu = "top"
 draft = false
 section = "about"
@@ -9,30 +9,26 @@ section = "about"
 
 # Jorge Esteban Quilcate Otoya
 
-Peruvian, husband, software engineer, and immigrant in Norway and the UK.
-
-Enjoying my journey working on distributed systems.
-
-Started to contribute to Open-Source projects since 2016, including Apache Kafka and Zipkin.
+Peruvian, father, husband, and software engineer; enjoying my journey working on distributed systems.
 
 Current interests: 
 
-* Log-based streaming platform (Apache Kafka),
-* Stream processing (Kafka Streams),
-* Distributed Tracing (OpenTracing), 
-* Metrics (Micrometer, Prometheus), 
-* Cluster Scheduling (Nomad, Kubernetes), 
-* Automation (Docker, Ansible)
+* [Tiered Storage](https://github.com/Aiven-Open/tiered-storage-for-apache-kafka/)
+* Log-based streaming platform (Kafka),
+* Stream processing (Kafka Streams, Flink),
 
 ## Open-Source contributions
 
-* KIP-122: Add Reset Consumer Group Offsets tooling https://cwiki.apache.org/confluence/display/KAFKA/KIP-122%3A+Add+Reset+Consumer+Group+Offsets+tooling
+Started to contribute to Open-Source projects in 2016, including projects like Apache Kafka and Zipkin.
 
-* KIP-171 - Extend Consumer Group Reset Offset for Stream Application https://cwiki.apache.org/confluence/display/KAFKA/KIP-171+-+Extend+Consumer+Group+Reset+Offset+for+Stream+Application
+* A few [Kafka Improvement Proposals](https://cwiki.apache.org/confluence/display/KAFKA/Kafka+Improvement+Proposals), including:
+  * KIP-122: Add Reset Consumer Group Offsets tooling https://cwiki.apache.org/confluence/display/KAFKA/KIP-122%3A+Add+Reset+Consumer+Group+Offsets+tooling
 
-* KIP-222 - Add Consumer Group operations to Admin API https://cwiki.apache.org/confluence/display/KAFKA/KIP-222+-+Add+Consumer+Group+operations+to+Admin+API
+  * KIP-171 - Extend Consumer Group Reset Offset for Stream Application https://cwiki.apache.org/confluence/display/KAFKA/KIP-171+-+Extend+Consumer+Group+Reset+Offset+for+Stream+Application
 
-* KIP-244: Add Record Header support to Kafka Streams https://cwiki.apache.org/confluence/display/KAFKA/KIP-244%3A+Add+Record+Header+support+to+Kafka+Streams
+  * KIP-222 - Add Consumer Group operations to Admin API https://cwiki.apache.org/confluence/display/KAFKA/KIP-222+-+Add+Consumer+Group+operations+to+Admin+API
+
+  * KIP-244: Add Record Header support to Kafka Streams https://cwiki.apache.org/confluence/display/KAFKA/KIP-244%3A+Add+Record+Header+support+to+Kafka+Streams
 
 * Work with the OpenZipkin community on Zipkin core, Brave library, Kafka-based storage, and more.
 
@@ -46,4 +42,6 @@ Theme is a fork of 'pickles' theme. Source can be found [here](https://themes.go
 It contains: 
 
 * [Posts](/posts/)
+* [Notes](/notes/)
 * [Talks](/talks/)
+
