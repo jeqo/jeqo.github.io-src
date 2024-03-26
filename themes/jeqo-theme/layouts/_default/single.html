@@ -1,7 +1,6 @@
 {{ partial "header.html" . }}
 {{ $baseurl := .Site.BaseURL }}
 <article class="p-article">
-  
   <header>
     {{ if .Params.Section }}
     <a href="{{ $baseurl }}{{ .Params.Section }}" class="c-tag">{{ .Params.Section }}</a>
@@ -25,6 +24,9 @@
   {{ with .Params.thumbnail }}
     <img src="{{ . }}" alt="thumbnail" class="p-article__thumbnail">
   {{ end }}
+  <aside class="p-toc">
+    {{ .TableOfContents }}
+  </aside>
   <section id="js-article" class="p-article__body">
     {{ .Content }}
   </section>
