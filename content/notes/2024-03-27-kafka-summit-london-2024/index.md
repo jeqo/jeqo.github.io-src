@@ -131,7 +131,7 @@ e.g., [KIP-848](https://cwiki.apache.org/confluence/display/KAFKA/KIP-848%3A+The
 ![](consumers-2.jpg)
 ![](consumers-3.jpg)
 
-## WarpStream
+## WarpStream by Richard Artoul
 
 Finally, I attended the [WarpStream](https://www.warpstream.com/) session, where Richard Artoul (founder) 
 introduced the platform and some of the design decisions behind taking the Kafka protocol into a no-disk journey.
