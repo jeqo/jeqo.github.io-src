@@ -67,7 +67,7 @@ Chris Riccomini shared some categorizations that may be helpful for anyone getti
 ![State machines](restate-3.jpg)
 ![As broker](restate-4.jpg)
 
-## Flink SQL by Robin Moffat from Decodable
+## Flink SQL by Robin Moffatt from Decodable
 
 [Robin](https://twitter.com/rmoff/)'s session was perfect for people (like me) who are getting started with Apache Flink, specifically Flink SQL.
 
