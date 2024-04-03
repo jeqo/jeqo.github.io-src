@@ -6,8 +6,9 @@ section: posts
 tags:
   - kafka
   - ops
+
 categories:
-  - notes
+  - tutorial
 
 draft: true
 ---
