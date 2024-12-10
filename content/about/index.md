@@ -9,6 +9,8 @@ section = "about"
 
 # Jorge Esteban Quilcate Otoya
 
+> New site: <https://jeqo.dev>
+
 Peruvian, father, husband, and software engineer; enjoying my journey working on distributed systems.
 
 Current interests: 
